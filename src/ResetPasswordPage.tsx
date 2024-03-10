@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./ResetPasswordPage.css";
 import PasswordInput from "./PasswordInput";
 import ResetPasswordService from "./ResetPasswordService";
-const red = "#5e8c61";
+const red = "#860e04";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex =
