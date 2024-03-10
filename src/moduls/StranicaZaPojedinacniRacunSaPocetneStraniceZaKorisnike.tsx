@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './../App.css';
 
 function DataFetchingPage() {
   const [data, setData] = useState<any>(null); // Definisanje tipa 'data' kao 'any'
@@ -25,94 +26,94 @@ function DataFetchingPage() {
     <div style={{ textAlign: 'center' }}>
       <h2>Stranica za pojedinacni racun sa pocetnim stanjima</h2>
       <div style={{ paddingBottom: '20px', display: 'inline-block', textAlign: 'left', marginLeft: 'auto', marginRight: 'auto' }}>
-        <h3>Podaci:</h3>
-        <table style={{ borderCollapse: 'collapse', border: '1px solid #ddd', width: '100%' }}>
-          <tbody>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Broj računa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.accountNumber*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Stanje:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.balance*/}</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Raspoloživo stanje:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.availableBalance*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Datum kad je račun kreiran:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.dateCreated*/}</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Datum kad račun ističe:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.expiryDate*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Valuta računa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.currency*/}</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Vrsta računa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.accountType*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Status računa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.accountStatus*/}</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Kamatna stopa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.interestRate || "N/A"*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Cena održavanja računa:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.accountMaintenancePrice || "N/A"*/}</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Mejl korisnika:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.userEmail*/}</td>
-            </tr>
-            <tr>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>Mejl zaposlenog:</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{/*data.employeeEmail*/}</td>
-            </tr>
-          </tbody>
-        </table>
+      
+      <table className="custom-table-bank">
+  <tbody>
+    <tr className="table-row">
+      <td className="table-cell">Broj računa:</td>
+      <td className="table-cell">{/*data.accountNumber*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Stanje:</td>
+      <td className="table-cell">{/*data.balance*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Raspoloživo stanje:</td>
+      <td className="table-cell">{/*data.availableBalance*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Datum kad je račun kreiran:</td>
+      <td className="table-cell">{/*data.dateCreated*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Datum kad račun ističe:</td>
+      <td className="table-cell">{/*data.expiryDate*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Valuta računa:</td>
+      <td className="table-cell">{/*data.currency*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Vrsta računa:</td>
+      <td className="table-cell">{/*data.accountType*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Status računa:</td>
+      <td className="table-cell">{/*data.accountStatus*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Kamatna stopa:</td>
+      <td className="table-cell">{/*data.interestRate || "N/A"*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Cena održavanja računa:</td>
+      <td className="table-cell">{/*data.accountMaintenancePrice || "N/A"*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Mejl korisnika:</td>
+      <td className="table-cell">{/*data.userEmail*/}</td>
+    </tr>
+    <tr className="table-row">
+      <td className="table-cell">Mejl zaposlenog:</td>
+      <td className="table-cell">{/*data.employeeEmail*/}</td>
+    </tr>
+  </tbody>
+</table>
 
 
         <h3>Podaci o transakciji:</h3>
-      <table style={{ borderCollapse: 'collapse', border: '1px solid #ddd', width: '80%', margin: 'auto' }}>
+        <table className="custom-table-bank">
         <thead>
-          <tr style={{ backgroundColor: '#f2f2f2' }}>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Naziv primaoca</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Broj računa primaoca</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Iznos</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Poziv na broj</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Status</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Datum i vreme transakcije</th>
+          <tr className="table-row">
+            <th className="table-cell">Naziv primaoca</th>
+            <th className="table-cell">Broj računa primaoca</th>
+            <th className="table-cell">Iznos</th>
+            <th className="table-cell">Poziv na broj</th>
+            <th className="table-cell">Status</th>
+            <th className="table-cell">Datum i vreme transakcije</th>
           </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>Primalac 1</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>123456789</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>1000</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>123456</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>Uspeh</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>2024-03-10 14:30:00</td>
-            </tr>
-            <tr style={{ backgroundColor: '#f2f2f2' }}>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>Primalac 2</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>987654321</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>500</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>654321</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>U obradi</td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>2024-03-10 15:45:00</td>
-            </tr>
-            {/* Dodajte dodatne redove za ostale transakcije */}
+          <tr className="table-row">
+            <td className="table-cell">Primalac 1</td>
+            <td className="table-cell">123456789</td>
+            <td className="table-cell">1000</td>
+            <td className="table-cell">123456</td>
+            <td className="table-cell">Uspeh</td>
+            <td className="table-cell">2024-03-10 14:30:00</td>
+          </tr>
+          <tr className="table-row">
+            <td className="table-cell">Primalac 2</td>
+            <td className="table-cell">987654321</td>
+            <td className="table-cell">500</td>
+            <td className="table-cell">654321</td>
+            <td className="table-cell">U obradi</td>
+            <td className="table-cell">2024-03-10 15:45:00</td>
+          </tr>
+          {/* Dodajte dodatne redove za ostale transakcije */}
         </tbody>
       </table>
-      
+            
       </div>
     </div>
   );

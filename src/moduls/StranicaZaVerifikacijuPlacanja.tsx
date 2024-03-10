@@ -1,4 +1,5 @@
 import React from 'react';
+import './../App.css';
 
 function Home() {
   const handleGenerateCodeClick = () => {
@@ -33,7 +34,9 @@ function Home() {
       <h1>Verifikacija</h1>
       <p>Ispod možete generisati verifikacioni kod</p>
       {/* Dodajemo onClick event handler koji će pozvati handleGenerateCodeClick funkciju kada se klikne na dugme */}
-      <button onClick={handleGenerateCodeClick}>Generiši verifikacioni kod</button>
+      <div className='learn-more-btn' onClick={handleGenerateCodeClick}>
+        <p>Generiši verifikacioni kod</p>
+      </div>
     </div>
   );
 }
