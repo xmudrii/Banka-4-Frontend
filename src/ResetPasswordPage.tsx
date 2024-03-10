@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./ResetPasswordPage.css";
 import PasswordInput from "./PasswordInput";
 import ResetPasswordService from "./ResetPasswordService";
+const red = "#5e8c61";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex =
@@ -67,7 +68,7 @@ const ResetPasswordPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             onBlur={validateEmail}
           />
-          {!emailValid && <p style={{ color: "red" }}>Unesite ispravan mejl</p>}
+          {!emailValid && <p style={{ color: red }}>Unesite ispravan mejl</p>}
 
           <button type="button" disabled={!emailValid} onClick={sendRequest}>
             Pošalji zahtev
@@ -85,7 +86,7 @@ const ResetPasswordPage = () => {
             onBlur={validateActivationCode}
           />
           {!activationCodeValid && (
-            <p style={{ color: "red" }}>Unesite ispravan aktivacioni kod</p>
+            <p style={{ color: red }}>Unesite ispravan aktivacioni kod</p>
           )}
         </div>
 
@@ -95,7 +96,7 @@ const ResetPasswordPage = () => {
           onBlur={validatePassword}
         />
         {!passwordValid && (
-          <p style={{ color: "red" }}>
+          <p style={{ color: red }}>
             Lozinka mora imati najmanje 8 karaktera, najviše 32 karaktera,
             najmanje 2 broja, najmanje 1 veliko slovo i najmanje 1 malo slovo
           </p>
