@@ -1,14 +1,13 @@
 import { Account } from "./Model";
-import "./AccountsTable.css";
+import "./Table.css";
 
-//number: "123456", balance: 1000, availableBalance: 800
 type Props = {
   accounts: Account[];
 };
 
 const AccountsTable = ({ accounts }: Props) => {
   return (
-    <div className="accountDiv">
+    <div className="tableDiv">
       <h2>Lista Računa</h2>
       <table>
         <thead>
