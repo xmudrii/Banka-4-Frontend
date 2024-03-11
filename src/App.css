@@ -47,11 +47,24 @@
   text-align: center;
   text-decoration: none; 
   display: inline-block;
+  position: relative; /*position relative to allow absolute positioning of pseudo elements */
   transition: background-color 0.3s; 
 }
 
 .learn-more-btn:hover {
   background-color: #297cb7; 
+}
+
+/* button pointy bit */
+.learn-more-btn::before {
+  content: '';
+  position: absolute;
+  top: -10px; /* up/down */
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent; /* width */
+  border-right: 10px solid transparent; /* width */
+  border-bottom: 10px solid #3498db; /* Color and size to match the button */
 }
 
 /*TABELA CSS*/
