@@ -3,9 +3,10 @@ import "./Table.css";
 
 type Props = {
   accounts: Account[];
+  setAccount: (account: Account) => void;
 };
 
-const AccountsTable = ({ accounts }: Props) => {
+const AccountsTable = ({ accounts, setAccount }: Props) => {
   return (
     <div className="tableDiv">
       <h2>Lista Računa</h2>
@@ -19,10 +20,10 @@ const AccountsTable = ({ accounts }: Props) => {
         </thead>
         <tbody>
           {accounts.map((account) => (
-            <tr key={account.number}>
-              <td>{account.number}</td>
-              <td>{account.balance}</td>
-              <td>{account.availableBalance}</td>
+            <tr key={account.brojRacuna} onClick={() => setAccount(account)}>
+              <td>{account.brojRacuna}</td>
+              <td>{account.stanje}</td>
+              <td>{account.raspolozivoStanje}</td>
             </tr>
           ))}
         </tbody>

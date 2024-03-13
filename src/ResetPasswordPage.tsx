@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import "./ResetPasswordPage.css";
+// import "./ResetPasswordPage.css";
 import PasswordInput from "./PasswordInput";
 import ResetPasswordService from "./ResetPasswordService";
 const red = "#5e8c61";

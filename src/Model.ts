@@ -1,7 +1,14 @@
 export type Account = {
-  number: string;
-  balance: number;
-  availableBalance: number;
+  id: number;
+  brojRacuna: string;
+  vlasnik: number;
+  stanje: number;
+  raspolozivoStanje: number;
+  zaposledni: number;
+  datumKreiranja: number;
+  datumIsteka: number;
+  currency: string;
+  aktivan: boolean;
 };
 
 export type Transaction = {
