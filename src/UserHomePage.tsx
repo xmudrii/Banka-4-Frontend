@@ -3,8 +3,9 @@ import AccountsTable from "./AccountsTable";
 import Header from "./Header";
 import { Account, Transaction } from "./Model";
 import TransactionsTable from "./TransactionsTable";
-const korisnikId = 123;
-const authToken = "Bearer YOUR_AUTH_TOKEN";
+const korisnikId = 1;
+const authToken =
+  "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6MzI3NjcsImlkIjoxMSwiZXhwIjoxNzEwMzk1MDA5LCJpYXQiOjE3MTAzNjYyMDl9.nmJhpXukMJuep05ggYIC9H-SLuowEapJXPFnQWaJEUeLeU8G0e-9IV0ptiFHKayU4G-zFzS9U8IcY8uycPaiLQ";
 
 // const transactions: Transaction[] = [
 //   {
@@ -32,7 +33,7 @@ const UserHomePage = () => {
   const fetchTransactions = async () => {
     try {
       const response = await fetch(
-        `https://localhost:8080/api/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
+        `http://api.stamenic.work:8080/api/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
         {
           method: "GET",
           headers: {
@@ -57,7 +58,7 @@ const UserHomePage = () => {
   const fetchAccounts = async () => {
     try {
       const response = await fetch(
-        `https://localhost:8080/api/racuni/nadjiRacuneKorisnika/${korisnikId}`,
+        `http://api.stamenic.work:8080/api/racuni/nadjiRacuneKorisnika/${korisnikId}`,
         {
           method: "GET",
           headers: {
