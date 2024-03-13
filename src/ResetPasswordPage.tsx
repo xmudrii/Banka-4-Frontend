@@ -32,7 +32,7 @@ const ResetPasswordPage = () => {
   const sendRequest = async () => {
     try {
       const response = await fetch(
-        "https://localhost:8080/api/korisnik/generate-reset",
+        "http://api.stamenic.work:8080/api/korisnik/generate-reset",
         {
           method: "post",
           headers: {
@@ -59,7 +59,7 @@ const ResetPasswordPage = () => {
   const resetPassword = async () => {
     try {
       const response = await fetch(
-        "https://localhost:8080/api/korisnik/reset-password",
+        "http://api.stamenic.work:8080/api/korisnik/reset-password",
         {
           method: "post",
           headers: {
