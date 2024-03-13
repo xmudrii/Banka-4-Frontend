@@ -32,7 +32,7 @@ const UserHomePage = () => {
   const fetchTransactions = async () => {
     try {
       const response = await fetch(
-        `/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
+        `https://localhost:8080/api/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
         {
           method: "GET",
           headers: {
@@ -57,7 +57,7 @@ const UserHomePage = () => {
   const fetchAccounts = async () => {
     try {
       const response = await fetch(
-        `/racuni/nadjiRacuneKorisnika/${korisnikId}`,
+        `https://localhost:8080/api/racuni/nadjiRacuneKorisnika/${korisnikId}`,
         {
           method: "GET",
           headers: {
