@@ -31,15 +31,18 @@ const ResetPasswordPage = () => {
 
   const sendRequest = async () => {
     try {
-      const response = await fetch("korisnik/generate-reset", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-        }),
-      });
+      const response = await fetch(
+        "https://localhost:8080/api/korisnik/generate-reset",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -55,17 +58,20 @@ const ResetPasswordPage = () => {
 
   const resetPassword = async () => {
     try {
-      const response = await fetch("korisnik/reset-password", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          sifra: newPassword,
-          kod: activationCode,
-        }),
-      });
+      const response = await fetch(
+        "https://localhost:8080/api/korisnik/reset-password",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            sifra: newPassword,
+            kod: activationCode,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
