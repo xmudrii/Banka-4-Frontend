@@ -13,7 +13,7 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }}>
+            <Table sx={{ minWidth: 650, marginTop: 0 }}>
                 <StyledTableHead>
                     <TableRow>
                         <StyledHeadTableCell>Naziv</StyledHeadTableCell>
