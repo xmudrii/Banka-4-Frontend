@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, TableHead, Button } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, TableHead, Button, Alert } from '@mui/material';
 import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -66,8 +66,10 @@ const formatTitle = (title: string): string => {
 //TODO add a conditionals to display buttons only with permissions
 const UserInfoTable: React.FC = () => {
   const [user, setUser] = useState([])
+  const [uid, setId] = useState(null)
   const [accounts, setAccounts] = useState<Account[]>([])
   const [jmbg, setJmbg] = useState('')
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +80,7 @@ const UserInfoTable: React.FC = () => {
           const res = await makeGetRequest(`/korisnik/jmbg/${jmbg}`);
           setUser(res);
           if (res?.id) {
+            setId(res?.id)
             const accs = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${res.id}`);
             setAccounts(accs);
           }
@@ -105,8 +108,10 @@ const UserInfoTable: React.FC = () => {
     }
   }
   const handleDeactivateUser = async () => {
-    await makeApiRequest('/korisnik', 'PUT', { ...user, aktivan: false })
-
+    const res = await makeApiRequest('/korisnik', 'PUT', { ...user, aktivan: false })
+    if (res) {
+      setSucessPopup(true)
+    }
   }
 
   const handleAccountDetails = (event: any) => {
@@ -115,7 +120,13 @@ const UserInfoTable: React.FC = () => {
   }
 
   const handleDeactivateAccount = async (brojRacuna: string) => {
-    await makeApiRequest(`/racuni/deleteRacunPoBroju/${brojRacuna}`, 'PUT')
+    const res = await makeApiRequest(`/racuni/deleteRacunPoBroju/${brojRacuna}`, 'PUT')
+    if (res) {
+      const accs = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${uid}`);
+      setAccounts(accs);
+
+      setSucessPopup(true)
+    }
   }
 
   return (
@@ -186,6 +197,7 @@ const UserInfoTable: React.FC = () => {
           </Table>
         </TableContainer>
       </FormWrapper >
+      {successPopup && <Alert severity="success">Uspesno deaktiviran.</Alert>}
     </PageWrapper >
   );
 };

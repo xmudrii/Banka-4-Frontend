@@ -95,6 +95,7 @@ const CreateAccountPage: React.FC = () => {
   const [fieldWarning, setFieldWarning] = useState<string>('');
   const [numbersOnlyWarning, setNumbersOnlyWarning] = useState<boolean>(false);
   const [userNotFoundWarning, setUserNotFoundWarning] = useState<boolean>(false);
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -120,10 +121,14 @@ const CreateAccountPage: React.FC = () => {
   const handleSumbit = async () => {
     for (const [key, value] of Object.entries(formData)) {
       if (value === '') {
-        setFieldWarning(key);
-        return;
+        if (key !== 'vrstaRacuna') {
+          console.log(value)
+          setFieldWarning(key);
+          return;
+        }
       }
     }
+    setFieldWarning('')
     const numbersOnlyRegex = /\d{13}/
     if (!(numbersOnlyRegex.test(formData.jmbg))) {
       setNumbersOnlyWarning(true)
@@ -132,27 +137,40 @@ const CreateAccountPage: React.FC = () => {
     }
     const zaposleni = getMe()
     const zaposleniId = zaposleni?.id
-    const data = {
-      vlasnik: idVlasnika,
-      zaposleni: zaposleniId,
-      vrstaRacuna: formData.vrstaRacuna
-    }
+
     if (formData.tip === 'tekuci') {
+      const data = {
+        vlasnik: idVlasnika,
+        zaposleni: zaposleniId,
+        vrstaRacuna: formData.vrstaRacuna
+      }
       const res = await makeApiRequest(`/racuni/dodajTekuci`, 'POST', data);
-      // console.log(res)
+      if (res) {
+        setSucessPopup(true)
+      }
     }
     // else if (formData.tip === 'pravni') {
     //   const res = await makeApiRequest(`/racuni/dodajPravni`, 'POST', data);
     //   // console.log(res)
     // }
     else if (formData.tip === 'devizni') {
+      const jezici: string[] = []
       valuteCheckbox.forEach((checkbox) => {
-        if(checkbox.vrednost){
-          
+        if (checkbox.vrednost) {
+          jezici.push(checkbox.naziv)
         }
       })
+      const data = {
+        vlasnik: idVlasnika,
+        zaposleni: zaposleniId,
+        currency: jezici,
+        defaultCurrency: formData.defaultCurrency,
+        brojDozvoljenihValuta: 7
+      }
       const res = await makeApiRequest(`/racuni/dodajDevizni`, 'POST', data);
-      // console.log(res)
+      if (res) {
+        setSucessPopup(true)
+      }
     }
 
   }
@@ -292,10 +310,11 @@ const CreateAccountPage: React.FC = () => {
             Kreiraj
           </StyledButton>
         </ButtonContainer>
-
       </FormWrapper>
       {fieldWarning !== "" && <Alert severity="error">Popunite polje '{fieldWarning}' .</Alert>}
       {numbersOnlyWarning && <Alert severity="error">Jmbg mora sadrzati iskljucivo 13 cifara.</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
+
     </PageWrapper>
   );
 };

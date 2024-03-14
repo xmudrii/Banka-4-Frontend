@@ -70,6 +70,7 @@ const EditUserPage: React.FC = () => {
   const [povezaniRacuni, setPovezaniRacuni] = useState(null)
   const [uid, setUid] = useState('')
   const [ponovi_lozinku, setPonoviLozinku] = useState('')
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -155,11 +156,16 @@ const EditUserPage: React.FC = () => {
           brojTelefona: formData.brojTelefona,
           pol: formData.pol
         }
-        await makeApiRequest('/korisnik', 'PUT', { ...formDataNoPW, id: uid, povezaniRacuni, aktivan: true })
+        const res = await makeApiRequest('/korisnik', 'PUT', { ...formDataNoPW, id: uid, povezaniRacuni, aktivan: true })
+        if (res) {
+          setSucessPopup(true)
+        }
       } else {
-        await makeApiRequest('/korisnik', 'PUT', { ...formData, id: uid, povezaniRacuni, aktivan: true })
+        const res = await makeApiRequest('/korisnik', 'PUT', { ...formData, id: uid, povezaniRacuni, aktivan: true })
+        if (res) {
+          setSucessPopup(true)
+        }
       }
-
     }
   }
 
@@ -239,6 +245,7 @@ const EditUserPage: React.FC = () => {
       {passwordWarning && <Alert severity="error">Lozinke se ne poklapaju.</Alert>}
       {emptyWarning && <Alert severity="error">Popunite neko polje.</Alert>}
       {phoneWarning && <Alert severity="error">Broj telefona je u pogresnom formatu.</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
 
     </PageWrapper>
   );

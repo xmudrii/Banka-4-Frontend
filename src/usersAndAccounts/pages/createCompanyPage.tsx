@@ -61,6 +61,7 @@ const CreateCompanyPage: React.FC = () => {
   });
 
   const [fieldWarning, setFieldWarning] = useState<string>('');
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
 
   // const navigate = useNavigate();
 
@@ -71,8 +72,10 @@ const CreateCompanyPage: React.FC = () => {
         return;
       }
     }
-    await makeApiRequest('/racuni/kreirajFirmu', 'POST', formData)
-
+    const res = await makeApiRequest('/racuni/kreirajFirmu', 'POST', formData)
+    if (res) {
+      setSucessPopup(true)
+    }
     // const numbersOnlyRegex = /\d{13}/
     // if (!(numbersOnlyRegex.test(formData.jmbg))) {
     //   setNumbersOnlyWarning(true)
@@ -171,6 +174,8 @@ const CreateCompanyPage: React.FC = () => {
 
       </FormWrapper>
       {fieldWarning !== "" && <Alert severity="error">Popunite polje '{fieldWarning}' .</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
+
     </PageWrapper>
   );
 };

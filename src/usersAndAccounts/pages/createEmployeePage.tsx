@@ -107,6 +107,7 @@ const CreateEmployeePage: React.FC = () => {
   const [numbersOnlyWarning, setNumbersOnlyWarning] = useState<boolean>(false);
   const [emailWarning, setEmailWarning] = useState<boolean>(false);
   const [passwordWarning, setPasswordWarning] = useState<boolean>(false);
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
     const { name, value } = event.target;
@@ -184,8 +185,10 @@ const CreateEmployeePage: React.FC = () => {
       setEmailWarning(false)
     }
     const data = { ...formData, datumRodjenja: new Date(formData.datumRodjenja).getTime(), aktivan: true }
-    await makeApiRequest('/radnik', 'POST', data)
-
+    const res = await makeApiRequest('/radnik', 'POST', data)
+    if (res) {
+      setSucessPopup(true)
+    }
     // navigate(-1)
   }
 
@@ -353,6 +356,7 @@ const CreateEmployeePage: React.FC = () => {
       {numbersOnlyWarning && <Alert severity="error">Jmbg mora sadrzati iskljucivo 13 cifara.</Alert>}
       {emailWarning && <Alert severity="error">Nevazeca mejl adresa.</Alert>}
       {passwordWarning && <Alert severity="error">Lozinke se ne poklapaju.</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
 
     </PageWrapper>
   );
