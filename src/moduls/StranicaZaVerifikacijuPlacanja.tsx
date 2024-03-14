@@ -1,35 +1,17 @@
 import React, { useState } from 'react';
 import './../App.css';
+import { makeApiRequest } from '../utils/apiRequest';
 
-function Home() {
+function Verifikacija() {
   const [verificationSuccess, setVerificationSuccess] = useState<boolean>(false); // Stanje koje označava da li je verifikacioni kod uspešno generisan
 
-  const sendOtpWithEmail = (email: string) => {
-    const token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0MzA1MTksImlhdCI6MTcxMDQwMTcxOX0.ZL3tvz9udJ_-fP5FcRuc6C2O6UTfhGicYVU-xyk9kcEJDCww71LjaTj9klCCyppb7m7HUJcY5-DhpfxR9ojbLA';
-    
-    fetch('http://api.stamenic.work:8080/api/generate-otp?email='+email, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      },
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log(response);
-        setVerificationSuccess(true); // Postavlja stanje da označi da je verifikacioni kod uspešno generisan
-      } else {
-        if (response.status === 404) {
-          console.error('Ruta nije pronađena.');
-        } else {
-          console.error('Greška prilikom generisanja verifikacionog koda.');
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Došlo je do greške prilikom slanja zahteva:', error);
-    });
-  };
+  const sendOtpWithEmail = async (email: string) => {
+    const res = await makeApiRequest(`generate-otp?email=${email}`, "POST")
+    if (res) {
+      setVerificationSuccess(true);
+    }
+  }
+
 
   React.useEffect(() => {
     document.title = "Verifikacija";
@@ -49,4 +31,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Verifikacija;

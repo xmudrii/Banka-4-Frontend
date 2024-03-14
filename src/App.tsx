@@ -17,6 +17,9 @@ import LoginPage from './moduls/LogReg/LoginPage';
 import RegistrationPage from './moduls/LogReg/RegistrationPage';
 import { getMe } from './utils/getMe';
 import UserHomePage from './UserHomePage';
+import ResetPasswordPage from './ResetPasswordPage';
+import Verifikacija from './moduls/StranicaZaVerifikacijuPlacanja';
+import Placanje from './moduls/Placanje/Placanje';
 const auth = getMe()
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
         <Route path="/izmeniZaposlenog" element={auth?.id ? <EditEmployeePage /> : <LoginPage />} />
         <Route path="/kreirajFirmu" element={auth?.id ? <CreateCompanyPage /> : <LoginPage />} />
         <Route path="/izmeniFirmu" element={auth?.id ? <EditCompanyPage /> : <LoginPage />} />
+        <Route path="/resetPassword" element={auth?.id ? <ResetPasswordPage /> : <LoginPage />} />
+        <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
+        <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
