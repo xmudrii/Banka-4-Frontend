@@ -1,6 +1,6 @@
 import { AppBar, Tabs, Tab, Button } from '@mui/material';
 import UserList from '../components/userList'
-import { Account, Company } from '../utils/types';
+import { Account } from '../utils/types';
 import styled from 'styled-components';
 import AccountList from '../components/accountList';
 import { useNavigate } from 'react-router-dom';
@@ -38,25 +38,14 @@ const HeadingText = styled.div`
   font-size: 32px;
 `
 
-
-
-const c1: Company = {
-  naziv: 'Diktatorship',
-  brojTelefona: '0694201337',
-  broj_faksa: '1231233',
-  pib: '12312345',
-  maticni_broj: '35462323',
-  sifra_delatnosti: '1123',
-  registarski_broj: '123344'
-}
-
 const accounts: Account[] = []
-const companies: Company[] = [c1]
 
 const UserAndAccountList: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [usrs, setUsrs] = useState([])
   const [employees, setEmployees] = useState([])
+  const [companies, setCompanies] = useState([])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,6 +53,8 @@ const UserAndAccountList: React.FC = () => {
         setUsrs(users);
         const employees = await makeGetRequest('/radnik');
         setEmployees(employees)
+        const companies = await makeGetRequest('/racuni/izlistajSveFirme');
+        setCompanies(companies)
       } catch (error) {
         console.error('Error fetching user list:', error);
       }

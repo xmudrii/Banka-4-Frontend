@@ -6,7 +6,8 @@ export const makeApiRequest = async (route: string, type: string, data?: object)
             method: type,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTI5NTcsImlhdCI6MTcxMDQyNDE1N30.3VlPgCYKToqAR22d8e-iYoayegR2-t6wud_ESa_r0bDu9rY5TpIo8sCbLbwkAEJXDL_iZmPH89XhHeit1uE8-g`
+                'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTQxOTQsImlhdCI6MTcxMDQyNTM5NH0.3PmmMcFe4aw1n1jXxsK_wX_dnYZOkZZvFFHy92ze_EcnaaVi1uSdx1RJjKJnWTm7l30BsNtbIFxzUBEQR7LeMA
+                `
 
             },
             body: JSON.stringify(data)
@@ -31,7 +32,8 @@ export const makeGetRequest = async (route: string) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTI5NTcsImlhdCI6MTcxMDQyNDE1N30.3VlPgCYKToqAR22d8e-iYoayegR2-t6wud_ESa_r0bDu9rY5TpIo8sCbLbwkAEJXDL_iZmPH89XhHeit1uE8-g`
+                'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTQxOTQsImlhdCI6MTcxMDQyNTM5NH0.3PmmMcFe4aw1n1jXxsK_wX_dnYZOkZZvFFHy92ze_EcnaaVi1uSdx1RJjKJnWTm7l30BsNtbIFxzUBEQR7LeMA
+                `
             },
 
         });

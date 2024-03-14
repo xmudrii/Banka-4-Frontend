@@ -29,14 +29,14 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
                 </StyledTableHead>
                 <TableBody>
                     {companies?.map((company: Company) => (
-                        <StyledTableRow key={company.maticni_broj} id={company.maticni_broj} onClick={handleSelect}>
-                            <StyledTableCell>{company.naziv}</StyledTableCell>
+                        <StyledTableRow key={company.maticniBroj} id={company.maticniBroj} onClick={handleSelect}>
+                            <StyledTableCell>{company.nazivPreduzeca}</StyledTableCell>
                             <StyledTableCell>{company.brojTelefona}</StyledTableCell>
-                            <StyledTableCell>{company.broj_faksa}</StyledTableCell>
+                            <StyledTableCell>{company.brojFaksa}</StyledTableCell>
                             <StyledTableCell>{company.pib}</StyledTableCell>
-                            <StyledTableCell>{company.maticni_broj}</StyledTableCell>
-                            <StyledTableCell>{company.sifra_delatnosti}</StyledTableCell>
-                            <StyledTableCell>{company.registarski_broj}</StyledTableCell>
+                            <StyledTableCell>{company.maticniBroj}</StyledTableCell>
+                            <StyledTableCell>{company.sifraDelatnosti}</StyledTableCell>
+                            <StyledTableCell>{company.registarskiBroj}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

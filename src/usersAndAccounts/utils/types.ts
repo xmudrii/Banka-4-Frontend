@@ -67,8 +67,8 @@ export type Account = {
 }
 
 export type AccountBasicInfo = {
-brojRacuna: string;
-stanje: number;
+  brojRacuna: string;
+  stanje: number;
 }
 
 export type AccountListProps = {
@@ -100,13 +100,13 @@ export type EmployeeListProps = {
 }
 
 export type Company = {
-  naziv: string;
+  nazivPreduzeca: string;
   brojTelefona: string;
-  broj_faksa: string;
+  brojFaksa: string;
   pib: string;
-  maticni_broj: string;
-  sifra_delatnosti: string;
-  registarski_broj: string;
+  maticniBroj: string;
+  sifraDelatnosti: string;
+  registarskiBroj: string;
 }
 
 export type CompanyListProps = {
