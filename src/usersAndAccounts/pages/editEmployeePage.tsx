@@ -98,6 +98,9 @@ const EditEmployeePage: React.FC = () => {
   const [passwordWarning, setPasswordWarning] = useState<boolean>(false);
   const [emptyWarning, setEmptyWarning] = useState<boolean>(false);
   const [phoneWarning, setPhoneWarning] = useState<boolean>(false);
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -169,7 +172,10 @@ const EditEmployeePage: React.FC = () => {
       }
     }
     const data = { ...formData, aktivan: true }
-    await makeApiRequest('/radnik', 'PUT', data)
+    const res = await makeApiRequest('/radnik', 'PUT', data)
+    if (res) {
+      setSucessPopup(true)
+    }
 
   }
 
@@ -289,6 +295,7 @@ const EditEmployeePage: React.FC = () => {
       {passwordWarning && <Alert severity="error">Lozinke se ne poklapaju.</Alert>}
       {emptyWarning && <Alert severity="error">Popunite neko polje.</Alert>}
       {phoneWarning && <Alert severity="error">Broj telefona je u pogresnom formatu.</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
 
     </PageWrapper>
   );

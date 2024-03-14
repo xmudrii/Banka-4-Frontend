@@ -69,6 +69,8 @@ const CreateUserPage: React.FC = () => {
   const [numbersOnlyWarning, setNumbersOnlyWarning] = useState<boolean>(false);
   const [emailWarning, setEmailWarning] = useState<boolean>(false);
   const [kreiranjeRacuna, setKreiranjeRacuna] = useState<string>('');
+  const [successPopup, setSucessPopup] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -151,7 +153,10 @@ const CreateUserPage: React.FC = () => {
       setEmailWarning(false)
     }
     const data = { ...formData, datumRodjenja: new Date(formData.datumRodjenja).getTime(), aktivan: true }
-    await makeApiRequest('/korisnik/add', 'POST', data)
+    const res = await makeApiRequest('/korisnik/add', 'POST', data)
+    if (res) {
+      setSucessPopup(true)
+    }
     if (kreiranjeRacuna) {
       navigate(`/kreirajRacun${kreiranjeRacuna}&jmbg=${formData.jmbg}`)
     }
@@ -255,13 +260,11 @@ const CreateUserPage: React.FC = () => {
       {letterOnlyWarning && <Alert severity="error">Ime i prezime ne sme sadrzati brojeve.</Alert>}
       {numbersOnlyWarning && <Alert severity="error">Jmbg mora sadrzati iskljucivo 13 cifara.</Alert>}
       {emailWarning && <Alert severity="error">Nevazeca mejl adresa.</Alert>}
+      {successPopup && <Alert severity="success">Uspesno kreiran.</Alert>}
 
     </PageWrapper>
   );
 };
 
 export default CreateUserPage;
-function useHistory() {
-  throw new Error('Function not implemented.');
-}
 

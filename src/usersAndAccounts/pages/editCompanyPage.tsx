@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Alert } from '@mui/material';
 import styled from 'styled-components';
-
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -165,3 +164,4 @@ const EditCompanyPage: React.FC = () => {
 };
 
 export default EditCompanyPage;
+//JUST IN CASE

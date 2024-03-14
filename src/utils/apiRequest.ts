@@ -6,7 +6,7 @@ export const getJWT = () => {
     return localStorage.getItem('si_jwt');
 };
 
-export const makeApiRequest = async (route: string, type: string, data?: object) => {
+export const makeApiRequest = async (route: string, type: string, data?: object, noJson?: boolean) => {
     try {
         const token = getJWT()
         const response = await fetch(`${apiUrl}${route}`, {
@@ -20,8 +20,10 @@ export const makeApiRequest = async (route: string, type: string, data?: object)
         });
         // console.log(response)
 
-        // console.log(await response.json())
-
+        if (response.ok) {
+            const res = await response.json()
+            return res
+        }
         if (!response.ok) {
             throw new Error('Error goes errrrr');
         }
