@@ -20,7 +20,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ employees }) => {
     const navigate = useNavigate();
     const handleSelect = (event: any) => {
         const id = event.currentTarget.id;
-        navigate(`/zaposleni?id=${id}`)
+        navigate(`/izmeniZaposlenog?email=${id}`)
     };
 
     return (
@@ -42,7 +42,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ employees }) => {
                 </StyledTableHead>
                 <TableBody>
                     {employees?.map((employee: Employee) => (
-                        <StyledTableRow key={employee.jmbg} id={employee.jmbg} onClick={handleSelect}>
+                        <StyledTableRow key={employee.email} id={employee.email} onClick={handleSelect}>
                             <StyledTableCell>{employee.ime}</StyledTableCell>
                             <StyledTableCell>{employee.prezime}</StyledTableCell>
                             <StyledTableCell>{employee.jmbg}</StyledTableCell>
