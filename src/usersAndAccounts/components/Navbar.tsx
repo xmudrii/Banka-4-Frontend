@@ -42,7 +42,7 @@ const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 { name: 'Kreiraj firmu', path: 'kreirajFirmu' },
 ];
 
-const settings = ['Nalog', 'Opcije', 'Logout'];
+const settings = ['Nalog', 'Opcije'];
 
 function Navbar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -54,6 +54,10 @@ function Navbar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const handleLogout = () => {
+        localStorage.removeItem('si_jwt');
+        window.location.reload();
+    }
 
     return (
         <StyledAppBar position="static">
@@ -93,6 +97,9 @@ function Navbar() {
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
+                            <MenuItem key={'Logout'} onClick={handleLogout}>
+                                <Typography textAlign="center">{'Logout'}</Typography>
+                            </MenuItem>
                         </Menu>
                     </NavUser>
                 </Toolbar>

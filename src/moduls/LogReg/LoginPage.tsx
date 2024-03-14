@@ -31,7 +31,7 @@ const LoginPage = () => {
         try {
             const result = await fetch(`${url}/korisnik/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: email, password: password }) });
             const token = await result.text();
-            document.cookie = `si-token=${token};`
+            localStorage.setItem('si_jwt', token);
             const decodedToken = jwtDecode(token) as DecodedToken;
             if (decodedToken.permission === 0) {
                 isEmployee = false;

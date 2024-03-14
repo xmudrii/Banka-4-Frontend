@@ -1,12 +1,19 @@
 import { apiUrl } from "./apiUrl";
 
+export const getJWT = () => {
+    // const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXJhQGdtYWlsLnJzIiwicGVybWlzc2lvbiI6NDE5NDMwMywiaWQiOjEsImV4cCI6MTcxMDQ3NDY2MCwiaWF0IjoxNzEwNDQ1ODYwfQ.zd5ImPnm9PQkFPn6gSfyR8HgW6nX1Irw2ToW_PjhRqo2U7GFJlFI-b7ENQRqruEGlAQmsMxccANf9uwncdSHiw';
+    // localStorage.setItem('si_jwt', token);
+    return localStorage.getItem('si_jwt');
+};
+
 export const makeApiRequest = async (route: string, type: string, data?: object) => {
     try {
+        const token = getJWT()
         const response = await fetch(`${apiUrl}${route}`, {
             method: type,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXJhQGdtYWlsLnJzIiwicGVybWlzc2lvbiI6NDE5NDMwMywiaWQiOjEsImV4cCI6MTcxMDQ3MTA1OSwiaWF0IjoxNzEwNDQyMjU5fQ.m96qgWQVSfHkjTWLNdwqjt3sH9UCNICiCxWI6w0FPbyS5buoILVBy06LuReLO1V9SoUDZVk1wXkRQOKbzOihRg`
+                'Authorization': `Bearer ${token}`
 
             },
             body: JSON.stringify(data)
@@ -27,11 +34,12 @@ export const makeApiRequest = async (route: string, type: string, data?: object)
 
 export const makeGetRequest = async (route: string) => {
     try {
+        const token = getJWT()
         const response = await fetch(`${apiUrl}${route}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXJhQGdtYWlsLnJzIiwicGVybWlzc2lvbiI6NDE5NDMwMywiaWQiOjEsImV4cCI6MTcxMDQ3MTA1OSwiaWF0IjoxNzEwNDQyMjU5fQ.m96qgWQVSfHkjTWLNdwqjt3sH9UCNICiCxWI6w0FPbyS5buoILVBy06LuReLO1V9SoUDZVk1wXkRQOKbzOihRg`
+                'Authorization': `Bearer ${token}`
             },
 
         });

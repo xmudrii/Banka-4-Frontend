@@ -3,6 +3,7 @@ import { TextField, Button, Alert, FormControl, InputLabel, Select, MenuItem, Fo
 import styled from 'styled-components';
 import { EmployeePermissions } from '../../utils/types';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
+import { encodePermissions } from '../../utils/permissions';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -58,42 +59,41 @@ type Permisije = {
   vrednost: boolean
 }
 interface editEmployeeData {
+  id: number
   prezime: string;
   adresa: string;
-  email: string;
   brojTelefona: string;
   password: string,
-  ponovi_lozinku: string,
+  passwordSalt: string,
   pol: string,
   departman: string,
   pozicija: string,
-  permisije: Permisije[]
+  permisije: number,
 }
 
 
 const EditEmployeePage: React.FC = () => {
   const [formData, setFormData] = useState<editEmployeeData>({
+    id: 0,
     prezime: '',
     adresa: '',
-    email: '',
     brojTelefona: '',
     password: '',
-    ponovi_lozinku: '',
+    passwordSalt: '',
     pol: '',
     departman: '',
     pozicija: '',
-    permisije: [{ naziv: EmployeePermissions.listanje_korisnika, vrednost: false },
+    permisije: 0,
+  });
+  const [permissionCheckboxes, setPermissionCheckboxes] = useState<Permisije[]>([
+    { naziv: EmployeePermissions.listanje_korisnika, vrednost: false },
     { naziv: EmployeePermissions.dodavanje_korisnika, vrednost: false },
     { naziv: EmployeePermissions.editovanje_korisnika, vrednost: false },
     { naziv: EmployeePermissions.deaktiviranje_korisnika, vrednost: false },
     { naziv: EmployeePermissions.kreiranje_racuna, vrednost: false },
     { naziv: EmployeePermissions.editovanje_racuna, vrednost: false },
-    { naziv: EmployeePermissions.brisanje_racuna, vrednost: false },
-    { naziv: EmployeePermissions.listanje_radnika, vrednost: false },
-    { naziv: EmployeePermissions.dodavanje_radnika, vrednost: false },
-    { naziv: EmployeePermissions.editovanje_radnika, vrednost: false },
-    { naziv: EmployeePermissions.deaktiviranje_radnika, vrednost: false }],
-  });
+    { naziv: EmployeePermissions.brisanje_racuna, vrednost: false }
+  ])
 
   const [passwordWarning, setPasswordWarning] = useState<boolean>(false);
   const [emptyWarning, setEmptyWarning] = useState<boolean>(false);
@@ -141,9 +141,10 @@ const EditEmployeePage: React.FC = () => {
   };
 
   const handleCheckboxChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const novePermisije = [...formData.permisije];
+    const novePermisije = [...permissionCheckboxes];
     novePermisije[index].vrednost = event.target.checked;
-    setFormData({ ...formData, permisije: novePermisije });
+    setPermissionCheckboxes(novePermisije);
+    setFormData({ ...formData, permisije: encodePermissions(permissionCheckboxes) })
   };
 
   const handleSumbit = async () => {
@@ -152,7 +153,7 @@ const EditEmployeePage: React.FC = () => {
     if (isEmpty) {
       return
     }
-    if (formData.password !== '' && formData.password !== formData.ponovi_lozinku) {
+    if (formData.password !== '' && formData.password !== formData.passwordSalt) {
       setPasswordWarning(true)
       return
     } else {
@@ -210,9 +211,9 @@ const EditEmployeePage: React.FC = () => {
             />
             <StyledTextField
               label="Ponovi lozinku"
-              name='ponovi_lozinku'
+              name='passwordSalt'
               variant="outlined"
-              value={formData.ponovi_lozinku}
+              value={formData.passwordSalt}
               onChange={handleChange}
               fullWidth
               margin="normal"
@@ -265,11 +266,11 @@ const EditEmployeePage: React.FC = () => {
         </FormSeparator>
         <CheckBoxForm>
           <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {formData.permisije?.map((permisija, index) => (
+            {permissionCheckboxes?.map((permisija, index) => (
               <Grid item xs={6} md={6} lg={6} key={index}>
                 <FormControlLabel
                   control={<Checkbox checked={permisija.vrednost} onChange={handleCheckboxChange(index)} />}
-                  label={`${formData.permisije[index].naziv.replaceAll("_", " ")}`}
+                  label={`${permissionCheckboxes[index].naziv.replaceAll("_", " ")}`}
                 />
               </Grid>
             ))}

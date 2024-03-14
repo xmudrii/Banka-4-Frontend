@@ -1,6 +1,5 @@
 import { AppBar, Tabs, Tab, Button } from '@mui/material';
 import UserList from '../components/userList'
-import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import EmployeeList from '../components/employeeList';
@@ -64,9 +63,6 @@ const UserAndAccountList: React.FC = () => {
 
   const handleCreateUser = (event: any) => {
     navigate(`/kreirajKorisnika`)
-  };
-  const handleCreateAccount = (event: any) => {
-    navigate(`/kreirajRacun`)
   };
   const handleCreateEmployee = (event: any) => {
     navigate(`/kreirajZaposlenog`)
