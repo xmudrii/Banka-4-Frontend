@@ -2,6 +2,7 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import "./ResetPasswordPage.css";
 import PasswordInput from "./PasswordInput";
+import { makeApiRequest } from "./utils/apiRequest";
 const red = "#860e04";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -31,26 +32,7 @@ const ResetPasswordPage = () => {
 
   const sendRequest = async () => {
     try {
-      const response = await fetch(
-        "http://api.stamenic.work:8080/api/korisnik/generate-reset",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-
-      console.log(data);
+      await makeApiRequest("/korisnik/generate-reset-korisnici", "POST", { email })
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,29 +40,11 @@ const ResetPasswordPage = () => {
 
   const resetPassword = async () => {
     try {
-      const response = await fetch(
-        "http://api.stamenic.work:8080/api/korisnik/reset-password",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            sifra: newPassword,
-            kod: activationCode,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-
-      // navigate("/login");
-      console.log(data);
+      await makeApiRequest("/korisnik/reset-password", "POST", {
+        email,
+        sifra: newPassword,
+        kod: activationCode,
+      })
     } catch (error) {
       console.error("Error fetching data:", error);
     }

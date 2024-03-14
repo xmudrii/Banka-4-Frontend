@@ -58,7 +58,6 @@ const StyledTableCell = styled(TableCell)`
 `
 
 const formatTitle = (title: string): string => {
-  console.log(title)
   // title = title.charAt(0).toUpperCase() + title.slice(1)
   // title = title.replaceAll("_", " ")
   return title
@@ -115,6 +114,10 @@ const UserInfoTable: React.FC = () => {
     navigate(`/racun?broj=${id}&jmbg=${jmbg}`)
   }
 
+  const handleDeactivateAccount = async (brojRacuna: string) => {
+    await makeApiRequest(`/racuni/deleteRacunPoBroju/${brojRacuna}`, 'PUT')
+  }
+
   return (
     <PageWrapper>
       <HeadingText>
@@ -164,7 +167,7 @@ const UserInfoTable: React.FC = () => {
             </TableHead>
             <TableBody>
               {accounts?.map((account) => (
-                <TableRow key='broj'>
+                <TableRow key={account.brojRacuna}>
                   <HighlightableStyledTableCentered id={account.brojRacuna} component="th" scope="row" onClick={handleAccountDetails}>
                     {formatTitle(account.brojRacuna)}
                   </HighlightableStyledTableCentered>
@@ -175,7 +178,7 @@ const UserInfoTable: React.FC = () => {
                     <Button onClick={handleEditAccount}>Izmeni</Button>
                   </StyledTableCentered>
                   <StyledTableCentered component="th" scope="row">
-                    <Button color='error'>Deaktiviraj</Button>
+                    <Button onClick={() => handleDeactivateAccount(account.brojRacuna)} color='error'>Deaktiviraj</Button>
                   </StyledTableCentered>
                 </TableRow>
               ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, TextField, Link, Typography, Container } from '@mui/material';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,12 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
+    useEffect(() => {
+        if(window.location.pathname !== '/login'){
+            navigate('/login')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const handleRegister = () => {
         navigate('/register')
     }

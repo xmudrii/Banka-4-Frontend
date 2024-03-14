@@ -197,7 +197,7 @@ const AccountInfoPage: React.FC = () => {
             </TableHead>
             <TableBody>
               {transactions?.map((transakcija) => (
-                <TableRow key='broj'>
+                <TableRow key={transakcija.sifraPlacanja}>
                   <StyledTableCentered component="th" scope="row">
                     {(transakcija.nazivPrimaoca)}
                   </StyledTableCentered>

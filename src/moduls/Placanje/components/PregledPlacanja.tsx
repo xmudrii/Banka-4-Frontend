@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { makeApiRequest } from '../../../utils/apiRequest';
 
 const url = "http://api.stamenic.work:8080/api";
 
@@ -52,7 +53,8 @@ const PregledPlacanja = () => {
         const func = async () => {
             //Izvlacenje iz kolaca xd
             try {
-                const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+                await makeApiRequest("/omiljeni-korisnici", "POST")
+                // const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
                 // setPlacanja();
             } catch (e) {
 

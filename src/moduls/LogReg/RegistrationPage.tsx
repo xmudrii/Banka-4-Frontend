@@ -95,7 +95,7 @@ const RegistrationPage = () => {
         // This would be a good place to validate all fields across all steps
         if (validateFieldsStepOne() && validateFieldsStepTwo() && validateFieldsStepThree()) {
             try {
-                const result = await fetch(`${url}/korisnik/verifikacija`, { method: "POST", headers: { "Authorization": `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTQxOTQsImlhdCI6MTcxMDQyNTM5NH0.3PmmMcFe4aw1n1jXxsK_wX_dnYZOkZZvFFHy92ze_EcnaaVi1uSdx1RJjKJnWTm7l30BsNtbIFxzUBEQR7LeMA`, "Content-Type": "application/json" }, body: JSON.stringify({ email: userData.email, brojTelefona: userData.telefon, brojRacuna: userData.brojRacuna, password: userData.lozinka, code: userData.aktivacioniKod }) });
+                await fetch(`${url}/korisnik/verifikacija`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: userData.email, brojTelefona: userData.telefon, brojRacuna: userData.brojRacuna, password: userData.lozinka, code: userData.aktivacioniKod }) });
                 alert("Uspeh");
                 navigate('/login')
             } catch (e) {
