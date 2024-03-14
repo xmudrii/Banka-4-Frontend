@@ -12,7 +12,6 @@ import AccountInfoPage from './usersAndAccounts/pages/accountPage';
 import CreateEmployeePage from './usersAndAccounts/pages/createEmployeePage';
 import EditEmployeePage from './usersAndAccounts/pages/editEmployeePage';
 import CreateCompanyPage from './usersAndAccounts/pages/createCompanyPage';
-import EditCompanyPage from './usersAndAccounts/pages/editCompanyPage';
 import LoginPage from './moduls/LogReg/LoginPage';
 import RegistrationPage from './moduls/LogReg/RegistrationPage';
 
@@ -21,20 +20,18 @@ function App() {
     <BrowserRouter>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<LoginPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/register" element={<RegistrationPage/>} />
-        <Route path="/listaKorisnika" element={<UserAndAccountList/>} />
-        <Route path="/korisnik" element={<UserInfoTable/>} />
-        <Route path="/kreirajKorisnika" element={<CreateUserPage/>} />
-        <Route path="/izmeniKorisnika" element={<EditUserPage/>} />
-        <Route path="/racun" element={<AccountInfoPage/>} />
-        <Route path="/kreirajRacun" element={<CreateAccountPage/>} />
-        <Route path="/kreirajZaposlenog" element={<CreateEmployeePage/>} />
-        <Route path="/izmeniZaposlenog" element={<EditEmployeePage/>} />
-        <Route path="/kreirajFirmu" element={<CreateCompanyPage/>} />
-        <Route path="/izmeniFirmu" element={<EditCompanyPage/>} />
-
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/listaKorisnika" element={<UserAndAccountList />} />
+        <Route path="/korisnik" element={<UserInfoTable />} />
+        <Route path="/kreirajKorisnika" element={<CreateUserPage />} />
+        <Route path="/izmeniKorisnika" element={<EditUserPage />} />
+        <Route path="/racun" element={<AccountInfoPage />} />
+        <Route path="/kreirajRacun" element={<CreateAccountPage />} />
+        <Route path="/kreirajZaposlenog" element={<CreateEmployeePage />} />
+        <Route path="/izmeniZaposlenog" element={<EditEmployeePage />} />
+        <Route path="/kreirajFirmu" element={<CreateCompanyPage />} />
       </Routes>
     </BrowserRouter>
   );

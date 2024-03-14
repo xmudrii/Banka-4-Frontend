@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Grid, Checkbox } from '@mui/material';
 import styled from 'styled-components';
 import { EmployeePermissions } from '../../utils/types';
-import { makeApiRequest } from '../../utils/apiRequest';
+import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -98,6 +98,29 @@ const EditEmployeePage: React.FC = () => {
   const [passwordWarning, setPasswordWarning] = useState<boolean>(false);
   const [emptyWarning, setEmptyWarning] = useState<boolean>(false);
   const [phoneWarning, setPhoneWarning] = useState<boolean>(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams?.get('email') ?? ''
+        if (email) {
+          const res = await makeGetRequest(`/radnik/email/${email}`);
+          let updatedFormData: editEmployeeData = { ...formData };
+          for (const [key] of Object.entries(formData)) {
+            if (res[key] && key !== 'permisije') {
+              updatedFormData = { ...updatedFormData, [key]: res[key] }
+            }
+          }
+          setFormData(updatedFormData);
+        }
+
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
     const { name, value } = event.target;

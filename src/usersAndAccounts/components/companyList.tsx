@@ -2,15 +2,13 @@ import * as React from 'react';
 import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
 import { Company, CompanyListProps } from '../../utils/types';
 import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
-import { useNavigate } from 'react-router-dom';
 
 
 const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
-    const navigate = useNavigate();
 
     const handleSelect = (event: any) => {
-        const id = event.currentTarget.id;
-        navigate(`/korisnik?id=${id}`)
+        // const id = event.currentTarget.id;
+        // navigate(`/korisnik?id=${id}`)
     };
 
     return (

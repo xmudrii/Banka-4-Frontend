@@ -85,7 +85,7 @@ const AccountInfoPage: React.FC = () => {
         const brojRacuna = urlParams?.get('broj')
         const jmbg = urlParams?.get('jmbg')
         if (brojRacuna && jmbg) {
-          const res = await makeGetRequest(`/racuni/nadjiTekuciRacunPoBroju/${brojRacuna}`);
+          const res = await makeGetRequest(`/racuni/nadjiRacunPoBroju/${brojRacuna}`);
           if (res) {
             setAccount(res)
             const vlasnik = await makeGetRequest(`/korisnik/jmbg/${jmbg}`);
@@ -146,12 +146,6 @@ const AccountInfoPage: React.FC = () => {
                   Datum isteka
                 </StyledTableCell>
                 <StyledTableCell>{new Date(account.datumIsteka).toDateString()}</StyledTableCell>
-              </TableRow>
-              <TableRow key={'Vrsta racuna'}>
-                <StyledTableCell component="th" scope="row">
-                  Vrsta racuna
-                </StyledTableCell>
-                <StyledTableCell>{account.vrstaRacuna}</StyledTableCell>
               </TableRow>
               <TableRow key={'Status racuna'}>
                 <StyledTableCell component="th" scope="row">

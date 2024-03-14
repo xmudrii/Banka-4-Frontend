@@ -64,33 +64,6 @@ const formatTitle = (title: string): string => {
   return title
 }
 
-// const user: User = {
-//   ime: 'Pera',
-//   prezime: 'Peric',
-//   jmbg: '1234123123123123',
-//   datumRodjenja: '11/02/2001',
-//   pol: 'M',
-//   adresa: 'Cvijiceva 12',
-//   email: 'pera@raf.rs',
-//   brojTelefona: '0694201337',
-//   permisije: [UserPermissions.listanje_korisnika, UserPermissions.kreiranje_racuna]
-// }
-
-// const r1: AccountBasicInfo = {
-//   .brojRacuna '123456789012345678',
-//   stanje: 1233,
-// }
-// const r2: AccountBasicInfo = {
-//   .brojRacuna '123456789012345678',
-//   stanje: 1233,
-// }
-// const r3: AccountBasicInfo = {
-//   .brojRacuna '123456789012345678',
-//   stanje: 1233,
-// }
-
-// const accounts: AccountBasicInfo[] = [r1, r2, r3]
-
 //TODO add a conditionals to display buttons only with permissions
 const UserInfoTable: React.FC = () => {
   const [user, setUser] = useState([])

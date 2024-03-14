@@ -6,7 +6,7 @@ type Decoded = {
     id: number;
 }
 export const getMe = () => {
-    const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NDU5NTIsImlhdCI6MTcxMDQxNzE1Mn0.TyfuP9lAVdIUoAVBgaGpbGk-zodjP9P8JSLk_CXCkhVnqRuIbnCkHGas798VDOVPEijW_8KsKNRGRwNQLp-QAQ'
+    const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXJhQGdtYWlsLnJzIiwicGVybWlzc2lvbiI6NDE5NDMwMywiaWQiOjEsImV4cCI6MTcxMDQ3MTA1OSwiaWF0IjoxNzEwNDQyMjU5fQ.m96qgWQVSfHkjTWLNdwqjt3sH9UCNICiCxWI6w0FPbyS5buoILVBy06LuReLO1V9SoUDZVk1wXkRQOKbzOihRg'
 
     try {
         const decoded: Decoded = jwtDecode(token);

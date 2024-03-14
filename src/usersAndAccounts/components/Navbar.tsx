@@ -38,12 +38,8 @@ const NavUser = styled(Box)`
 `
 
 const pages = [{ name: 'Liste', path: 'listaKorisnika' },
-{ name: 'Kreiraj korisnika', path: 'kreirajKorisnika' },
-{ name: 'Kreiraj racun', path: 'kreirajRacun' },
 { name: 'Kreiraj zaposlenog', path: 'kreirajZaposlenog' },
-{ name: 'Izmeni zaposlenog', path: 'izmeniZaposlenog' },
 { name: 'Kreiraj firmu', path: 'kreirajFirmu' },
-{ name: 'Izmeni firmu', path: 'izmenifirmu' },
 ];
 
 const settings = ['Nalog', 'Opcije', 'Logout'];
