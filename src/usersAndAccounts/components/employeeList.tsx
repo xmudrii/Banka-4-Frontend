@@ -1,8 +1,8 @@
 import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
-import { Employee, EmployeeListProps } from '../utils/types';
-import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../utils/tableStyles';
+import { Employee, EmployeeListProps } from '../../utils/types';
+import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
 import { useNavigate } from 'react-router-dom';
-import { decodePermissions } from '../utils/permissions';
+import { decodePermissions } from '../../utils/permissions';
 import styled from 'styled-components';
 
 const StyledTableCellLocal = styled(StyledTableCell)`

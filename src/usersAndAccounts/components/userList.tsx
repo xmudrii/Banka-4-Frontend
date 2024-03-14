@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
-import { User, UserListProps } from '../utils/types';
-import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../utils/tableStyles';
+import { User, UserListProps } from '../../utils/types';
+import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
 import { useNavigate } from 'react-router-dom';
 
 

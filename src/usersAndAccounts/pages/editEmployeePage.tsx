@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Grid, Checkbox } from '@mui/material';
 import styled from 'styled-components';
-import { EmployeePermissions } from '../utils/types';
-import { makeApiRequest } from '../utils/apiRequest';
+import { EmployeePermissions } from '../../utils/types';
+import { makeApiRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;

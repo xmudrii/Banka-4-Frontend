@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styled from 'styled-components';
-import { makeApiRequest, makeGetRequest } from '../utils/apiRequest';
+import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;

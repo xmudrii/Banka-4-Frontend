@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, TableHead, Button } from '@mui/material';
-import { Account } from '../utils/types';
+import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { makeApiRequest, makeGetRequest } from '../utils/apiRequest';
+import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;
