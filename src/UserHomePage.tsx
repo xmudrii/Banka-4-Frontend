@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import AccountsTable from "./AccountsTable";
 import Header from "./Header";
-import { Account, Transaction } from "./Model";
-import TransactionsTable from "./TransactionsTable";
+import { Account } from "./Model";
 const korisnikId = 1;
-const authToken =
-  "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6MzI3NjcsImlkIjoxMSwiZXhwIjoxNzEwMzk1MDA5LCJpYXQiOjE3MTAzNjYyMDl9.nmJhpXukMJuep05ggYIC9H-SLuowEapJXPFnQWaJEUeLeU8G0e-9IV0ptiFHKayU4G-zFzS9U8IcY8uycPaiLQ";
 
 // const transactions: Transaction[] = [
 //   {
@@ -27,33 +24,33 @@ const authToken =
 const UserHomePage = () => {
   //account za prikaz komponentu u kojoj se prikazuje pojedinacan racun
   const [account, setAccount] = useState<Account>();
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [accounts, setAccounts] = useState<Account[]>([]);
+  // const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const fetchTransactions = async () => {
-    try {
-      const response = await fetch(
-        `http://api.stamenic.work:8080/api/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authToken,
-          },
-        }
-      );
+  // const fetchTransactions = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://api.stamenic.work:8080/api/transactions/getAllTransactionsByKorisnikId/${korisnikId}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NDU5NTIsImlhdCI6MTcxMDQxNzE1Mn0.TyfuP9lAVdIUoAVBgaGpbGk-zodjP9P8JSLk_CXCkhVnqRuIbnCkHGas798VDOVPEijW_8KsKNRGRwNQLp-QAQ`,
+  //         },
+  //       }
+  //     );
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+  //     }
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      setTransactions(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  //     setTransactions(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
 
   const fetchAccounts = async () => {
     try {
@@ -63,7 +60,7 @@ const UserHomePage = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: authToken,
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NDU5NTIsImlhdCI6MTcxMDQxNzE1Mn0.TyfuP9lAVdIUoAVBgaGpbGk-zodjP9P8JSLk_CXCkhVnqRuIbnCkHGas798VDOVPEijW_8KsKNRGRwNQLp-QAQ`,
           },
         }
       );
@@ -81,7 +78,7 @@ const UserHomePage = () => {
   };
 
   useEffect(() => {
-    fetchTransactions();
+    // fetchTransactions();
     fetchAccounts();
   }, []);
 
@@ -89,7 +86,7 @@ const UserHomePage = () => {
     <div>
       <Header firstName={"Sofija"} lastName={"Todorovic"} />
       <AccountsTable accounts={accounts} setAccount={setAccount} />
-      <TransactionsTable transactions={transactions} />
+      {/* <TransactionsTable transactions={transactions} /> */}
     </div>
   );
 };
