@@ -10,7 +10,7 @@ import { PrimaociPlacanja } from './components/PrimaociPlacanja';
 import PregledPlacanja from './components/PregledPlacanja';
 
 
-const App: React.FC = () => {
+const Placanje: React.FC = () => {
     // Dodati pravu navigaciju
     const [selectedOption, setSelectedOption] = useState('');
 
@@ -43,4 +43,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default Placanje;

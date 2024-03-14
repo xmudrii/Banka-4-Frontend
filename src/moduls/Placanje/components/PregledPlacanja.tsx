@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+
+const url = "http://api.stamenic.work:8080/api";
 
 type UplataDTO = {
     racunPosiljaoca: string;
@@ -44,6 +46,20 @@ const transactions: UplataDTO[] = [
 ];
 
 const PregledPlacanja = () => {
+    const [placanja, setPlacanja] = useState<UplataDTO[]>([]);
+
+    useEffect(() => {
+        const func = async () => {
+            //Izvlacenje iz kolaca xd
+            try {
+                const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+                // setPlacanja();
+            } catch (e) {
+
+            }
+        }
+        func();
+    }, [])
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">

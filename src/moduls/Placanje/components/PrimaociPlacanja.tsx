@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -15,9 +15,23 @@ const MOCK_PRIMAOCI = [
     { id: 2, naziv: 'Jane Doe', brojRacuna: '265-0000001234568-79', pozivNaBroj: '67890', sifraPlacanja: '002', svrhaPlacanja: 'Support' },
 ];
 
+const url = "http://api.stamenic.work:8080/api";
 
 export const PrimaociPlacanja = () => {
     const [primaoci, setPrimaoci] = useState(MOCK_PRIMAOCI);
+
+    useEffect(() => {
+        const func = async () => {
+            //Izvlacenje iz kolaca xd
+            try {
+                const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+                // setPrimaoci();
+            } catch (e) {
+
+            }
+        }
+        func();
+    }, [])
 
     const handleAdd = () => {
         Swal.fire({
@@ -47,9 +61,15 @@ export const PrimaociPlacanja = () => {
                 }
                 return { naziv, brojRacuna, pozivNaBroj, sifraPlacanja, svrhaPlacanja };
             }
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.value) {
-                setPrimaoci(old => [...old, { id: Math.floor(Math.random() * 10000), ...result.value }]);
+                try {
+                    //Dodavanje primaoca
+                    const apiResult = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+                    setPrimaoci(old => [...old, { id: Math.floor(Math.random() * 10000), ...result.value }]);
+                } catch (e) {
+
+                }
             }
         });
     };
@@ -100,17 +120,29 @@ export const PrimaociPlacanja = () => {
                 }
                 return { naziv, brojRacuna, pozivNaBroj, sifraPlacanja, svrhaPlacanja };
             }
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.value) {
-                setPrimaoci(old => old.map(prim => (prim.id === id) ? { ...prim, ...result.value } : prim));
+                try {
+                    //Editovanje  primaoca
+                    const apiResult = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+                    setPrimaoci(old => old.map(prim => (prim.id === id) ? { ...prim, ...result.value } : prim));
+                } catch (e) {
+
+                }
             }
         });
     };
 
 
     // @ts-ignore
-    const handleDelete = (id) => {
-        setPrimaoci(primaoci.filter(prim => prim.id !== id));
+    const handleDelete = async (id) => {
+        try {
+            //Brisanje
+            const apiResult = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
+            setPrimaoci(primaoci.filter(prim => prim.id !== id));
+        } catch (e) {
+
+        }
     };
 
     return (

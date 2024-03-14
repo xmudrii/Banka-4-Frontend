@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Button, TextField, Container, Typography, Box, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 // @ts-ignore
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+const url = "http://api.stamenic.work:8080/api";
 
 // @ts-ignore
 const validateEmail = (email) => {
@@ -9,25 +12,18 @@ const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
 };
 
-
-
 const RegistrationPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState({
-        ime: '',
-        prezime: '',
-        jmbg: '',
-        datumRodjenja: '',
-        pol: '',
-        adresa: '',
-        email: '',
-        telefon: '',
-        brojRacuna: '',
+        email: 'aki.spremo@gmail.com',
+        telefon: '+381600176999',
+        brojRacuna: '444000000000000333',
         aktivacioniKod: '',
-        lozinka: '',
-        ponovljenaLozinka: '',
+        lozinka: 'Aaaa#123',
+        ponovljenaLozinka: 'Aaaa#123',
     });
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     // Add validation and step change logic here
     const handleNextStep = () => {
@@ -40,27 +36,18 @@ const RegistrationPage = () => {
     };
 
 
-    const handleGenerateCode = () => {
-        // Placeholder for generating the activation code
-        // In a real application, you would call your backend API to send the activation code to the user
-        console.log("Generating activation code...");
-        // Simulate setting a received code (this would typically be done via email or SMS)
-        setUserData({ ...userData, aktivacioniKod: '123456' }); // Example code
+    const handleGenerateCode = async () => {
+        try {
+            const result = await fetch(`${url}/korisnik/generate-login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: userData.email }) });
+            console.log(await result.text());
+        }
+        catch (e) {
+            console.log(e);
+        }
     };
 
     const validateFieldsStepOne = () => {
         let newErrors = {};
-        // Text fields without numbers
-        if (!/^[a-zA-Z]+$/.test(userData.ime)) {
-            newErrors = { ...newErrors, ime: 'Ime može sadržati samo slova.' };
-        }
-        if (!/^[a-zA-Z]+$/.test(userData.prezime)) {
-            newErrors = { ...newErrors, prezime: 'Prezime može sadržati samo slova.' };
-        }
-        // JMBG validation
-        if (userData.jmbg.length !== 13 || !/^\d+$/.test(userData.jmbg)) {
-            newErrors = { ...newErrors, jmbg: 'JMBG mora imati 13 cifara.' };
-        }
         // Email validation
         if (!/\S+@\S+\.\S+/.test(userData.email)) {
             newErrors = { ...newErrors, email: 'Neispravna email adresa.' };
@@ -104,24 +91,23 @@ const RegistrationPage = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleRegistration = () => {
+    const handleRegistration = async () => {
         // This would be a good place to validate all fields across all steps
         if (validateFieldsStepOne() && validateFieldsStepTwo() && validateFieldsStepThree()) {
-            // In a real application, you'd make an API call to your backend to register the user
-            console.log("Registering user with data:", userData);
-            // Redirect the user or show a success message
+            try {
+                const result = await fetch(`${url}/korisnik/verifikacija`, { method: "POST", headers: { "Authorization": `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NTQxOTQsImlhdCI6MTcxMDQyNTM5NH0.3PmmMcFe4aw1n1jXxsK_wX_dnYZOkZZvFFHy92ze_EcnaaVi1uSdx1RJjKJnWTm7l30BsNtbIFxzUBEQR7LeMA`, "Content-Type": "application/json" }, body: JSON.stringify({ email: userData.email, brojTelefona: userData.telefon, brojRacuna: userData.brojRacuna, password: userData.lozinka, code: userData.aktivacioniKod }) });
+                alert("Uspeh");
+                navigate('/login')
+            } catch (e) {
+                alert("Navigacija");
+            }
         }
     };
 
     // @ts-ignore
     const handleFieldChange = (field, value) => {
         // Apply transformations like capitalization for names here if necessary
-        if (field === 'ime' || field === 'prezime') {
-            value = capitalizeFirstLetter(value);
-        }
-        if (field === 'jmbg' && value.length !== 13) {
-            setErrors({ ...errors, jmbg: 'JMBG mora imati 13 cifara.' });
-        } else if (field === 'email' && !validateEmail(value)) {
+        if (field === 'email' && !validateEmail(value)) {
             setErrors({ ...errors, email: 'Email adresa nije validna.' });
         } else {
             let newErrors = { ...errors };
@@ -140,89 +126,6 @@ const RegistrationPage = () => {
             <Container component="main" maxWidth="sm">
                 <Typography component="h1" variant="h5">Registracija korisnika - Korak 1</Typography>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="ime"
-                        label="Ime"
-                        name="ime"
-                        autoComplete="given-name"
-                        value={userData.ime}
-                        onChange={(e) => handleFieldChange('ime', e.target.value)}
-                        // @ts-ignore
-                        error={!!errors.ime}
-                        // @ts-ignore
-                        helperText={errors.ime}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        required
-                        fullWidth
-                        id="prezime"
-                        label="Prezime"
-                        name="prezime"
-                        autoComplete="family-name"
-                        value={userData.prezime}
-                        onChange={(e) => handleFieldChange('prezime', e.target.value)}
-                        // @ts-ignore
-                        error={!!errors.prezime}
-                        // @ts-ignore
-                        helperText={errors.prezime}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        required
-                        fullWidth
-                        id="jmbg"
-                        label="JMBG"
-                        name="jmbg"
-                        autoComplete="jmbg"
-                        value={userData.jmbg}
-                        onChange={(e) => handleFieldChange('jmbg', e.target.value)}
-                        // @ts-ignore
-                        error={!!errors.jmbg}
-                        // @ts-ignore
-                        helperText={errors.jmbg}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        required
-                        fullWidth
-                        id="datumRodjenja"
-                        label="Datum rođenja"
-                        name="datumRodjenja"
-                        type="date"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        value={userData.datumRodjenja}
-                        onChange={(e) => handleFieldChange('datumRodjenja', e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                    <FormControl fullWidth sx={{ mb: 2 }}>
-                        <InputLabel id="pol-label">Pol</InputLabel>
-                        <Select
-                            labelId="pol-label"
-                            id="pol"
-                            value={userData.pol}
-                            label="Pol"
-                            onChange={(e) => handleFieldChange('pol', e.target.value)}
-                        >
-                            <MenuItem value={'M'}>Muški</MenuItem>
-                            <MenuItem value={'Ž'}>Ženski</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField
-                        required
-                        fullWidth
-                        id="adresa"
-                        label="Adresa stanovanja"
-                        name="adresa"
-                        autoComplete="address"
-                        value={userData.adresa}
-                        onChange={(e) => handleFieldChange('adresa', e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
                     <TextField
                         required
                         fullWidth
