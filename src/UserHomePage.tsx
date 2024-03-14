@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AccountsTable from "./AccountsTable";
 import Header from "./Header";
 import { Account } from "./Model";
+import { makeGetRequest } from "./utils/apiRequest";
 const korisnikId = 1;
 
 // const transactions: Transaction[] = [
@@ -54,24 +55,10 @@ const UserHomePage = () => {
 
   const fetchAccounts = async () => {
     try {
-      const response = await fetch(
-        `http://api.stamenic.work:8080/api/racuni/nadjiRacuneKorisnika/${korisnikId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtaWxhbi5rcnN0aWNAZ21haWwuY29tIiwicGVybWlzc2lvbiI6ODE5MSwiaWQiOjExLCJleHAiOjE3MTA0NDU5NTIsImlhdCI6MTcxMDQxNzE1Mn0.TyfuP9lAVdIUoAVBgaGpbGk-zodjP9P8JSLk_CXCkhVnqRuIbnCkHGas798VDOVPEijW_8KsKNRGRwNQLp-QAQ`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const data = await makeGetRequest(`racuni/nadjiRacuneKorisnika/${korisnikId}`)
+      if (data) {
+        setAccounts(data);
       }
-
-      const data = await response.json();
-
-      setAccounts(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

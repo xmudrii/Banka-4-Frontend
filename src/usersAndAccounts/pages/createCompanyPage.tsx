@@ -71,7 +71,6 @@ const CreateCompanyPage: React.FC = () => {
         return;
       }
     }
-    console.log(formData)
     await makeApiRequest('/racuni/kreirajFirmu', 'POST', formData)
 
     // const numbersOnlyRegex = /\d{13}/
@@ -88,7 +87,6 @@ const CreateCompanyPage: React.FC = () => {
 
   const handleChangeNumber = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
     const { name, value } = event.target;
-    console.log(parseInt(value as string))
     setFormData({ ...formData, [name as string]: parseInt(value as string) });
   };
 

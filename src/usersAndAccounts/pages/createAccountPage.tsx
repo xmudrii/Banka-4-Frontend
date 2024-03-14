@@ -68,16 +68,16 @@ interface createAccountData {
   jmbg: string;
   tip: string;
   vrstaRacuna: string;
-  osnovnaValuta: string;
-  valute: string[];
+  defaultCurrency: string;
+  currency: string[];
 }
 
 const CreateAccountPage: React.FC = () => {
   const [formData, setFormData] = useState<createAccountData>({
     jmbg: '',
     tip: '',
-    osnovnaValuta: 'EUR',
-    valute: [],
+    defaultCurrency: 'EUR',
+    currency: [],
     vrstaRacuna: '',
 
   });
@@ -135,10 +135,23 @@ const CreateAccountPage: React.FC = () => {
     const data = {
       vlasnik: idVlasnika,
       zaposleni: zaposleniId,
-      vrstaRacuna: 'Studentski'
+      vrstaRacuna: formData.vrstaRacuna
     }
     if (formData.tip === 'tekuci') {
       const res = await makeApiRequest(`/racuni/dodajTekuci`, 'POST', data);
+      // console.log(res)
+    }
+    // else if (formData.tip === 'pravni') {
+    //   const res = await makeApiRequest(`/racuni/dodajPravni`, 'POST', data);
+    //   // console.log(res)
+    // }
+    else if (formData.tip === 'devizni') {
+      valuteCheckbox.forEach((checkbox) => {
+        if(checkbox.vrednost){
+          
+        }
+      })
+      const res = await makeApiRequest(`/racuni/dodajDevizni`, 'POST', data);
       // console.log(res)
     }
 
@@ -158,7 +171,7 @@ const CreateAccountPage: React.FC = () => {
   };
 
   const handleRadioChange = (event: any) => {
-    setFormData({ ...formData, osnovnaValuta: event.target.value as string });
+    setFormData({ ...formData, defaultCurrency: event.target.value as string });
   };
 
 
@@ -202,7 +215,7 @@ const CreateAccountPage: React.FC = () => {
             label="Tip"
           >
             <MenuItem value="tekuci">Tekuci</MenuItem>
-            <MenuItem value="pravni">Pravni</MenuItem>
+            {/* <MenuItem value="pravni">Pravni</MenuItem> */}
             <MenuItem value="devizni">Devizni</MenuItem>
           </StyledSelect>
         </FormControl>
