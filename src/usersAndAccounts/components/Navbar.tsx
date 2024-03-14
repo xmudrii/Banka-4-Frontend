@@ -10,7 +10,8 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getMe } from '../../utils/getMe';
 
 const StyledAppBar = styled(AppBar)`
     background-color: #23395b!important;
@@ -42,10 +43,17 @@ const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 { name: 'Kreiraj firmu', path: 'kreirajFirmu' },
 ];
 
-const settings = ['Nalog', 'Opcije'];
+const pagesUser = [{ name: 'Pocetna', path: '' },
+{ name: 'Placanja', path: '/placanja' },
+{ name: 'Verifikacija', path: '/verifikacija' },
+];
 
+const settings = ['Nalog'];
+const auth = getMe()
+const user = auth?.permission === 0 ? true : false;
 function Navbar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const navigate = useNavigate();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -58,14 +66,19 @@ function Navbar() {
         localStorage.removeItem('si_jwt');
         window.location.reload();
     }
-
+    const handleReset = () => {
+        navigate('/resetPassword')
+    };
     return (
         <StyledAppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar>
                     <img src={process.env.PUBLIC_URL + '/logo.webp'} alt="Logo" />
                     <NavItems>
-                        {pages?.map((page) => (
+                        {user && pagesUser?.map((page) => (
+                            <StyledLink to={page.path}>{page.name}</StyledLink>
+                        ))}
+                        {!user && pages?.map((page) => (
                             <StyledLink to={page.path}>{page.name}</StyledLink>
                         ))}
                     </NavItems>
@@ -97,6 +110,9 @@ function Navbar() {
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
+                            <MenuItem key={'Resetovanje'} onClick={handleReset}>
+                                <Typography textAlign="center">{'Resetovanje'}</Typography>
+                            </MenuItem>
                             <MenuItem key={'Logout'} onClick={handleLogout}>
                                 <Typography textAlign="center">{'Logout'}</Typography>
                             </MenuItem>
