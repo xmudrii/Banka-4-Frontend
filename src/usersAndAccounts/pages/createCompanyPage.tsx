@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Alert } from '@mui/material';
 import styled from 'styled-components';
-import { makeApiRequest } from '../utils/apiRequest';
+import { makeApiRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;

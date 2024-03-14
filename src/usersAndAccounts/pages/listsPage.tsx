@@ -1,13 +1,13 @@
 import { AppBar, Tabs, Tab, Button } from '@mui/material';
 import UserList from '../components/userList'
-import { Account } from '../utils/types';
+import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import AccountList from '../components/accountList';
 import { useNavigate } from 'react-router-dom';
 import EmployeeList from '../components/employeeList';
 import CompanyList from '../components/companyList';
 import { useEffect, useState } from 'react';
-import { makeGetRequest } from '../utils/apiRequest';
+import { makeGetRequest } from '../../utils/apiRequest';
 
 const StyledTabs = styled(Tabs)`
   background-color: #f2f2f2;

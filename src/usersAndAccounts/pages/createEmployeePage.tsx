@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, FormControl, InputLabel, Alert, Select, MenuItem, Grid, FormControlLabel, Checkbox } from '@mui/material';
 import styled from 'styled-components';
-import { UserPermissions } from '../utils/types';
+import { UserPermissions } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
-import { encodePermissions } from '../utils/permissions';
-import { makeApiRequest } from '../utils/apiRequest';
+import { encodePermissions } from '../../utils/permissions';
+import { makeApiRequest } from '../../utils/apiRequest';
 
 const PageWrapper = styled.div`
   display: flex;

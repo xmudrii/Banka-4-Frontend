@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, MenuItem, Select, Grid, FormControlLabel, Checkbox, Radio, FormLabel, RadioGroup } from '@mui/material';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { makeApiRequest, makeGetRequest } from '../utils/apiRequest';
-import { getMe } from '../utils/getMe';
+import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
+import { getMe } from '../../utils/getMe';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -107,7 +107,7 @@ const CreateAccountPage: React.FC = () => {
         updatedFormData = { ...updatedFormData, vrstaRacuna: urlParams?.get('vrsta') ?? '' }
         updatedFormData = { ...updatedFormData, jmbg: urlParams?.get('jmbg') ?? '' }
         setFormData(updatedFormData);
-        
+
       } catch (error) {
         console.error('Error fetching user:', error);
       }

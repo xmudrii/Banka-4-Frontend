@@ -1,0 +1,1 @@
+export const apiUrl = 'http://api.stamenic.work:8080/api'
