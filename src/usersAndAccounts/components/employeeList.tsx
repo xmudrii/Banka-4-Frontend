@@ -25,7 +25,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ employees }) => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }}>
+            <Table sx={{ minWidth: 650, marginTop: 0 }}>
                 <StyledTableHead>
                     <TableRow>
                         <StyledHeadTableCell>Ime</StyledHeadTableCell>

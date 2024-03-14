@@ -50,10 +50,10 @@ const LoginPage = () => {
         } else {
             if (isEmployee) {
                 // Redirect to users list page
-                window.location.href = '/users';
+                window.location.href = '/listaKorisnika';
             } else {
                 // Redirect to user's homepage
-                window.location.href = '/home';
+                window.location.href = '/';
             }
         }
     };

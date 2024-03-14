@@ -16,13 +16,14 @@ import EditCompanyPage from './usersAndAccounts/pages/editCompanyPage';
 import LoginPage from './moduls/LogReg/LoginPage';
 import RegistrationPage from './moduls/LogReg/RegistrationPage';
 import { getMe } from './utils/getMe';
+import UserHomePage from './UserHomePage';
 const auth = getMe()
 function App() {
   return (
     <BrowserRouter>
       {auth?.id && <Navbar></Navbar>}
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={auth?.id ? <UserHomePage /> : <LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/listaKorisnika" element={auth?.id ? <UserAndAccountList /> : <LoginPage />} />
