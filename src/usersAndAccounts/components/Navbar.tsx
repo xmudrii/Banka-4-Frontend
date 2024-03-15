@@ -19,6 +19,7 @@ const StyledAppBar = styled(AppBar)`
 
 const StyledLink = styled(Link)`
     color: white;
+    font-size:25px;
     text-decoration: none;
     padding: 6px 10px;
     &:hover{
@@ -28,7 +29,7 @@ const StyledLink = styled(Link)`
     }
 `
 const NavItems = styled(Box)`
-    flex-grow: 1;
+    flex-grow: 1; //was 1
     display: flex;
     margin-left: 20px;
     gap: 10px;
@@ -43,8 +44,8 @@ const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 { name: 'Kreiraj firmu', path: 'kreirajFirmu' },
 ];
 
-const pagesUser = [{ name: 'Pocetna', path: '' },
-{ name: 'Placanja', path: '/placanja' },
+const pagesUser = [{ name: 'Početna', path: '' },
+{ name: 'Plaćanja', path: '/placanja' },
 { name: 'Verifikacija', path: '/verifikacija' },
 ];
 
@@ -84,9 +85,9 @@ function Navbar() {
                     </NavItems>
 
                     <NavUser>
-                        <Tooltip title="Nalog">
+                        <Tooltip title="Nalog" componentsProps={{ tooltip: { sx: { fontSize: '1.35em' } } }}>
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Jeff Smith" src={process.env.PUBLIC_URL + '/diktator100.png'} />
+                                <Avatar alt="Profile Picture" src={process.env.PUBLIC_URL + '/diktator100.png'} sx={{ width: 70, height: 70 }} /> {/* Increased Avatar size */}
                             </IconButton>
                         </Tooltip>
                         <Menu

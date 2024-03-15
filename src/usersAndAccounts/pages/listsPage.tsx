@@ -29,11 +29,21 @@ const PageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
-  gap: 80px;
+  gap: 0px;
 `
 
 const HeadingText = styled.div`
-  font-size: 32px;
+  font-size: 45px;
+`
+
+const HeadingAndButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: bottom;
+  padding: 0 10px; /* Add padding according to your layout */
+  max-width: 1200px; /* Match this with your StyledTable's max-width for alignment */
+  margin-bottom: 16px; /* Space between the heading/button and the table below */
 `
 
 const UserAndAccountList: React.FC = () => {
@@ -82,18 +92,25 @@ const UserAndAccountList: React.FC = () => {
   return (
     <PageWrapper>
 
-      <HeadingText>
-        Liste
-      </HeadingText>
-      {permissions && selectedTab === 0 && <Button variant="contained" onClick={handleCreateUser}>
-        Dodaj Korisnika
-      </Button>}
-      {permissions3 && selectedTab === 1 && <Button variant="contained" onClick={handleCreateEmployee}>
-        Dodaj Zaposlenog
-      </Button>}
-      {permissions4 && selectedTab === 2 && <Button variant="contained" onClick={handleCreateCompany}>
-        Dodaj Firmu
-      </Button>}
+      <HeadingAndButtonWrapper>
+        <HeadingText>Liste</HeadingText>
+        {permissions && selectedTab === 0 && (
+          <Button variant="contained" onClick={handleCreateUser}>
+            Dodaj Korisnika
+          </Button>
+        )}
+        {permissions3 && selectedTab === 1 && (
+          <Button variant="contained" onClick={handleCreateEmployee}>
+            Dodaj Zaposlenog
+          </Button>
+        )}
+        {permissions4 && selectedTab === 2 && (
+          <Button variant="contained" onClick={handleCreateCompany}>
+            Dodaj Firmu
+          </Button>
+        )}
+      </HeadingAndButtonWrapper>
+
       <TableWrapper>
         <StyledTable>
           <AppBar position="static" >

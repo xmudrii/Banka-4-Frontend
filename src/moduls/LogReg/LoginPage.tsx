@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField, Link, Typography, Container } from '@mui/material';
+import { Button, TextField, Link, Typography, Container, CssBaseline } from '@mui/material';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,9 +23,11 @@ const LoginPage = () => {
     const handleRegister = () => {
         navigate('/register')
     }
+
     const handleForgot = () => {
         navigate("/resetPassword")
     }
+
     // @ts-ignore
     const authenticate = async (e) => {
         e.preventDefault();
@@ -60,8 +62,30 @@ const LoginPage = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
-            <Typography component="h1" variant="h5">
+        //added inline style
+
+        <Container component="main" maxWidth="xs" sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            backgroundColor: '#f9e7e7', // Beige color
+            border: '1px solid #dedede',
+            borderRadius: '8px',
+            boxShadow: 3,
+            marginTop: '-8vh',
+            padding: '20px' // Add padding to the container
+        }}>
+            <style type="text/css">
+                {`
+                    body {
+                        background-color: #82b2ff;
+                    }
+                `}
+            </style>
+
+            <Typography component="h1" variant="h5" sx={{ fontSize: '1.5rem', fontWeight: 'bold', margin: '20px 0' }}>
                 Login
             </Typography>
             <form onSubmit={authenticate}>
@@ -77,10 +101,10 @@ const LoginPage = () => {
                     autoFocus
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    sx={{ margin: '5px 0' }} // Reduced margin
                 />
                 <TextField
                     variant="outlined"
-                    margin="normal"
                     required
                     fullWidth
                     name="password"
@@ -90,6 +114,7 @@ const LoginPage = () => {
                     autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    sx={{ margin: '5px 0' }} // Reduced margin
                 />
                 {error && (
                     <Typography color="error" variant="body2">

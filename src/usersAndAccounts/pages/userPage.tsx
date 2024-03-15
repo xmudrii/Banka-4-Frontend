@@ -136,7 +136,7 @@ const UserInfoTable: React.FC = () => {
       </HeadingText>
       <FormWrapper>
         <H2Text>
-          Korisnik Info
+          Info
         </H2Text>
         <TableContainer component={Paper}>
           <Table aria-label="user information table">
