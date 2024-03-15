@@ -3,7 +3,7 @@ import AccountsTable from "./AccountsTable";
 import Header from "./Header";
 import { Account } from "./Model";
 import { makeGetRequest } from "./utils/apiRequest";
-const korisnikId = 1;
+import { getMe } from "./utils/getMe";
 
 // const transactions: Transaction[] = [
 //   {
@@ -22,7 +22,7 @@ const korisnikId = 1;
 //   { number: "789012", balance: 500, availableBalance: 300 },
 // ];
 
-const UserHomePage = () => {
+const UserHomePage: React.FC = () => {
   //account za prikaz komponentu u kojoj se prikazuje pojedinacan racun
   const [account, setAccount] = useState<Account>();
   const [accounts, setAccounts] = useState<Account[]>([]);
@@ -55,7 +55,10 @@ const UserHomePage = () => {
 
   const fetchAccounts = async () => {
     try {
-      const data = await makeGetRequest(`racuni/nadjiRacuneKorisnika/${korisnikId}`)
+      const me = getMe();
+      if(!me)
+        return;
+      const data = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`)
       if (data) {
         setAccounts(data);
       }
@@ -71,7 +74,6 @@ const UserHomePage = () => {
 
   return (
     <div>
-      <Header firstName={"Sofija"} lastName={"Todorovic"} />
       <AccountsTable accounts={accounts} setAccount={setAccount} />
       {/* <TransactionsTable transactions={transactions} /> */}
     </div>

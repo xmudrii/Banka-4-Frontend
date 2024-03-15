@@ -20,6 +20,7 @@ import UserHomePage from './UserHomePage';
 import ResetPasswordPage from './ResetPasswordPage';
 import Verifikacija from './moduls/StranicaZaVerifikacijuPlacanja';
 import Placanje from './moduls/Placanje/Placanje';
+import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from "./moduls/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike";
 const auth = getMe()
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/resetPassword" element={auth?.id ? <ResetPasswordPage /> : <LoginPage />} />
         <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
         <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
+        <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -12,6 +12,9 @@ import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Grid';
 import { NovaUplata, NoviPrenosSredstava } from '../datatypes/Types';
 import { RACUNI_PLACEHOLDER, RacunType } from '../../../data/Racuni';
+import { getMe } from '../../../utils/getMe';
+import { getJWT } from '../../../utils/apiRequest';
+
 
 interface PaymentFormProps {
     onSave: (data: any) => void;
@@ -40,6 +43,9 @@ function svrhaPlacanjaIliTekstSifrePlacanja(svrhaPlacanja: string, sifraPlacanja
     return "";
 }
 
+const url = "http://api.stamenic.work:8080/api";
+
+
 export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }) => {
     const [racuni, setRacuni] = useState<RacunType[]>(RACUNI_PLACEHOLDER);
     const [selectedRacun, setSelectedRacun] = useState(0);
@@ -50,6 +56,23 @@ export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }
     const [pozivNaBroj, setPozivNaBroj] = useState('');
     const [sifraPlacanja, setSifraPlacanja] = useState<number>(289);
     const [svrhaPlacanja, setSvrhaPlacanja] = useState("");
+
+    useEffect(() => {
+        const gett = async () => {
+            const jwt = getJWT();
+            const me = getMe();
+
+            if (!me) return;
+            console.log("IDKOR " + me.id);
+            const result = await fetch(`${url}/racuni/nadjiRacuneKorisnika/${me.id}`, {
+                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
+            })
+            const rac = await result.json();
+            // @ts-ignore
+            setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
+        }
+        gett();
+    }, [])
 
     useEffect(() => {
         if (racuni.length > 0) {

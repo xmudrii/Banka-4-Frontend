@@ -8,17 +8,37 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { NoviPrenosSredstava } from '../datatypes/Types';
 import { RACUNI_PLACEHOLDER, RacunType, getRacunByBroj } from '../../../data/Racuni';
+import { getJWT } from '../../../utils/apiRequest';
+import { getMe } from '../../../utils/getMe';
 
 interface TransferFormProps {
     onSave: (data: NoviPrenosSredstava) => void;
     navigate: (screen: string) => void;
 }
 
+const url = "http://api.stamenic.work:8080/api";
+
 export const FormaZaPrenos: React.FC<TransferFormProps> = ({ onSave, navigate }) => {
     const [racuni, setRacuni] = useState<RacunType[]>(RACUNI_PLACEHOLDER);
     const [selectedRacunPosiljaoca, setSelectedRacunPosiljaoca] = useState('');
     const [selectedRacunPrimaoca, setSelectedRacunPrimaoca] = useState('');
     const [iznos, setIznos] = useState('');
+
+    useEffect(() => {
+        const gett = async () => {
+            const jwt = getJWT();
+            const me = getMe();
+
+            if (!me) return;
+            const result = await fetch(`${url}/racuni/nadjiRacuneKorisnika/${me.id}`, {
+                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
+            })
+            const rac = await result.json();
+            // @ts-ignore
+            setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
+        }
+        gett();
+    }, [])
 
     useEffect(() => {
         // This assumes the first account in the list is selected by default for both sender and recipient
