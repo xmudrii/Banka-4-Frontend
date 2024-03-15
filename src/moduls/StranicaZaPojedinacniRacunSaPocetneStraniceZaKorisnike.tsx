@@ -5,7 +5,7 @@ import { makeGetRequest } from '../utils/apiRequest';
 import { getMe } from '../utils/getMe';
 
 const auth = getMe();
-let emailKorisnikov ="";
+let emailKorisnikov = "";
 if (auth) {
   emailKorisnikov = auth.sub;
   console.log(emailKorisnikov);
@@ -25,6 +25,15 @@ type Transakcija = {
   vremeIzvrsavanja: string;
 }
 
+type Sredstvo = {
+  prviRacun: string,
+  drugiRacun: string,
+  iznos: number,
+  status: string,
+  vreme: string,
+  vremeIzvrsavanja: string
+}
+
 const AccountInfoPage: React.FC = () => {
   const [account, setAccount] = useState<Account>({
     brojRacuna: '',
@@ -42,14 +51,15 @@ const AccountInfoPage: React.FC = () => {
   });
   const [emailVlasnika, setEmailVlasnika] = useState('');
   const [transactions, setTransatcions] = useState<Transakcija[]>([]);
+  const [sredstva, setSredstva] = useState<Sredstvo[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-     // Pročitajte podatke iz Local Storage
-    const storedAccountString = localStorage.getItem('selectedAccount');
+      // Pročitajte podatke iz Local Storage
+      const storedAccountString = localStorage.getItem('selectedAccount');
 
-    // Proverite da li postoje podaci
-    if (storedAccountString) {
+      // Proverite da li postoje podaci
+      if (storedAccountString) {
         const storedAccount = JSON.parse(storedAccountString);
         // Možete koristiti storedAccount na željeni način
         setAccount(storedAccount);
@@ -58,27 +68,32 @@ const AccountInfoPage: React.FC = () => {
         setEmailVlasnika(emailKorisnikov);
         try {
           const brojRacuna = storedAccount.brojRacuna;
-        
-        const transakcije = await makeGetRequest(`/transaction/getAllUplateByBrojRacuna/${brojRacuna}`);
-        if (transakcije) {
-              console.log(transactions)
-              setTransatcions(transakcije)
+
+          const transakcije = await makeGetRequest(`/transaction/getAllUplateByBrojRacuna/${brojRacuna}`);
+          const sredstva = await makeGetRequest(`/transaction/getAllPrenosSredstavaByBrojRacuna/${brojRacuna}`);
+
+          if (transakcije) {
+            console.log(transactions)
+            setTransatcions(transakcije)
           }
-              
-            
-          
+
+          if (sredstva) {
+            setSredstva(sredstva);
+          }
+
+
         } catch (error) {
           console.error('Error fetching user:', error);
         }
-    } else {
+      } else {
         console.log("Nema podataka o nalogu u Local Storage-u.");
-    }
-    
+      }
+
 
     };
 
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -142,7 +157,6 @@ const AccountInfoPage: React.FC = () => {
               <th className="table-cell">Naziv primaoca</th>
               <th className="table-cell">Broj računa primaoca</th>
               <th className="table-cell">Iznos</th>
-              <th className="table-cell">Poziv na broj</th>
               <th className="table-cell">Status</th>
               <th className="table-cell">Datum i vreme transakcije</th>
             </tr>
@@ -153,9 +167,33 @@ const AccountInfoPage: React.FC = () => {
                 <td className="table-cell">{transakcija.nazivPrimaoca}</td>
                 <td className="table-cell">{transakcija.racunPrimaoca}</td>
                 <td className="table-cell">{transakcija.iznos.toString()}</td>
-                <td className="table-cell">{transakcija.pozivNaBroj}</td>
                 <td className="table-cell">{transakcija.status}</td>
                 <td className="table-cell">{new Date(transakcija.vremeTransakcije).toDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <br></br>
+        <table className="custom-table-bank">
+          <thead>
+            <tr className="table-row">
+              <th className="table-cell">Prvi racun</th>
+              <th className="table-cell">Drugi racun</th>
+              <th className="table-cell">Iznos</th>
+              <th className="table-cell">Status</th>
+              <th className="table-cell">Datum i vreme transakcije</th>
+              <th className="table-cell">Datum i vreme izvrsavanja</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sredstva?.map((sredstvo, index) => (
+              <tr key={index} className="table-row">
+                <td className="table-cell">{sredstvo.prviRacun}</td>
+                <td className="table-cell">{sredstvo.drugiRacun}</td>
+                <td className="table-cell">{sredstvo.iznos.toString()}</td>
+                <td className="table-cell">{sredstvo.status}</td>
+                <td className="table-cell">{new Date(sredstvo.vreme).toDateString()}</td>
+                <td className="table-cell">{new Date(sredstvo.vremeIzvrsavanja).toDateString()}</td>
               </tr>
             ))}
           </tbody>
