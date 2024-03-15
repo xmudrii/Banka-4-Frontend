@@ -40,7 +40,7 @@ function App() {
         <Route path="/izmeniZaposlenog" element={auth?.id ? <EditEmployeePage /> : <LoginPage />} />
         <Route path="/kreirajFirmu" element={auth?.id ? <CreateCompanyPage /> : <LoginPage />} />
         <Route path="/izmeniFirmu" element={auth?.id ? <EditCompanyPage /> : <LoginPage />} />
-        <Route path="/resetPassword" element={auth?.id ? <ResetPasswordPage /> : <LoginPage />} />
+        <Route path="/resetPassword" element={<ResetPasswordPage />} />
         <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
         <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
