@@ -15,12 +15,12 @@ const validateEmail = (email) => {
 const RegistrationPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState({
-        email: 'aki.spremo@gmail.com',
-        telefon: '+381600176999',
-        brojRacuna: '444000000000000333',
+        email: '',
+        telefon: '',
+        brojRacuna: '',
         aktivacioniKod: '',
-        lozinka: 'Aaaa#123',
-        ponovljenaLozinka: 'Aaaa#123',
+        lozinka: '',
+        ponovljenaLozinka: '',
     });
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -80,8 +80,23 @@ const RegistrationPage = () => {
     const validateFieldsStepThree = () => {
         let newErrors = {};
         // Password validation
-        if (!userData.lozinka || userData.lozinka.length < 6) {
+        if (!userData.lozinka || userData.lozinka.length < 8) {
+            newErrors = { ...newErrors, lozinka: 'Lozinka mora imati najmanje 8 karaktera.' };
+        }
+        if (userData.lozinka.length > 32) {
             newErrors = { ...newErrors, lozinka: 'Lozinka mora imati najmanje 6 karaktera.' };
+        }
+        if (!/^(?=.*[A-Z]).+$/.test(userData.lozinka)) {
+            newErrors = { ...newErrors, lozinka: 'Lozinka mora imati bar jedno veliko slovo.' };
+        }
+        if (!/^(?=.*[a-z]).+$/.test(userData.lozinka)) {
+            newErrors = { ...newErrors, lozinka: 'Lozinka mora imati bar jedno malo slovo.' };
+        }
+        if (!/(?=.*\d.*\d)/.test(userData.lozinka)) {
+            newErrors = { ...newErrors, lozinka: 'Lozinka mora imati bar dva broja.' };
+        }
+        if (!/(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?])/.test(userData.lozinka)) {
+            newErrors = { ...newErrors, lozinka: 'Lozinka mora imati bar jedan specijalni karakter.' };
         }
         if (userData.lozinka !== userData.ponovljenaLozinka) {
             newErrors = { ...newErrors, ponovljenaLozinka: 'Lozinke se ne poklapaju.' };
