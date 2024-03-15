@@ -15,13 +15,16 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     useEffect(() => {
-        if(window.location.pathname !== '/login'){
+        if (window.location.pathname !== '/login') {
             navigate('/login')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const handleRegister = () => {
         navigate('/register')
+    }
+    const handleForgot = () => {
+        navigate("/resetPassword")
     }
     // @ts-ignore
     const authenticate = async (e) => {
@@ -102,12 +105,12 @@ const LoginPage = () => {
                 >
                     Login
                 </Button>
-                <Link href="/reset-password" variant="body2">
-                    Forgot password?
+                <Link onClick={handleForgot} variant="body2">
+                    {"Zaboravio si šifru?"}
                 </Link>
                 <br />
                 <Link onClick={handleRegister} variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Nemaš nalog? Registruj se"}
                 </Link>
             </form>
         </Container>
