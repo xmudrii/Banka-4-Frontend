@@ -49,11 +49,9 @@ const LoginPage = () => {
             setError('Incorrect username or password');
         } else {
             if (isEmployee) {
-                // Redirect to users list page
-                window.location.href = '/listaKorisnika';
+                window.location.replace("/listaKorisnika");
             } else {
-                // Redirect to user's homepage
-                window.location.href = '/';
+                window.location.replace("/");
             }
         }
     };

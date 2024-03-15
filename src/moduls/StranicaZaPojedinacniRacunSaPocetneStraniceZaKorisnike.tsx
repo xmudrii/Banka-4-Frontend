@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './../App.css';
 import { Account } from '../utils/types';
 import { makeGetRequest } from '../utils/apiRequest';
+import { getMe } from '../utils/getMe';
+
+const auth = getMe();
+let emailKorisnikov ="";
+if (auth) {
+  emailKorisnikov = auth.sub;
+  console.log(emailKorisnikov);
+} else {
+  console.error("Nije moguće dobiti informacije o korisniku.");
+}
 
 type Transakcija = {
   nazivPrimaoca: string,
@@ -35,28 +45,36 @@ const AccountInfoPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        console.log("jej")
-        const brojRacuna = "444000000000000333"
-        const jmbg = "1802001739921"
-        if (brojRacuna && jmbg) {
-          const res = await makeGetRequest(`/racuni/nadjiTekuciRacunPoBroju/${brojRacuna}`);
-          if (res) {
-            setAccount(res)
-            const vlasnik = await makeGetRequest(`/korisnik/jmbg/${jmbg}`);
-            if (vlasnik && vlasnik.jmbg) {
-              setEmailVlasnika(vlasnik.email)
-              const transakcije = await makeGetRequest(`/transaction/getAllUplateByBrojRacuna/${brojRacuna}`);
-              if (transakcije) {
-                console.log(transactions)
-                setTransatcions(transakcije)
-              }
-            }
+     // Pročitajte podatke iz Local Storage
+    const storedAccountString = localStorage.getItem('selectedAccount');
+
+    // Proverite da li postoje podaci
+    if (storedAccountString) {
+        const storedAccount = JSON.parse(storedAccountString);
+        // Možete koristiti storedAccount na željeni način
+        setAccount(storedAccount);
+        console.log(storedAccount);
+        console.log("JEJ");
+        setEmailVlasnika(emailKorisnikov);
+        try {
+          const brojRacuna = storedAccount.brojRacuna;
+        
+        const transakcije = await makeGetRequest(`/transaction/getAllUplateByBrojRacuna/${brojRacuna}`);
+        if (transakcije) {
+              console.log(transactions)
+              setTransatcions(transakcije)
           }
+              
+            
+          
+        } catch (error) {
+          console.error('Error fetching user:', error);
         }
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
+    } else {
+        console.log("Nema podataka o nalogu u Local Storage-u.");
+    }
+    
+
     };
 
     fetchData();
@@ -92,7 +110,7 @@ const AccountInfoPage: React.FC = () => {
             </tr>
             <tr className="table-row">
               <td className="table-cell">Valuta računa:</td>
-              <td className="table-cell">{account.vrstaRacuna}</td>
+              <td className="table-cell">{account.currency}</td>
             </tr>
             <tr className="table-row">
               <td className="table-cell">Status računa:</td>
