@@ -1,39 +1,68 @@
 import React, { useState } from 'react';
-import { TextField, Button, Alert } from '@mui/material';
+import { TextField, Button, Alert } from '@mui/material'; //pre-designed
 import styled from 'styled-components';
+
 const PageWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 100px;
-  gap: 80px;
-`
+  flex-direction: column; // Stack children vertically
+  align-items: flex-end; // Align children to the right
+  height: 100vh; // Full height of the viewport
+  padding-right: 50px; // Space from the right edge of the viewport
+  background-color: #82b2ff; // Sets the background color to light blue
+`;
+
+
 const FormWrapper = styled.div`
-    background-color: #fafafa;
-    padding: 30px;
-    border-radius: 18px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-`
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 18px;
+  width: 33%; //third screen width
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 const HeadingText = styled.div`
-  font-size: 32px;
-`
+  font-size: 56px;
+  align-self: flex-end; 
+  margin-bottom: 20px; 
+`;
 
 const StyledButton = styled(Button)`
-  max-width: 100px ;
-`
+  width: 100%;
+  height:70px;
+  font-weight: bold;
+  font-size: 1.5rem;  //issue:doesn't affect it
+  padding: 1rem 0; // Increased padding for a taller button
+  position: relative;
+
+  &::before { //pointy bit
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #1A7B99; // match the button background-color
+  }
+
+  &:hover {
+    background-color: #297cb7; // hover color
+  }
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-`
+  margin-top: 15px;
+  // If any other styles are affecting the button, they should be reviewed here.
+`;
+
 const StyledTextField = styled(TextField)`
   background-color: white;
-`
+`;
+
 
 
 interface createCompanyData {
@@ -164,4 +193,3 @@ const EditCompanyPage: React.FC = () => {
 };
 
 export default EditCompanyPage;
-//JUST IN CASE

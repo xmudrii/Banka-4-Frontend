@@ -140,7 +140,7 @@ const RegistrationPage = () => {
         return (
             <Container component="main" maxWidth="sm">
                 <Typography component="h1" variant="h5">Registracija korisnika - Korak 1</Typography>
-                <Box component="form" noValidate sx={{ mt: 3 }}>
+                <Box component="form" noValidate sx={{ mt: 1 }}>
                     <TextField
                         required
                         fullWidth
