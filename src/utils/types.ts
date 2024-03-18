@@ -126,7 +126,7 @@ export type Kartica = {
   status: 'aktivna' | 'deaktivirana' | 'blokirana';
 }
 
-export type Transakcija = {
+export type TransakcijaKarticePrikaz = {
   id: number;
   nazivPrimaoca: string;
   brojRacunaPrimaoca: string;

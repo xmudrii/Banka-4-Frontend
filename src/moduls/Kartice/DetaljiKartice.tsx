@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Typography } from '@mui/material';
 import Swal from 'sweetalert2'; import { useSearchParams } from 'react-router-dom';
-import { Kartica, Transakcija } from '../../utils/types';
+import { Kartica, TransakcijaKarticePrikaz } from '../../utils/types';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 import ListaTransakcija from './ListaTransakcija';
 import { getMe } from '../../utils/getMe';
@@ -14,7 +14,7 @@ const updateKarticaStatus = async (id: number, status: string): Promise<boolean>
 export default function DetaljiKartice() {
   const [kartica, setKartica] = useState<Kartica | null>(null);
   const [showDetails, setShowDetails] = useState(false);
-  const [transakcije, setTransakcije] = useState<Transakcija[] | null>()
+  const [transakcije, setTransakcije] = useState<TransakcijaKarticePrikaz[] | null>()
 
   // Ovo će biti ID kartice dobijen iz URL-a
   let [searchParams, setSearchParams] = useSearchParams();

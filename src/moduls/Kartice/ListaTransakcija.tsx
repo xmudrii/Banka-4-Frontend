@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { Transakcija } from '../../utils/types';
+import { TransakcijaKarticePrikaz } from '../../utils/types';
 
 interface TransactionListProps {
-    transakcije: Transakcija[];
+    transakcije: TransakcijaKarticePrikaz[];
 }
 const ListaTransakcija: React.FC<TransactionListProps> = ({ transakcije }) => {
     const formatDate = (timestamp: number) => {
