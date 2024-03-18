@@ -17,6 +17,10 @@ p {
   margin: 0;
 }
 
+.platilac {
+  text-transform: capitalize;
+}
+
 .main-section-details-div {
   width: 263px;
   display: flex;

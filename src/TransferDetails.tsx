@@ -9,7 +9,7 @@ const TransferDetails = ({ setDetaljiTransfera }: Props) => {
     <article className="main-section-details-div">
       <section className="details-section">
         <p>Platilac:</p>
-        <p>PETAR PETROVIC, ADRESA</p>
+        <p className="platilac">PETAR PETROVIC, ADRESA</p>
       </section>
       <section className="details-section">
         <p>Sa racuna:</p>
