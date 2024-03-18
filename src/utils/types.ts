@@ -112,3 +112,16 @@ export type Company = {
 export type CompanyListProps = {
   companies: Company[];
 }
+
+export type Kartica = {
+  id: number;
+  naziv: string;
+  broj: string;
+  vrsta: 'kreditna' | 'debitna';
+  datum_kreiranja: number;
+  datum_isteka: number;
+  broj_racuna: string;
+  cvv: string;
+  limit: number;
+  status: 'aktivna' | 'deaktivirana' | 'blokirana';
+}

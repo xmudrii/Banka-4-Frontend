@@ -21,6 +21,9 @@ import ResetPasswordPage from './ResetPasswordPage';
 import Verifikacija from './moduls/StranicaZaVerifikacijuPlacanja';
 import Placanje from './moduls/Placanje/Placanje';
 import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from "./moduls/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike";
+import PregledKartica from './moduls/Kartice/PregledKartica';
+import DodajKarticu from './moduls/Kartice/DodajKarticu';
+import DetaljiKartice from './moduls/Kartice/DetaljiKartice';
 const auth = getMe()
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
         <Route path="/resetPassword" element={<ResetPasswordPage />} />
         <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
         <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
+        <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <PregledKartica />} />
+        <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <DodajKarticu />} />
+        <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <DetaljiKartice />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>

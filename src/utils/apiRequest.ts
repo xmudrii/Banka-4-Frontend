@@ -6,6 +6,33 @@ export const getJWT = () => {
     return localStorage.getItem('si_jwt');
 };
 
+export const makeApiRequest2 = async (route: string, type: string, data?: object, noJson?: boolean) => {
+    try {
+        const token = getJWT()
+        const response = await fetch(`http://localhost:2000${route}`, {
+            method: type,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+
+            },
+            body: JSON.stringify(data)
+        });
+        // console.log(response)
+
+        if (response.ok) {
+            const res = await response.json()
+            return res
+        }
+        if (!response.ok) {
+            throw new Error('Error goes errrrr');
+        }
+        console.log('Big YAY');
+    } catch (error) {
+        console.error('BIG SAD:', error);
+    }
+}
+
 export const makeApiRequest = async (route: string, type: string, data?: object, noJson?: boolean) => {
     try {
         const token = getJWT()
@@ -33,7 +60,25 @@ export const makeApiRequest = async (route: string, type: string, data?: object,
     }
 }
 
+export const makeGetRequest2 = async (route: string) => {
+    try {
+        const token = getJWT()
+        const response = await fetch(`http://localhost:2000${route}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
 
+        });
+        if (!response.ok) {
+            throw new Error('Error goes errrrr');
+        }
+        return await response.json()
+    } catch (error) {
+        console.error('BIG SAD:', error);
+    }
+}
 export const makeGetRequest = async (route: string) => {
     try {
         const token = getJWT()
