@@ -42,13 +42,18 @@ const NavUser = styled(Box)`
 const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 { name: 'Kreiraj zaposlenog', path: 'kreirajZaposlenog' },
 { name: 'Kreiraj firmu', path: 'kreirajFirmu' },
+{ name: 'Kartice', path: '/kartice' },
 ];
 
+const pagesUser = [{ name: 'Početna', path: '' },
+{ name: 'Plaćanja', path: '/placanja' },
+{ name: 'Verifikacija', path: '/verifikacija' },
 const pagesUser = [
     { name: 'Početna', path: '' },
     { name: 'Plaćanja', path: '/placanja' },
     { name: 'Verifikacija', path: '/verifikacija' },
-    { name: 'Lista kredita', path: '/listaKredita' }, 
+    { name: 'Kartice', path: '/kartice' },,
+    { name: 'Lista kredita', path: '/listaKredita' }
 ];
 
 

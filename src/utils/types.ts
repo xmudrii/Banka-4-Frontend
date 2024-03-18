@@ -113,6 +113,32 @@ export type CompanyListProps = {
   companies: Company[];
 }
 
+export type Kartica = {
+  id: number;
+  naziv: string;
+  broj: string;
+  vrsta: 'kreditna' | 'debitna';
+  datum_kreiranja: number;
+  datum_isteka: number;
+  broj_racuna: string;
+  cvv: string;
+  limit: number;
+  status: 'aktivna' | 'deaktivirana' | 'blokirana';
+}
+
+export type TransakcijaKarticePrikaz = {
+  id: number;
+  nazivPrimaoca: string;
+  brojRacunaPrimaoca: string;
+  iznos: number;
+  sifraPlacanja: string;
+  pozivNaBroj: string;
+  svrhaPlacanja: string;
+  status: 'U obradi' | 'Uspeh' | 'Neuspeh';
+  vremeTransakcije: number; // JS timestamp
+  vremeIzvrsavanja: number;
+}
+
 export type Kredit = {
   id: number;
   VrstaKredita: string;
