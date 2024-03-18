@@ -48,8 +48,14 @@ const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 const pagesUser = [{ name: 'Početna', path: '' },
 { name: 'Plaćanja', path: '/placanja' },
 { name: 'Verifikacija', path: '/verifikacija' },
-{ name: 'Kartice', path: '/kartice' },
+const pagesUser = [
+    { name: 'Početna', path: '' },
+    { name: 'Plaćanja', path: '/placanja' },
+    { name: 'Verifikacija', path: '/verifikacija' },
+    { name: 'Kartice', path: '/kartice' },,
+    { name: 'Lista kredita', path: '/listaKredita' }
 ];
+
 
 const settings = ['Nalog'];
 const auth = getMe()
@@ -77,6 +83,7 @@ function Navbar() {
             <Container maxWidth="xl">
                 <Toolbar>
                     <img src={process.env.PUBLIC_URL + '/logo.webp'} alt="Logo" />
+                    
                     <NavItems>
                         {user && pagesUser?.map((page) => (
                             <StyledLink to={page.path}>{page.name}</StyledLink>
