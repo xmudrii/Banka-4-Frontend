@@ -125,3 +125,16 @@ export type Kartica = {
   limit: number;
   status: 'aktivna' | 'deaktivirana' | 'blokirana';
 }
+
+export type Transakcija = {
+  id: number;
+  nazivPrimaoca: string;
+  brojRacunaPrimaoca: string;
+  iznos: number;
+  sifraPlacanja: string;
+  pozivNaBroj: string;
+  svrhaPlacanja: string;
+  status: 'U obradi' | 'Uspeh' | 'Neuspeh';
+  vremeTransakcije: number; // JS timestamp
+  vremeIzvrsavanja: number;
+}

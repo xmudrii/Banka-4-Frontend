@@ -46,9 +46,9 @@ function App() {
         <Route path="/resetPassword" element={<ResetPasswordPage />} />
         <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
         <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
-        <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <PregledKartica />} />
-        <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <DodajKarticu />} />
-        <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <DetaljiKartice />} />
+        <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <LoginPage />} />
+        <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <LoginPage />} />
+        <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <LoginPage />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>

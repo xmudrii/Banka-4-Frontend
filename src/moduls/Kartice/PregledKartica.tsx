@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Kartica } from "../../utils/types";
-import { makeGetRequest2 } from "../../utils/apiRequest";
+import { makeGetRequest } from "../../utils/apiRequest";
 import { Button, Card, List, ListItem, ListItemText } from "@mui/material";
 import { getMe } from "../../utils/getMe";
 
@@ -12,7 +12,7 @@ export default function PregledKartica() {
         const me = getMe();
         if (me?.permission)
             setJeZaposleni(true)
-        makeGetRequest2("/kartica/povuci-sve")
+        makeGetRequest("/kartica/povuci-sve")
             .then((result) => {
                 setKartice(result);
             })

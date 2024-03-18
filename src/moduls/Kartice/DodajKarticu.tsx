@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Swal from 'sweetalert2';
-import { makeApiRequest2 } from '../../utils/apiRequest';
+import { makeApiRequest } from '../../utils/apiRequest';
 
 export default function DodajKarticu() {
     const [vrsta, setVrsta] = useState('debitna');
@@ -38,7 +38,7 @@ export default function DodajKarticu() {
             return;
         }
 
-        const uspesno = await makeApiRequest2("/kartica/kreiraj", 'POST', { vrsta, brojRacuna, limit });
+        const uspesno = await makeApiRequest("/kartica/kreiraj", 'POST', { vrsta, brojRacuna, limit });
         if (uspesno?.ok) {
             Swal.fire({
                 icon: 'success',
