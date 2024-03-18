@@ -22,7 +22,13 @@ export type Transaction = {
 };
 
 export type ExchangeRate = {
-  valuta: string;
-  kupovni: number;
-  prodajni: number;
+  par: string;
+  kurs: number;
+  poslednjaIzmena: Date;
 };
+
+// export type ExchangeRate = {
+//   valuta: string;
+//   kupovni: number;
+//   prodajni: number;
+// };

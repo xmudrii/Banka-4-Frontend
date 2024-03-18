@@ -1,31 +1,27 @@
 import { ExchangeRate } from "./Model";
+import "./Table.css";
 
 const ExchangeRatesTable = () => {
   const exchangeRateList: ExchangeRate[] = [
     {
-      valuta: "EUR",
-      kupovni: 117.5,
-      prodajni: 119.5,
+      par: "EUR-USD",
+      kurs: 1.184,
+      poslednjaIzmena: new Date(),
     },
     {
-      valuta: "USD",
-      kupovni: 99.2,
-      prodajni: 101.0,
+      par: "EUR-GBP",
+      kurs: 0.855,
+      poslednjaIzmena: new Date(),
     },
     {
-      valuta: "GBP",
-      kupovni: 135.8,
-      prodajni: 138.2,
+      par: "EUR-CHF",
+      kurs: 1.093,
+      poslednjaIzmena: new Date(),
     },
     {
-      valuta: "CHF",
-      kupovni: 107.5,
-      prodajni: 109.0,
-    },
-    {
-      valuta: "RSD",
-      kupovni: 1.0,
-      prodajni: 1.0,
+      par: "EUR-RSD",
+      kurs: 117.5,
+      poslednjaIzmena: new Date(),
     },
   ];
   return (
@@ -41,10 +37,10 @@ const ExchangeRatesTable = () => {
         </thead>
         <tbody>
           {exchangeRateList.map((exchangeRate) => (
-            <tr key={exchangeRate.valuta}>
-              <td>{exchangeRate.valuta}</td>
-              <td>{exchangeRate.kupovni}</td>
-              <td>{exchangeRate.prodajni}</td>
+            <tr key={exchangeRate.par}>
+              <td>{exchangeRate.par}</td>
+              <td>{exchangeRate.kurs}</td>
+              <td>{exchangeRate.poslednjaIzmena.toLocaleDateString()}</td>
             </tr>
           ))}
         </tbody>

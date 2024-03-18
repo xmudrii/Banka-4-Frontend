@@ -13,8 +13,28 @@
   resize: none;
 }
 
+p {
+  margin: 0;
+}
+
+.main-section-details-div {
+  width: 263px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 3rem;
+  margin-left: 2rem;
+  gap: 1rem;
+}
+
+.details-section {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .main-div {
   display: flex;
+  justify-content: center;
   gap: 3rem;
 }
 
@@ -23,7 +43,7 @@
 }
 
 .main-section-div {
-  width: 223px;
+  width: 263px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -40,6 +60,10 @@
   background-color: #fff;
   color: #333;
   cursor: pointer;
+  width: 222px;
+}
+
+.kurs-div {
   width: 222px;
 }
 
