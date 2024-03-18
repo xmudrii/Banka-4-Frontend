@@ -1,5 +1,7 @@
 import React from 'react';
 import { Kredit } from './../../utils/types';
+import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
+import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
 
 interface TabelaProps {
     krediti: Kredit[];
@@ -8,38 +10,40 @@ interface TabelaProps {
 
 const Tabela: React.FC<TabelaProps> = ({ krediti, onClickRed }) => {
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Vrsta kredita</th>
-                    <th>Iznos kredita</th>
-                    <th>Svrha kredita</th>
-                    <th>Iznos mesečne plate</th>
-                    <th>Zaposlen za stalno</th>
-                    <th>Period zaposlenja kod trenutnog poslodavca</th>
-                    <th>Ročnost</th>
-                    <th>Ekspozitura</th>
-                    <th>Broj mobilnog telefona</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {krediti.map((kredit, index) => (
-                    <tr key={index} onClick={() => onClickRed(kredit)}>
-                        <td>{kredit.VrstaKredita}</td>
-                        <td>{kredit.IznosKredita}</td>
-                        <td>{kredit.SvrhaKredita}</td>
-                        <td>{kredit.IznosMesecnePlate}</td>
-                        <td>{kredit.ZaposlenZaStalno}</td>
-                        <td>{kredit.PeriodZaposlenja}</td>
-                        <td>{kredit.Rocnost}</td>
-                        <td>{kredit.Ekspozitura}</td>
-                        <td>{kredit.BrojMobilnogTelefona}</td>
-                        <td>{kredit.Status}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <TableContainer component={Paper}>
+            <Table>
+                <StyledTableHead>
+                    <StyledTableRow>
+                        <StyledHeadTableCell>Vrsta kredita</StyledHeadTableCell>
+                        <StyledHeadTableCell>Iznos kredita</StyledHeadTableCell>
+                        <StyledHeadTableCell>Svrha kredita</StyledHeadTableCell>
+                        <StyledHeadTableCell>Iznos mesečne plate</StyledHeadTableCell>
+                        <StyledHeadTableCell>Zaposlen za stalno</StyledHeadTableCell>
+                        <StyledHeadTableCell>Period zaposlenja kod trenutnog poslodavca</StyledHeadTableCell>
+                        <StyledHeadTableCell>Ročnost</StyledHeadTableCell>
+                        <StyledHeadTableCell>Ekspozitura</StyledHeadTableCell>
+                        <StyledHeadTableCell>Broj mobilnog telefona</StyledHeadTableCell>
+                        <StyledHeadTableCell>Status</StyledHeadTableCell>
+                    </StyledTableRow>
+                </StyledTableHead>
+                <TableBody>
+                    {krediti.map((kredit, index) => (
+                        <StyledTableRow key={index} onClick={() => onClickRed(kredit)}>
+                            <StyledTableCell>{kredit.VrstaKredita}</StyledTableCell>
+                            <StyledTableCell>{kredit.IznosKredita}</StyledTableCell>
+                            <StyledTableCell>{kredit.SvrhaKredita}</StyledTableCell>
+                            <StyledTableCell>{kredit.IznosMesecnePlate}</StyledTableCell>
+                            <StyledTableCell>{kredit.ZaposlenZaStalno}</StyledTableCell>
+                            <StyledTableCell>{kredit.PeriodZaposlenja}</StyledTableCell>
+                            <StyledTableCell>{kredit.Rocnost}</StyledTableCell>
+                            <StyledTableCell>{kredit.Ekspozitura}</StyledTableCell>
+                            <StyledTableCell>{kredit.BrojMobilnogTelefona}</StyledTableCell>
+                            <StyledTableCell>{kredit.Status}</StyledTableCell>
+                        </StyledTableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 

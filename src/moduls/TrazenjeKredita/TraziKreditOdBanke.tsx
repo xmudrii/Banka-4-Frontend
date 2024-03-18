@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Checkbox, FormControlLabel } from '@mui/material';
 
 interface FormData {
   vrstaKredita: string;
@@ -25,20 +26,13 @@ const TraziKreditStranica: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<string>('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
+  const handleChange = (e: SelectChangeEvent<string>) => {
+    const { name, value } = e.target;
 
-    if (type === 'checkbox') {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: (e.target as HTMLInputElement).checked,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handlePosalji = async () => {
@@ -60,18 +54,24 @@ const TraziKreditStranica: React.FC = () => {
     <div>
       <h2>Forma za traženje kredita</h2>
       {poruka && <p>{poruka}</p>}
-      <label>
-        Vrsta kredita:
-        <select name="vrstaKredita" value={formData.vrstaKredita} onChange={handleChange}>
-          <option value="gotovinski">Gotovinski</option>
-          <option value="stambeni">Stambeni</option>
-          <option value="auto">Auto</option>
-          <option value="refinansirajuci">Refinansirajući</option>
-        </select>
-      </label>
+      <FormControl>
+        <InputLabel id="vrstaKredita-label">Vrsta kredita</InputLabel>
+        <Select
+          labelId="vrstaKredita-label"
+          id="vrstaKredita"
+          name="vrstaKredita"
+          value={formData.vrstaKredita}
+          onChange={handleChange}
+        >
+          <MenuItem value="gotovinski">Gotovinski</MenuItem>
+          <MenuItem value="stambeni">Stambeni</MenuItem>
+          <MenuItem value="auto">Auto</MenuItem>
+          <MenuItem value="refinansirajuci">Refinansirajući</MenuItem>
+        </Select>
+      </FormControl>
       <br />
       {/* Ostatak forme */}
-      <button onClick={handlePosalji} disabled={loading}>Pošalji</button>
+      <Button variant="contained" onClick={handlePosalji} disabled={loading}>Pošalji</Button>
     </div>
   );
 };
