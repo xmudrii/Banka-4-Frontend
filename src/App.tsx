@@ -19,8 +19,12 @@ import { getMe } from './utils/getMe';
 import UserHomePage from './UserHomePage';
 import ResetPasswordPage from './ResetPasswordPage';
 import Verifikacija from './moduls/StranicaZaVerifikacijuPlacanja';
+import ListaKredita from './moduls/SviKrediti/listaKredita';
 import Placanje from './moduls/Placanje/Placanje';
+import TrazenjeKredita from './moduls/TrazenjeKredita/TraziKreditOdBanke';
+import PojedinacniKredit from './moduls/PojedinacniKredit/PojedinacniKreditStranica'
 import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from "./moduls/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike";
+
 const auth = getMe()
 function App() {
   return (
@@ -42,7 +46,10 @@ function App() {
         <Route path="/izmeniFirmu" element={auth?.id ? <EditCompanyPage /> : <LoginPage />} />
         <Route path="/resetPassword" element={<ResetPasswordPage />} />
         <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
+        <Route path="/listaKredita" element={auth?.id ? <ListaKredita /> : <LoginPage />} />
         <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
+        <Route path="/trazenjeKredita" element={auth?.id ? <TrazenjeKredita /> : <LoginPage />} />
+        <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKredit /> : <LoginPage />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>

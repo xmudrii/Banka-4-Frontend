@@ -112,3 +112,45 @@ export type Company = {
 export type CompanyListProps = {
   companies: Company[];
 }
+
+export type Kredit = {
+  id: number;
+  VrstaKredita: string;
+  IznosKredita: string;
+  SvrhaKredita: string;
+  IznosMesecnePlate: number;
+  ZaposlenZaStalno: number;
+  PeriodZaposlenja: number;
+  Rocnost: string;
+  Ekspozitura: string;
+  BrojMobilnogTelefona: string;
+  Status: string;
+}
+
+export type KreditPojedinacni = {
+  naziv: string;
+  broj: string;
+  iznos: number;
+  period: number;
+  nominalnaKamatnaStopa: number;
+  efektivnaKamatnaStopa: number;
+  datumUgovaranja: number;
+  datumDospeca: number;
+  iznosRate: number;
+  datumSledeceRate: number;
+  preostaloDugovanje: number;
+  iznosPretplate: number;
+  valuta: string;
+};
+
+export type Transakcija = {
+  nazivPrimaoca: string,
+  racunPrimaoca: string,
+  iznos: number,
+  pozivNaBroj: string,
+  status: string,
+  vremeTransakcije: string;
+  sifraPlacanja: string;
+  svrhaPlacanja: string;
+  vremeIzvrsavanja: string;
+}
