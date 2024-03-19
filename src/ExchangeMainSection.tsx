@@ -1,12 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
+import { getMe } from "./utils/getMe";
+import { makeGetRequest } from "./utils/apiRequest";
+import { Account } from "./Model";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
+  setIznos: (iznos: string) => void;
+  setSaRacuna: (saRacuna: Account) => void;
+  setNaRacun: (naRacun: Account) => void;
 };
 
-const ExchangeMainSection = ({ setDetaljiTransfera }: Props) => {
-  const [iznos, setIznos] = useState<number>();
+const ExchangeMainSection = ({
+  setDetaljiTransfera,
+  setIznos,
+  setSaRacuna,
+  setNaRacun,
+}: Props) => {
+  const [accounts, setAccounts] = useState<Account[]>([]);
+
+  useEffect(() => {
+    fetchAccounts();
+  }, []);
+
+  const fetchAccounts = async () => {
+    try {
+      const me = getMe();
+      if (!me) return;
+      const data = await makeGetRequest(
+        `/racuni/nadjiRacuneKorisnika/${me.id}`
+      );
+      if (data) {
+        setAccounts(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <article className="main-section-div">
@@ -17,20 +47,36 @@ const ExchangeMainSection = ({ setDetaljiTransfera }: Props) => {
           name={"iznos"}
           className="textarea"
           placeholder={"Upisite iznos..."}
-          value={iznos}
           required={true}
+          onChange={(e) => setIznos(e.target.value)}
         />
       </section>
       <section className="sa-racuna-div">
         <label>Sa racuna: </label>
         <select className="custom-select" defaultValue={"Broj racuna..."}>
           <option defaultValue={"Broj racuna..."}>Broj racuna...</option>
+          {accounts.map((account) => (
+            <option
+              value={account.brojRacuna}
+              onChange={() => setSaRacuna(account)}
+            >
+              {account.brojRacuna}, {account.currency}
+            </option>
+          ))}
         </select>
       </section>
       <section className="na-racun-div">
         <label>Na racun: </label>
         <select className="custom-select">
           <option defaultValue={"Broj racuna..."}>Broj racuna...</option>
+          {accounts.map((account) => (
+            <option
+              value={account.brojRacuna}
+              onChange={() => setNaRacun(account)}
+            >
+              {account.brojRacuna}, {account.currency}
+            </option>
+          ))}
         </select>
       </section>
       <section className="kurs-div">

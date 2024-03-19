@@ -1,10 +1,19 @@
 import ".//ExchangePage.css";
+import { Account } from "./Model";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
+  iznos: string | undefined;
+  saRacuna: Account | undefined;
+  naRacun: Account | undefined;
 };
 
-const TransferDetails = ({ setDetaljiTransfera }: Props) => {
+const TransferDetails = ({
+  setDetaljiTransfera,
+  iznos,
+  saRacuna,
+  naRacun,
+}: Props) => {
   return (
     <article className="main-section-details-div">
       <section className="details-section">
@@ -13,15 +22,15 @@ const TransferDetails = ({ setDetaljiTransfera }: Props) => {
       </section>
       <section className="details-section">
         <p>Sa racuna:</p>
-        <p>102-39443942389</p>
+        <p>{saRacuna?.brojRacuna}</p>
       </section>
       <section className="details-section">
         <p>Iznos:</p>
-        <p>1,00 EUR</p>
+        <p>{iznos}</p>
       </section>
       <section className="details-section">
         <p>Na racun:</p>
-        <p>102-394438340549</p>
+        <p>{naRacun?.brojRacuna}</p>
       </section>
       <section className="details-section">
         <p>Iznos:</p>
@@ -35,7 +44,6 @@ const TransferDetails = ({ setDetaljiTransfera }: Props) => {
         <p>Provizija:</p>
         <p>0.00 RSD</p>
       </section>
-      {/* <section className=""></section> */}
       <section className="buttons">
         <button className="button" onClick={() => setDetaljiTransfera(false)}>
           Ponisti
