@@ -4,7 +4,7 @@ import Header from "./Header";
 import { Account } from "./Model";
 import { makeGetRequest } from "./utils/apiRequest";
 import { getMe } from "./utils/getMe";
-
+import CurrencyConverter from "./UserHomeComponents/CurrencyConverter";
 // const transactions: Transaction[] = [
 //   {
 //     senderAccountNumber: "123456",
@@ -76,6 +76,9 @@ const UserHomePage: React.FC = () => {
     <div>
       <AccountsTable accounts={accounts} setAccount={setAccount} />
       {/* <TransactionsTable transactions={transactions} /> */}
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100vw', alignItems:"center" }}>
+    <CurrencyConverter/>
+  </div>
     </div>
   );
 };
