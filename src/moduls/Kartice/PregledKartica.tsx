@@ -29,7 +29,7 @@ export default function PregledKartica() {
                 </Button>
             )}
             <List>
-                {kartice.map((kartica, index) => (
+                {kartice?.map((kartica, index) => (
                     <Card variant="outlined" key={index} style={{ margin: "10px" }}>
                         <ListItem button onClick={() => window.location.replace("/kartica?id=" + kartica.id)}>
                             <ListItemText

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Swal from 'sweetalert2';
-import { makeApiRequest } from '../../utils/apiRequest';
+import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 
 export default function DodajKarticu() {
+    const [imena, setImena] = useState(['greska']);
+    const [ime, setIme] = useState('greska');
     const [vrsta, setVrsta] = useState('debitna');
     const [brojRacuna, setBrojRacuna] = useState('');
     const [limit, setLimit] = useState('5000000');
@@ -11,8 +13,19 @@ export default function DodajKarticu() {
     const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
+        makeGetRequest("/cards/allNames").then(result => {
+            if (!result)
+                return;
+
+            setImena(result.name.split(","));
+            setIme(result.name.split(",")[0]);
+        }).catch(_ => { })
+    }, [])
+
+    useEffect(() => {
         const validateForm = () => {
             return (
+                (ime ? true : false) &&
                 (vrsta ? true : false) &&
                 brojRacuna.length === 18 &&
                 (limit ? true : false) && !isNaN(Number(limit))
@@ -20,9 +33,10 @@ export default function DodajKarticu() {
         };
 
         setFormValid(validateForm());
-    }, [vrsta, brojRacuna, limit]);
+    }, [vrsta, brojRacuna, limit, ime]);
 
     const validirajPodatke = () => {
+        if (!ime) return 'Odaberite tip kartice';
         if (!vrsta) return 'Morate odabrati vrstu kartice';
         if (brojRacuna.length !== 18) return 'Broj računa mora imati 18 cifara';
         if (!limit || isNaN(Number(limit))) return 'Limit mora biti broj';
@@ -38,7 +52,7 @@ export default function DodajKarticu() {
             return;
         }
 
-        const uspesno = await makeApiRequest("/kartica/kreiraj", 'POST', { vrsta, brojRacuna, limit });
+        const uspesno = await makeApiRequest("/kartica/kreiraj", 'POST', { ime, vrsta, brojRacuna, limit });
         if (uspesno?.ok) {
             Swal.fire({
                 icon: 'success',
@@ -67,6 +81,17 @@ export default function DodajKarticu() {
                 >
                     <MenuItem value="kreditna">Kreditna</MenuItem>
                     <MenuItem value="debitna">Debitna</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl style={{ marginTop: 20 }} fullWidth>
+                <InputLabel id="tip-label">Ime kartice</InputLabel>
+                <Select
+                    labelId="tip-label"
+                    value={ime}
+                    label="Tip kartice"
+                    onChange={(e) => setIme(e.target.value)}
+                >
+                    {imena.map(e => <MenuItem value={e}>{e}</MenuItem>)}
                 </Select>
             </FormControl>
             <TextField

@@ -45,14 +45,11 @@ const pages = [{ name: 'Liste', path: 'listaKorisnika' },
 { name: 'Kartice', path: '/kartice' },
 ];
 
-const pagesUser = [{ name: 'Početna', path: '' },
-{ name: 'Plaćanja', path: '/placanja' },
-{ name: 'Verifikacija', path: '/verifikacija' },
 const pagesUser = [
     { name: 'Početna', path: '' },
     { name: 'Plaćanja', path: '/placanja' },
     { name: 'Verifikacija', path: '/verifikacija' },
-    { name: 'Kartice', path: '/kartice' },,
+    { name: 'Kartice', path: '/kartice' },
     { name: 'Lista kredita', path: '/listaKredita' }
 ];
 
