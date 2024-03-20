@@ -6,22 +6,18 @@ const ExchangeRatesTable = () => {
     {
       par: "EUR-USD",
       kurs: 1.184,
-      poslednjaIzmena: new Date(),
     },
     {
       par: "EUR-GBP",
       kurs: 0.855,
-      poslednjaIzmena: new Date(),
     },
     {
       par: "EUR-CHF",
       kurs: 1.093,
-      poslednjaIzmena: new Date(),
     },
     {
       par: "EUR-RSD",
       kurs: 117.5,
-      poslednjaIzmena: new Date(),
     },
   ];
   return (
@@ -30,9 +26,8 @@ const ExchangeRatesTable = () => {
       <table>
         <thead>
           <tr>
-            <th>Valuta</th>
-            <th>Kupovni</th>
-            <th>Prodajni</th>
+            <th>Par</th>
+            <th>Kurs</th>
           </tr>
         </thead>
         <tbody>
@@ -40,7 +35,6 @@ const ExchangeRatesTable = () => {
             <tr key={exchangeRate.par}>
               <td>{exchangeRate.par}</td>
               <td>{exchangeRate.kurs}</td>
-              <td>{exchangeRate.poslednjaIzmena.toLocaleDateString()}</td>
             </tr>
           ))}
         </tbody>

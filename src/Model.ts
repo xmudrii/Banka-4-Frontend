@@ -24,8 +24,15 @@ export type Transaction = {
 export type ExchangeRate = {
   par: string;
   kurs: number;
-  poslednjaIzmena: Date;
 };
+
+export type PrenosSredstava = {
+  racunPosiljaoca: 0;
+  racunPrimaoca: 0;
+  iznos: 0;
+};
+
+//iznos/prvavaluta*drugavaluta*provizija
 
 // export type ExchangeRate = {
 //   valuta: string;
