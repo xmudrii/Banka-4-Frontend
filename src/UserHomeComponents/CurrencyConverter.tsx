@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styles from './CurrencyConverter.module.css'; // Importujemo CSS modul
+import styles from './CurrencyConverter.module.css'; // Importing CSS module
 
 type CurrencyRate = {
   code: string;
-  rate: number; // Kurs u odnosu na dinar
+  rate: number; // Exchange rate in relation to dinar
 };
 
-// Primer kursne liste
+// Example currency rates
 const MOCK_CURRENCY_RATES: CurrencyRate[] = [
   { code: 'EUR', rate: 117.5 },
   { code: 'USD', rate: 97.3 },
@@ -21,7 +21,7 @@ const CurrencyConverter: React.FC = () => {
   const [currencyRates, setCurrencyRates] = useState<CurrencyRate[]>(MOCK_CURRENCY_RATES);
 
   useEffect(() => {
-    // Ovde bi se implementirao poziv na backend za dobijanje kursne liste
+    // Here you would implement the backend call to get the list of exchange rates
     // setCurrencyRates(fetchedRates);
   }, []);
 
@@ -56,13 +56,14 @@ const CurrencyConverter: React.FC = () => {
     if (!amount) return;
     const fromRate = currencyRates.find((cr) => cr.code === fromCurrency)?.rate || 1;
     const toRate = currencyRates.find((cr) => cr.code === toCurrency)?.rate || 1;
-    const result = (parseFloat(amount) / fromRate) * toRate;
+    // Adjusting the calculation logic to use RSD as a base for conversion between any two currencies
+    const result = (parseFloat(amount) * fromRate) / toRate;
     setConvertedAmount(result);
   };
 
   return (
     <div className={styles.container}>
-      <input type="text" value={amount} onChange={handleAmountChange} placeholder="Unesite količinu" className={styles.input} />
+      <input type="text" value={amount} onChange={handleAmountChange} placeholder="Enter amount" className={styles.input} />
       <select value={fromCurrency} onChange={handleFromCurrencyChange} className={styles.select}>
         {currencyRates.map((currency) => (
           <option key={currency.code} value={currency.code}>
@@ -77,12 +78,12 @@ const CurrencyConverter: React.FC = () => {
           </option>
         ))}
       </select>
-      <label className={styles.label}>Izračunata vrednost: {convertedAmount.toFixed(2)}</label>
+      <label className={styles.label}>Calculated value: {convertedAmount.toFixed(2)}</label>
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Valuta</th>
-            <th>Kurs u odnosu na dinar</th>
+            <th>Currency</th>
+            <th>Exchange rate in relation to dinar</th>
           </tr>
         </thead>
         <tbody>
@@ -94,7 +95,7 @@ const CurrencyConverter: React.FC = () => {
           ))}
         </tbody>
       </table>
-      {amount === '' && <div className={styles.error}>Molimo unesite količinu.</div>}
+      {amount === '' && <div className={styles.error}>Please enter an amount.</div>}
     </div>
   );
 };
