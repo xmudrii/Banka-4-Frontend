@@ -27,6 +27,11 @@ import DetaljiKartice from 'moduls/Kartice/DetaljiKartice';
 import ListaKredita from 'moduls/SviKrediti/listaKredita';
 import TraziKreditStranica from 'moduls/TrazenjeKredita/TraziKreditOdBanke';
 import PojedinacniKreditStranica from 'moduls/PojedinacniKredit/PojedinacniKreditStranica';
+import OpcijePage from 'berza/pages/OpcijePage';
+import UserOpcijePage from 'berza/pages/UserOptionsPage';
+import Transaction from 'zaposleni/pages/TransactionPage';
+import AkcijePage from 'berza/pages/AkcijePage';
+import DetaljiAkcije from 'berza/pages/DetaljiAkcijePage';
 const auth = getMe()
 function App() {
   return (
@@ -56,6 +61,12 @@ function App() {
         <Route path="/trazenjeKredita" element={auth?.id ? <TraziKreditStranica /> : <LoginPage />} />
         <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKreditStranica /> : <LoginPage />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
+        <Route path="/opcije" element={auth?.id ? <OpcijePage /> : <LoginPage />} />
+        <Route path="/userOpcije" element={auth?.id ? <UserOpcijePage /> : <LoginPage />} />
+        <Route path="/transakcija" element={auth?.id ? <Transaction /> : <LoginPage />} />
+        <Route path="/akcije" element={auth?.id ? <AkcijePage /> : <LoginPage />} />
+        <Route path="/detaljiAkcije" element={auth?.id ? <DetaljiAkcije /> : <LoginPage />} />
+
       </Routes>
     </BrowserRouter>
   );
