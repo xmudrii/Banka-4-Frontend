@@ -8,7 +8,7 @@ export const RACUNI_PLACEHOLDER: RacunType[] = [{ naziv: "Dragos", broj: '265-00
 // ne moze da bude async
 export function getRacunByBroj(racuni: RacunType[], broj: string): (RacunType | null) {
     for (let racun of racuni) {
-        if (racun.broj == broj) {
+        if (racun.broj === broj) {
             return racun;
         }
     }

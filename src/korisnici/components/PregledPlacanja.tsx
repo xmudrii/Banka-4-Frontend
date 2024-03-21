@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { getJWT, makeApiRequest } from '../../../utils/apiRequest';
-import { RACUNI_PLACEHOLDER, RacunType } from '../../../data/Racuni';
-import { getMe } from '../../../utils/getMe';
+import { getJWT } from 'utils/apiRequest';
+import { getMe } from 'utils/getMe';
+import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 
 const url = "http://api.stamenic.work:8080/api";
 

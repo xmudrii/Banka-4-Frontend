@@ -10,10 +10,10 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Grid';
-import { NovaUplata, NoviPrenosSredstava } from '../datatypes/Types';
-import { RACUNI_PLACEHOLDER, RacunType } from '../../../data/Racuni';
-import { getMe } from '../../../utils/getMe';
-import { getJWT } from '../../../utils/apiRequest';
+import { NovaUplata, NoviPrenosSredstava } from '../types/Types';
+import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
+import { getMe } from 'utils/getMe';
+import { getJWT } from 'utils/apiRequest';
 
 
 interface PaymentFormProps {

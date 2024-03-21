@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { DropdownMenu } from './components/DropdownMenu';
-import { FormaZaPlacanje } from './components/FormaZaPlacanje';
+import { DropdownMenu } from '../components/DropdownMenu';
+import { FormaZaPlacanje } from '../components/FormaZaPlacanje';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { NovaUplata, NoviPrenosSredstava, isNovaUplata, isNoviPrenosSredstava } from './datatypes/Types';
-import VerifikacijaPlacanja from './components/VerifikacijaPlacanja';
-import { FormaZaPrenos } from './components/FormaZaPrenos';
-import { PrimaociPlacanja } from './components/PrimaociPlacanja';
-import PregledPlacanja from './components/PregledPlacanja';
+import { NovaUplata, NoviPrenosSredstava } from '../types/Types';
+import VerifikacijaPlacanja from '../components/VerifikacijaPlacanja';
+import { FormaZaPrenos } from '../components/FormaZaPrenos';
+import { PrimaociPlacanja } from '../components/PrimaociPlacanja';
+import PregledPlacanja from '../components/PregledPlacanja';
+import { isNovaUplata, isNoviPrenosSredstava } from 'korisnici/utils/korisniciUtils';
 
 
 const Placanje: React.FC = () => {
