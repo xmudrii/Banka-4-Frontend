@@ -9,7 +9,9 @@ const PojedinacniKreditStranica = () => {
 
   useEffect(() => {
     const storedKredit = localStorage.getItem('selectedKredit');
-    let parsedKredit = null;
+    let parsedKredit = {
+      id: ''
+    };
 
     if (storedKredit) {
       parsedKredit = JSON.parse(storedKredit);

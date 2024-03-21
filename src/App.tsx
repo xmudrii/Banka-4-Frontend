@@ -21,6 +21,12 @@ import UserHomePage from 'korisnici/pages/UserHomePage';
 import ResetPasswordPage from 'korisnici/pages/ResetPasswordPage';
 import Verifikacija from 'korisnici/pages/StranicaZaVerifikacijuPlacanja';
 import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from 'korisnici/pages/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike';
+import PregledKartica from 'moduls/Kartice/PregledKartica';
+import DodajKarticu from 'moduls/Kartice/DodajKarticu';
+import DetaljiKartice from 'moduls/Kartice/DetaljiKartice';
+import ListaKredita from 'moduls/SviKrediti/listaKredita';
+import TraziKreditStranica from 'moduls/TrazenjeKredita/TraziKreditOdBanke';
+import PojedinacniKreditStranica from 'moduls/PojedinacniKredit/PojedinacniKreditStranica';
 const auth = getMe()
 function App() {
   return (
@@ -47,8 +53,8 @@ function App() {
         <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <LoginPage />} />
         <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <LoginPage />} />
         <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <LoginPage />} />
-        <Route path="/trazenjeKredita" element={auth?.id ? <TrazenjeKredita /> : <LoginPage />} />
-        <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKredit /> : <LoginPage />} />
+        <Route path="/trazenjeKredita" element={auth?.id ? <TraziKreditStranica /> : <LoginPage />} />
+        <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKreditStranica /> : <LoginPage />} />
         <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
       </Routes>
     </BrowserRouter>

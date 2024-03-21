@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Account } from "utils/types";
+import CurrencyConverter from "korisnici/components/CurrencyConverter";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -104,6 +105,7 @@ const UserHomePage: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
+          <CurrencyConverter />
       </FormWrapper >
     </PageWrapper >
   );
