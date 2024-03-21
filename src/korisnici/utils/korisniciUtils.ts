@@ -1,18 +1,4 @@
-export interface NovaUplata {
-    racunPosiljaoca: string;
-    nazivPrimaoca: string;
-    racunPrimaoca: string;
-    iznos: string;
-    pozivNaBroj: string;
-    sifraPlacanja: number;
-    svrhaPlacanja: string;
-}
-
-export interface NoviPrenosSredstava {
-    racunPosiljaoca: string;
-    racunPrimaoca: string;
-    iznos: number;
-}
+import { NovaUplata, NoviPrenosSredstava } from "korisnici/types/Types";
 
 export function isNovaUplata(object: any): object is NovaUplata {
     if (!object) return false;

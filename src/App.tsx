@@ -1,26 +1,26 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import UserAndAccountList from './usersAndAccounts/pages/listsPage'
+import UserAndAccountList from './zaposleni/pages/listsPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import UserInfoTable from './usersAndAccounts/pages/userPage';
-import Navbar from './usersAndAccounts/components/Navbar';
-import CreateUserPage from './usersAndAccounts/pages/createUserPage';
-import EditUserPage from './usersAndAccounts/pages/editUserPage';
-import CreateAccountPage from './usersAndAccounts/pages/createAccountPage';
-import AccountInfoPage from './usersAndAccounts/pages/accountPage';
-import CreateEmployeePage from './usersAndAccounts/pages/createEmployeePage';
-import EditEmployeePage from './usersAndAccounts/pages/editEmployeePage';
-import CreateCompanyPage from './usersAndAccounts/pages/createCompanyPage';
-import EditCompanyPage from './usersAndAccounts/pages/editCompanyPage';
+import UserInfoTable from './zaposleni/pages/userPage';
+import Navbar from './zaposleni/components/Navbar';
+import CreateUserPage from './zaposleni/pages/createUserPage';
+import EditUserPage from './zaposleni/pages/editUserPage';
+import CreateAccountPage from './zaposleni/pages/createAccountPage';
+import AccountInfoPage from './zaposleni/pages/accountPage';
+import CreateEmployeePage from './zaposleni/pages/createEmployeePage';
+import EditEmployeePage from './zaposleni/pages/editEmployeePage';
+import CreateCompanyPage from './zaposleni/pages/createCompanyPage';
+import EditCompanyPage from './zaposleni/pages/editCompanyPage';
 import LoginPage from './moduls/LogReg/LoginPage';
 import RegistrationPage from './moduls/LogReg/RegistrationPage';
 import { getMe } from './utils/getMe';
-import UserHomePage from './UserHomePage';
-import ResetPasswordPage from './ResetPasswordPage';
-import Verifikacija from './moduls/StranicaZaVerifikacijuPlacanja';
-import Placanje from './moduls/Placanje/Placanje';
-import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from "./moduls/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike";
+import Placanje from './korisnici/pages/PlacanjePage';
+import UserHomePage from 'korisnici/pages/UserHomePage';
+import ResetPasswordPage from 'korisnici/pages/ResetPasswordPage';
+import Verifikacija from 'korisnici/pages/StranicaZaVerifikacijuPlacanja';
+import StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike from 'korisnici/pages/StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike';
 const auth = getMe()
 function App() {
   return (

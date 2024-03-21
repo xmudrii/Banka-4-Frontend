@@ -6,10 +6,10 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { NoviPrenosSredstava } from '../datatypes/Types';
-import { RACUNI_PLACEHOLDER, RacunType, getRacunByBroj } from '../../../data/Racuni';
-import { getJWT } from '../../../utils/apiRequest';
-import { getMe } from '../../../utils/getMe';
+import { NoviPrenosSredstava } from '../types/Types';
+import { RACUNI_PLACEHOLDER, RacunType, getRacunByBroj } from 'korisnici/data/Racuni';
+import { getJWT } from 'utils/apiRequest';
+import { getMe } from 'utils/getMe';
 
 interface TransferFormProps {
     onSave: (data: NoviPrenosSredstava) => void;

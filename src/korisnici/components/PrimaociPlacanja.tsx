@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import Swal from 'sweetalert2';
-import { makeApiRequest } from '../../../utils/apiRequest';
+import { makeApiRequest } from 'utils/apiRequest';
 
 const MOCK_PRIMAOCI = [
     { id: 1, naziv: 'John Doe', brojRacuna: '265-0000001234569-78', pozivNaBroj: '12345', sifraPlacanja: '001', svrhaPlacanja: 'Donation' },

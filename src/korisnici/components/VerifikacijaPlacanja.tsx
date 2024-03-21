@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { NovaUplata, NoviPrenosSredstava, isNovaUplata, isNoviPrenosSredstava } from '../datatypes/Types';
-import { getJWT } from '../../../utils/apiRequest';
-import { getMe } from '../../../utils/getMe';
+import { NovaUplata, NoviPrenosSredstava} from '../types/Types';
+import { isNovaUplata, isNoviPrenosSredstava } from 'korisnici/utils/korisniciUtils';
+
+import { getJWT } from 'utils/apiRequest';
+import { getMe } from 'utils/getMe';
 
 const PrikazPodataka: React.FC<{ podaci: NovaUplata | NoviPrenosSredstava }> = ({ podaci }) => {
     return <div>Placeholder za prikaz podataka</div>;
