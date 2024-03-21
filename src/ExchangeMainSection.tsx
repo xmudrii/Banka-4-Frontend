@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
 import { getMe } from "./utils/getMe";
 import { makeGetRequest } from "./utils/apiRequest";
-import { Account } from "./Model";
+import { Account, ExchangeRate } from "./Model";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
@@ -19,10 +19,25 @@ const ExchangeMainSection = ({
 }: Props) => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [iznosError, setIznosError] = useState<boolean>(false);
+  const [saRacuna2, setSaRacuna2] = useState<Account>();
+  const [naRacun2, setNaRacun2] = useState<Account>();
+  const [exchages, setExhanges] = useState<ExchangeRate[]>([]);
 
   useEffect(() => {
     fetchAccounts();
+    fetchExchange();
   }, []);
+
+  const fetchExchange = async () => {
+    try {
+      const data = await makeGetRequest(`/api/exchange`);
+      if (data) {
+        setExhanges(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const fetchAccounts = async () => {
     try {
@@ -36,6 +51,27 @@ const ExchangeMainSection = ({
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+  };
+
+  const findExchangeRate = (
+    currency1: string | undefined,
+    currency2: string | undefined
+  ) => {
+    if (!currency1 || !currency2) return null;
+
+    const rate1 = exchages.find(
+      (exchage) => exchage.currencyCode === currency1
+    )?.rate;
+
+    const rate2 = exchages.find(
+      (exchage) => exchage.currencyCode === currency2
+    )?.rate;
+
+    if (rate1 && rate2) {
+      return rate1 / rate2;
+    } else {
+      return null;
     }
   };
 
@@ -61,7 +97,7 @@ const ExchangeMainSection = ({
               setIznosError(false);
             }}
           />
-          {iznosError && <p className="error-text">Iznos je obavezan</p>}
+          {iznosError && <p className="error-text">Iznos je obavezan.</p>}
         </section>
         <section className="sa-racuna-div">
           <label>Sa racuna: </label>
@@ -70,7 +106,10 @@ const ExchangeMainSection = ({
             {accounts.map((account) => (
               <option
                 value={account.brojRacuna}
-                onChange={() => setSaRacuna(account)}
+                onChange={() => {
+                  setSaRacuna(account);
+                  setSaRacuna2(account);
+                }}
               >
                 {account.brojRacuna}, {account.currency}
               </option>
@@ -84,7 +123,10 @@ const ExchangeMainSection = ({
             {accounts.map((account) => (
               <option
                 value={account.brojRacuna}
-                onChange={() => setNaRacun(account)}
+                onChange={() => {
+                  setNaRacun(account);
+                  setNaRacun2(account);
+                }}
               >
                 {account.brojRacuna}, {account.currency}
               </option>
@@ -92,7 +134,10 @@ const ExchangeMainSection = ({
           </select>
         </section>
         <section className="kurs-div">
-          <label>Trenutni kurs izmedju: valute1 i valute2: 117.5 </label>
+          <label>
+            Trenutni kurs izmedju: {saRacuna2?.currency} i {naRacun2?.currency}:{" "}
+            {findExchangeRate(saRacuna2?.currency, naRacun2?.currency)}
+          </label>
         </section>
         <section className="buttons">
           <button className="button">Odustani</button>

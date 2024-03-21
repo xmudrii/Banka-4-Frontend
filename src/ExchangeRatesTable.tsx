@@ -32,12 +32,16 @@ const ExchangeRatesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {exchages.map((exchage) => (
-            <tr key={exchage.currencyCode}>
-              <td>{exchage.currencyCode}</td>
-              <td>{exchage.rate}</td>
-            </tr>
-          ))}
+          {exchages.map((exchange1, index1) =>
+            exchages.slice(index1 + 1).map((exchange2, index2) => (
+              <tr key={`${exchange1.currencyCode}-${exchange2.currencyCode}`}>
+                <td>
+                  {exchange1.currencyCode}-{exchange2.currencyCode}
+                </td>
+                <td>{exchange2.rate / exchange1.rate}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
