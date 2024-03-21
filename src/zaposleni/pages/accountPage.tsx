@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, TableHead
 import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import { makeGetRequest } from '../../utils/apiRequest';
+import { useNavigate } from 'react-router-dom';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -46,6 +47,12 @@ const StyledTableCell = styled(TableCell)`
   }
 `
 
+const StyledTableRow = styled(TableRow)`
+  &:hover{
+    background-color: #f2f2f2;
+  }
+`
+
 type Transakcija = {
   nazivPrimaoca: string,
   racunPrimaoca: string,
@@ -77,7 +84,12 @@ const AccountInfoPage: React.FC = () => {
   })
   const [emailVlasnika, setEmailVlasnika] = useState('')
   const [transactions, setTransatcions] = useState<Transakcija[]>([])
+  const navigate = useNavigate();
 
+  const handleSelectTransaction = (transaction: Transakcija) => {
+    localStorage.setItem('selectedTransaction', JSON.stringify(transaction));
+    navigate("/transakcija")
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -197,7 +209,7 @@ const AccountInfoPage: React.FC = () => {
             </TableHead>
             <TableBody>
               {transactions?.map((transakcija) => (
-                <TableRow key={transakcija.sifraPlacanja}>
+                <StyledTableRow key={transakcija.sifraPlacanja} onClick={() => handleSelectTransaction(transakcija)}>
                   <StyledTableCentered component="th" scope="row">
                     {(transakcija.nazivPrimaoca)}
                   </StyledTableCentered>
@@ -214,10 +226,10 @@ const AccountInfoPage: React.FC = () => {
                     {(transakcija.status)}
                   </StyledTableCentered>
                   <StyledTableCentered component="th" scope="row">
-                    {(transakcija.svrhaPlacanja)}
+                    {(transakcija.sifraPlacanja)}
                   </StyledTableCentered>
                   <StyledTableCentered component="th" scope="row">
-                    {(transakcija.sifraPlacanja)}
+                    {(transakcija.svrhaPlacanja)}
                   </StyledTableCentered>
                   <StyledTableCentered component="th" scope="row">
                     {(new Date(transakcija.vremeTransakcije).toDateString())}
@@ -225,7 +237,7 @@ const AccountInfoPage: React.FC = () => {
                   <StyledTableCentered component="th" scope="row">
                     {(new Date(transakcija.vremeIzvrsavanja).toDateString())}
                   </StyledTableCentered>
-                </TableRow>
+                </StyledTableRow>
               ))}
             </TableBody>
           </Table>

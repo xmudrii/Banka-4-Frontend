@@ -54,7 +54,6 @@ const pagesUser = [
 ];
 
 
-const settings = ['Nalog'];
 const auth = getMe()
 const user = auth?.permission === 0 ? true : false;
 function Navbar() {
@@ -80,13 +79,13 @@ function Navbar() {
             <Container maxWidth="xl">
                 <Toolbar>
                     <img src={process.env.PUBLIC_URL + '/logo.webp'} alt="Logo" />
-                    
+
                     <NavItems>
                         {user && pagesUser?.map((page) => (
-                            <StyledLink to={page.path}>{page.name}</StyledLink>
+                            <StyledLink key={page.name} to={page.path}>{page.name}</StyledLink>
                         ))}
                         {!user && pages?.map((page) => (
-                            <StyledLink to={page.path}>{page.name}</StyledLink>
+                            <StyledLink key={page.name} to={page.path}>{page.name}</StyledLink>
                         ))}
                     </NavItems>
 
@@ -112,11 +111,9 @@ function Navbar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings?.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem key={'Nalog'} onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">{'Nalog'}</Typography>
+                            </MenuItem>
                             <MenuItem key={'Resetovanje'} onClick={handleReset}>
                                 <Typography textAlign="center">{'Resetovanje'}</Typography>
                             </MenuItem>
