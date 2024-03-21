@@ -22,8 +22,8 @@ export type Transaction = {
 };
 
 export type ExchangeRate = {
-  par: string;
-  kurs: number;
+  currencyCode: string;
+  rate: number;
 };
 
 export type PrenosSredstava = {

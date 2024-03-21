@@ -1,40 +1,41 @@
+import { useEffect, useState } from "react";
 import { ExchangeRate } from "./Model";
 import "./Table.css";
+import { makeGetRequest } from "./utils/apiRequest";
 
 const ExchangeRatesTable = () => {
-  const exchangeRateList: ExchangeRate[] = [
-    {
-      par: "EUR-USD",
-      kurs: 1.184,
-    },
-    {
-      par: "EUR-GBP",
-      kurs: 0.855,
-    },
-    {
-      par: "EUR-CHF",
-      kurs: 1.093,
-    },
-    {
-      par: "EUR-RSD",
-      kurs: 117.5,
-    },
-  ];
+  const [exchages, setExhanges] = useState<ExchangeRate[]>([]);
+
+  const fetchExchange = async () => {
+    try {
+      const data = await makeGetRequest(`/api/exchange`);
+      if (data) {
+        setExhanges(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchExchange();
+  }, []);
+
   return (
     <div>
       <p>Kursna lista</p>
       <table>
         <thead>
           <tr>
-            <th>Par</th>
+            <th>Valuta</th>
             <th>Kurs</th>
           </tr>
         </thead>
         <tbody>
-          {exchangeRateList.map((exchangeRate) => (
-            <tr key={exchangeRate.par}>
-              <td>{exchangeRate.par}</td>
-              <td>{exchangeRate.kurs}</td>
+          {exchages.map((exchage) => (
+            <tr key={exchage.currencyCode}>
+              <td>{exchage.currencyCode}</td>
+              <td>{exchage.rate}</td>
             </tr>
           ))}
         </tbody>
