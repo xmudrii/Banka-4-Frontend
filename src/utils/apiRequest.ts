@@ -33,7 +33,6 @@ export const makeApiRequest = async (route: string, type: string, data?: object,
     }
 }
 
-
 export const makeGetRequest = async (route: string) => {
     try {
         const token = getJWT()
