@@ -5,6 +5,7 @@ import { getMe } from '../../utils/getMe';
 import Tabela from './TabelaKrediti';
 import { Kredit } from './../../utils/types';
 import { useNavigate } from 'react-router-dom';
+import { makeGetRequest } from 'utils/apiRequest';
 
 
 const auth = getMe();
@@ -23,12 +24,9 @@ function ListaKredita() {
     const [krediti, setKrediti] = useState<Kredit[]>([]);
     const navigate = useNavigate(); // Dodato za useNavigate
 
-    useEffect(() => {
-    
-        fetch(`http://api.stamenic.work:8080/api/kredit/odobreniKrediti?email=${encodeURIComponent(emailKorisnikov)}`)
-        .then(response => response.json())
-        .then(data => setKrediti(data))
-        .catch(error => console.error('Greška pri dohvatanju podataka:', error));
+    useEffect(async () => {
+        const data = await makeGetRequest(`/kredit/odobreniKrediti?email=${encodeURIComponent(emailKorisnikov)}`)
+        setKrediti(data)
     }, []);
 
     

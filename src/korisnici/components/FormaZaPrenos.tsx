@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { NoviPrenosSredstava } from '../types/Types';
 import { RACUNI_PLACEHOLDER, RacunType, getRacunByBroj } from 'korisnici/data/Racuni';
-import { getJWT } from 'utils/apiRequest';
+import { getJWT, makeGetRequest } from 'utils/apiRequest';
 import { getMe } from 'utils/getMe';
 
 interface TransferFormProps {
@@ -30,10 +30,7 @@ export const FormaZaPrenos: React.FC<TransferFormProps> = ({ onSave, navigate })
             const me = getMe();
 
             if (!me) return;
-            const result = await fetch(`${url}/racuni/nadjiRacuneKorisnika/${me.id}`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
-            })
-            const rac = await result.json();
+            const rac = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`);
             // @ts-ignore
             setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
         }
