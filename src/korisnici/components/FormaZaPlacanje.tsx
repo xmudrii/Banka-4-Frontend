@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import { NovaUplata, NoviPrenosSredstava } from '../types/Types';
 import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 import { getMe } from 'utils/getMe';
-import { getJWT } from 'utils/apiRequest';
+import { getJWT, makeGetRequest } from 'utils/apiRequest';
 
 
 interface PaymentFormProps {
@@ -64,10 +64,7 @@ export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }
 
             if (!me) return;
             console.log("IDKOR " + me.id);
-            const result = await fetch(`${url}/racuni/nadjiRacuneKorisnika/${me.id}`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
-            })
-            const rac = await result.json();
+            const rac = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`)
             // @ts-ignore
             setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
         }

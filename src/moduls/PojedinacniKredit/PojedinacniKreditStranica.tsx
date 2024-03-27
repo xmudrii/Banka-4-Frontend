@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import KreditiTabela from './KreditiTabela';
 import TransakcijeTabela from './TransakcijeTabela';
 import { KreditPojedinacni, Transakcija } from '../../utils/types';
+import { makeGetRequest } from 'utils/apiRequest';
 
 const PojedinacniKreditStranica = () => {
   const [kredit, setKredit] = useState<KreditPojedinacni | null>(null);
@@ -20,10 +21,9 @@ const PojedinacniKreditStranica = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://api.stamenic.work:8080/api/kredit/neOdobreniKrediti?id=${encodeURIComponent(parsedKredit.id)}`)
-        const data = await response.json();
-        setKredit(data.kredit);
-        setTransakcije(data.transakcije);
+        const data = await makeGetRequest(`/kredit/neOdobreniKrediti?id=${encodeURIComponent(parsedKredit.id)}`)
+        setKredit(data?.kredit);
+        setTransakcije(data?.transakcije);
       } catch (error) {
         console.error('Greška pri preuzimanju podataka:', error);
       }

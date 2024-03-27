@@ -26,7 +26,6 @@ export const PrimaociPlacanja = () => {
             //Izvlacenje iz kolaca xd
             try {
                 await makeApiRequest("/omiljeni-korisnici", "POST")
-
                 // const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
                 // setPrimaoci();
             } catch (e) {

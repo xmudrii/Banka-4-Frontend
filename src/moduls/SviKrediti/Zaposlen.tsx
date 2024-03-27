@@ -3,6 +3,7 @@ import Tabela from './TabelaKrediti';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Kredit } from './../../utils/types';
+import { makeApiRequest, makeGetRequest } from 'utils/apiRequest';
 
 const auth = getMe();
 let emailKorisnikov = "";
@@ -20,49 +21,29 @@ function Zaposlen() {
     const [krediti, setKrediti] = useState<Kredit[]>([]);
 
     useEffect(() => {
-       
-        
-        fetch(`http://api.stamenic.work:8080/api/kredit/neOdobrenKredit?email=${encodeURIComponent(emailKorisnikov)}`)
-            .then(response => response.json())
-            .then(data => setKrediti(data))
-            .catch(error => console.error('Greška pri dohvatanju podataka:', error));
+        const fetchData = async () => { 
+            const data = await makeGetRequest(`/kredit/neOdobrenKredit?email=${encodeURIComponent(emailKorisnikov)}`)
+            setKrediti(data)
+        }
+        fetchData()
     }, []);
 
     
 const navigate = useNavigate();
 
-const odobri = (index: number) => {
+const odobri = async (index: number) => {
     const kredit = krediti[index];
-    fetch(`http://api.stamenic.work:8080/api/kredit/odobri`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: kredit.id })
-    })
-    .then(response => response.json())
-    .then(data => {
+    const data = await makeApiRequest("/krediti/odobri", "POST", {id: kredit.id})
         console.log(`Odobren kredit za: ${kredit.VrstaKredita}`);
         console.log(data);
-    })
-    .catch(error => console.error('Greška pri odobravanju kredita:', error));
+    
 };
 
-const odbij = (index: number) => {
+const odbij = async (index: number) => {
     const kredit = krediti[index];
-    fetch(`http://api.stamenic.work:8080/api/kredit/odbij`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: kredit.id })
-    })
-    .then(response => response.json())
-    .then(data => {
+    const data = await makeApiRequest("/kredit/odbij", "POST", {id: kredit.id})
         console.log(`Odbijen kredit za: ${kredit.VrstaKredita}`);
         console.log(data);
-    })
-    .catch(error => console.error('Greška pri odbijanju kredita:', error));
 };
 
     

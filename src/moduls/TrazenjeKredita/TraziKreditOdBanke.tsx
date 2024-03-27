@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Checkbox, FormControlLabel } from '@mui/material';
+import { makeApiRequest } from 'utils/apiRequest';
 
 interface FormData {
   vrstaKredita: string;
@@ -38,14 +39,7 @@ const TraziKreditStranica: React.FC = () => {
   const handlePosalji = async () => {
     setLoading(true);
     // Simulacija slanja zahteva na server
-    const response = await fetch('http://api.stamenic.work:8080/api/kredit/TraziKredit', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
+    const data = await makeApiRequest('/kredit/TraziKredit', "POST", formData)
     setLoading(false);
     setPoruka(data.message); // Prikazivanje poruke na stranici
   };

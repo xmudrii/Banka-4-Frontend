@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { getJWT } from 'utils/apiRequest';
+import { getJWT, makeGetRequest } from 'utils/apiRequest';
 import { getMe } from 'utils/getMe';
 import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 
@@ -62,10 +62,7 @@ const PregledPlacanja = () => {
             const me = getMe();
 
             if (!me) return;
-            const result = await fetch(`${url}/racuni/nadjiRacuneKorisnika/${me.id}`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
-            })
-            const rac = await result.json();
+            const rac = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`);
             // @ts-ignore
             setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
         }
@@ -80,10 +77,8 @@ const PregledPlacanja = () => {
 
             if (!me) return;
             try {
-                const result = await fetch(`${url}/transaction/getAllUplateByBrojRacuna/${br}`, {
-                    headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt }
-                })
-                setPlacanja(await result.json());
+                const result = await makeGetRequest(`/transaction/getAllUplateByBrojRacuna/${br}`);
+                setPlacanja(result);
             } catch (e) {
                 console.log("NE RADI")
                 console.log(e);

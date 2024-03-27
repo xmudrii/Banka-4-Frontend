@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { NovaUplata, NoviPrenosSredstava} from '../types/Types';
 import { isNovaUplata, isNoviPrenosSredstava } from 'korisnici/utils/korisniciUtils';
 
-import { getJWT } from 'utils/apiRequest';
+import { getJWT, makeApiRequest } from 'utils/apiRequest';
 import { getMe } from 'utils/getMe';
 
 const PrikazPodataka: React.FC<{ podaci: NovaUplata | NoviPrenosSredstava }> = ({ podaci }) => {
@@ -37,10 +37,7 @@ const VerifikacijaPlacanja = () => {
         const email = me.sub;
 
         try {
-            const resultOtp = await fetch(`${url}/validate-otp?email=${email}&password=${verifikacioniKod}`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt },
-                method: "POST"
-            })
+            const resultOtp = await makeApiRequest(`/validate-otp?email=${email}&password=${verifikacioniKod}`, "POST", {}, false, true)
             if ("Valid OTP" != await resultOtp.text())
                 return alert("LOS OTP"); // FRONTEND PROVERAVA
         }
@@ -49,22 +46,14 @@ const VerifikacijaPlacanja = () => {
         }
 
         if (isNovaUplata(podaci)) {
-            const result = await fetch(`${url}/transaction/nova-uplata`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt },
-                method: "POST",
-                body: JSON.stringify(podaci)
-            })
-            const rac = await result.text();
+            const data = await makeApiRequest(`/transaction/nova-uplata`, "POST", podaci, false, true)
+            const rac = await data.text()
             console.log(rac);
             localStorage.removeItem("uplataPodaci")
         }
         else if (isNoviPrenosSredstava(podaci)) {
-            const result = await fetch(`${url}/transaction/novi-prenos`, {
-                headers: { 'Content-Type': 'application/json', 'Authorization': "Bearer " + jwt },
-                method: "POST",
-                body: JSON.stringify(podaci)
-            })
-            const rac = await result.text();
+            const data = await makeApiRequest(`/transaction/novi-prenos`, "POST", podaci, false, true)
+            const rac = await data.text()
             console.log(rac);
             localStorage.removeItem("prenosPodaci")
         }
