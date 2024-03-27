@@ -20,3 +20,8 @@ export type Transaction = {
   status: "U obradi" | "Uspeh" | "Neuspeh";
   timestamp: string;
 };
+
+export type ExchangeRate = {
+  currencyCode: string;
+  rate: number;
+};

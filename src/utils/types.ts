@@ -215,3 +215,18 @@ export enum BankRoutes {
 export enum StockRoutes {
 
 }
+
+export type Transaction = {
+  senderAccountNumber: string;
+  recipientName: string;
+  recipientAccountNumber: string;
+  amount: number;
+  referenceNumber: string;
+  status: "U obradi" | "Uspeh" | "Neuspeh";
+  timestamp: string;
+};
+
+export type ExchangeRate = {
+  currencyCode: string;
+  rate: number;
+};
