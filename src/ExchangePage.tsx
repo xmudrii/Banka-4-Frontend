@@ -3,10 +3,10 @@ import ".//ExchangePage.css";
 import ExchangeRatesTable from "./ExchangeRatesTable";
 import TransferDetails from "./TransferDetails";
 import ExchangeMainSection from "./ExchangeMainSection";
-import { Account } from "./Model";
 import { makeGetRequest } from "./utils/apiRequest";
 import { getMe } from "./utils/getMe";
-import { User } from "./utils/types";
+import { Account, User } from "./utils/types";
+import { Container } from "@mui/material";
 
 const ExchangePage = () => {
   const [iznos, setIznos] = useState<string>();
@@ -33,9 +33,9 @@ const ExchangePage = () => {
   };
 
   return (
-    <main className="main-div">
+    <Container className="main-div">
       {detaljiTransfera ? (
-        <div>
+        <Container>
           <TransferDetails
             user={user}
             setDetaljiTransfera={setDetaljiTransfera}
@@ -43,21 +43,21 @@ const ExchangePage = () => {
             saRacuna={saRacuna}
             naRacun={naRacun}
           />
-        </div>
+        </Container>
       ) : (
-        <div>
+        <Container>
           <ExchangeMainSection
             setNaRacun={setNaRacun}
             setSaRacuna={setSaRacuna}
             setDetaljiTransfera={setDetaljiTransfera}
             setIznos={setIznos}
           />
-        </div>
+        </Container>
       )}
-      <section className="table-div">
+      <Container className="table-div">
         <ExchangeRatesTable />
-      </section>
-    </main>
+      </Container>
+    </Container>
   );
 };
 export default ExchangePage;

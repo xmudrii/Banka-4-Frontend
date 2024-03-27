@@ -1,6 +1,6 @@
+import { Button, Container, Grid, Typography } from "@mui/material";
 import ".//ExchangePage.css";
-import { Account } from "./Model";
-import { User } from "./utils/types";
+import { Account, User } from "./utils/types";
 
 const provizija = 0.005;
 const kurs = 117.6926;
@@ -21,48 +21,48 @@ const TransferDetails = ({
   user,
 }: Props) => {
   return (
-    <article className="main-section-details-div">
-      <section className="details-section">
-        <p>Platilac:</p>
-        <p className="platilac">
+    <Container className="main-section-details-div">
+      <Grid className="details-section">
+        <Typography>Platilac:</Typography>
+        <Typography className="platilac">
           {user?.ime} {user?.prezime}, {user?.adresa}
-        </p>
-      </section>
-      <section className="details-section">
-        <p>Sa racuna:</p>
-        <p>{saRacuna?.brojRacuna}</p>
-      </section>
-      <section className="details-section">
-        <p>Iznos:</p>
-        <p>
+        </Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Sa racuna:</Typography>
+        <Typography>{saRacuna?.brojRacuna}</Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Iznos:</Typography>
+        <Typography>
           {iznos} {saRacuna?.currency}
-        </p>
-      </section>
-      <section className="details-section">
-        <p>Na racun:</p>
-        <p>{naRacun?.brojRacuna}</p>
-      </section>
-      <section className="details-section">
-        <p>Iznos:</p>
-        <p>
+        </Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Na racun:</Typography>
+        <Typography>{naRacun?.brojRacuna}</Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Iznos:</Typography>
+        <Typography>
           {iznos && parseInt(iznos, 10) * kurs} {naRacun?.currency}
-        </p>
-      </section>
-      <section className="details-section">
-        <p>Kurs:</p>
-        <p>{kurs}</p>
-      </section>
-      <section className="details-section">
-        <p>Provizija:</p>
-        <p>{provizija}</p>
-      </section>
-      <section className="buttons">
-        <button className="button" onClick={() => setDetaljiTransfera(false)}>
+        </Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Kurs:</Typography>
+        <Typography>{kurs}</Typography>
+      </Grid>
+      <Grid className="details-section">
+        <Typography>Provizija:</Typography>
+        <Typography>{provizija}</Typography>
+      </Grid>
+      <Grid className="buttons">
+        <Button className="button" onClick={() => setDetaljiTransfera(false)}>
           Ponisti
-        </button>
-        <button className="button">Potvrdi</button>
-      </section>
-    </article>
+        </Button>
+        <Button className="button">Potvrdi</Button>
+      </Grid>
+    </Container>
   );
 };
 export default TransferDetails;

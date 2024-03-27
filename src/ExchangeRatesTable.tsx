@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { makeGetRequest } from "./utils/apiRequest";
 import { ExchangeRate } from "utils/types";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
 const ExchangeRatesTable = () => {
   const [exchages, setExhanges] = useState<ExchangeRate[]>([]);
@@ -21,29 +22,29 @@ const ExchangeRatesTable = () => {
   }, []);
 
   return (
-    <div>
-      <p>Kursna lista</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Valuta</th>
-            <th>Kurs</th>
-          </tr>
-        </thead>
-        <tbody>
+    <Fragment>
+      <Typography variant="h6">Kursna lista</Typography>
+      <TableContainer>
+        <Table>
+          <TableRow>
+            <TableHead>Valuta</TableHead>
+            <TableHead>Kurs</TableHead>
+          </TableRow>
+        </Table>
+        <TableBody>
           {exchages.map((exchange1, index1) =>
             exchages.slice(index1 + 1).map((exchange2, index2) => (
-              <tr key={`${exchange1.currencyCode}-${exchange2.currencyCode}`}>
-                <td>
+              <TableRow key={`${exchange1.currencyCode}-${exchange2.currencyCode}`}>
+                <TableCell>
                   {exchange1.currencyCode}-{exchange2.currencyCode}
-                </td>
-                <td>{exchange2.rate / exchange1.rate}</td>
-              </tr>
+                </TableCell>
+                <TableCell>{exchange2.rate / exchange1.rate}</TableCell>
+              </TableRow>
             ))
           )}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </TableContainer>
+    </Fragment>
   );
 };
 export default ExchangeRatesTable;
