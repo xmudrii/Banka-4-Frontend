@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, FormControl, InputLabel, Alert, Select, MenuItem, Grid, FormControlLabel, Checkbox } from '@mui/material';
 import styled from 'styled-components';
-import { UserPermissions } from '../../utils/types';
+import { UserPermissions, UserRoutes } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { encodePermissions } from '../../utils/permissions';
 import { makeApiRequest } from '../../utils/apiRequest';
@@ -185,7 +185,7 @@ const CreateEmployeePage: React.FC = () => {
       setEmailWarning(false)
     }
     const data = { ...formData, datumRodjenja: new Date(formData.datumRodjenja).getTime(), aktivan: true }
-    const res = await makeApiRequest('/radnik', 'POST', data)
+    const res = await makeApiRequest(UserRoutes.worker, 'POST', data)
     if (res) {
       setSucessPopup(true)
     }

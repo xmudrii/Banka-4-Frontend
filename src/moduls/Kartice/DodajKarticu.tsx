@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Swal from 'sweetalert2';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
+import { BankRoutes } from 'utils/types';
 
 export default function DodajKarticu() {
     const [imena, setImena] = useState(['greska']);
@@ -52,7 +53,7 @@ export default function DodajKarticu() {
             return;
         }
 
-        const uspesno = await makeApiRequest("/kartica/kreiraj", 'POST', { ime, vrsta, brojRacuna, limit });
+        const uspesno = await makeApiRequest(BankRoutes.cards_create, 'POST', { ime, vrsta, brojRacuna, limit });
         if (uspesno?.ok) {
             Swal.fire({
                 icon: 'success',
@@ -68,8 +69,9 @@ export default function DodajKarticu() {
             });
         }
     };
-
+    // @ts-ignore
     return (
+        // @ts-ignore
         <div style={{ padding: '20px' }}>
             <FormControl fullWidth>
                 <InputLabel id="vrsta-label">Vrsta kartice</InputLabel>

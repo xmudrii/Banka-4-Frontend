@@ -3,9 +3,7 @@ import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material
 import { Company, CompanyListProps } from '../../utils/types';
 import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
 
-
 const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
-
     const handleSelect = (event: any) => {
         // const id = event.currentTarget.id;
         // navigate(`/korisnik?id=${id}`)

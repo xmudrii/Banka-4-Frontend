@@ -16,8 +16,6 @@ interface TransferFormProps {
     navigate: (screen: string) => void;
 }
 
-const url = "http://api.stamenic.work:8080/api";
-
 export const FormaZaPrenos: React.FC<TransferFormProps> = ({ onSave, navigate }) => {
     const [racuni, setRacuni] = useState<RacunType[]>(RACUNI_PLACEHOLDER);
     const [selectedRacunPosiljaoca, setSelectedRacunPosiljaoca] = useState('');
@@ -26,7 +24,6 @@ export const FormaZaPrenos: React.FC<TransferFormProps> = ({ onSave, navigate })
 
     useEffect(() => {
         const gett = async () => {
-            const jwt = getJWT();
             const me = getMe();
 
             if (!me) return;

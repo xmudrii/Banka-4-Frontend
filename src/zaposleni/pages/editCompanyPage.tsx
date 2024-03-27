@@ -11,7 +11,6 @@ const PageWrapper = styled.div`
   background-color: #82b2ff; // Sets the background color to light blue
 `;
 
-
 const FormWrapper = styled.div`
   background-color: #fafafa;
   padding: 20px;
@@ -62,8 +61,6 @@ const ButtonContainer = styled.div`
 const StyledTextField = styled(TextField)`
   background-color: white;
 `;
-
-
 
 interface createCompanyData {
   naziv: string;

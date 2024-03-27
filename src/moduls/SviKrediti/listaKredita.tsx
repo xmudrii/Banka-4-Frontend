@@ -7,7 +7,6 @@ import { Kredit } from './../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { makeGetRequest } from 'utils/apiRequest';
 
-
 const auth = getMe();
 let emailKorisnikov = "";
 let zaposlen = false;
@@ -18,7 +17,6 @@ if (auth) {
 } else {
     console.error("Nije moguće dobiti informacije o korisniku.");
 }
-
 
 function ListaKredita() {
     const [krediti, setKrediti] = useState<Kredit[]>([]);
@@ -32,7 +30,6 @@ function ListaKredita() {
         fetchData()
     }, []);
 
-    
     const posalji = () => {
         // Implementacija posalji funkcije
     };
@@ -41,8 +38,6 @@ function ListaKredita() {
         localStorage.setItem('selectedKredit', JSON.stringify(kredit));
         navigate(`/pojedinacniKredit`);
     };
-    
-    
 
     return (
         <div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Grid, Checkbox } from '@mui/material';
 import styled from 'styled-components';
-import { EmployeePermissions } from '../../utils/types';
+import { EmployeePermissions, UserRoutes } from '../../utils/types';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 import { encodePermissions } from '../../utils/permissions';
 
@@ -71,7 +71,6 @@ interface editEmployeeData {
   permisije: number,
 }
 
-
 const EditEmployeePage: React.FC = () => {
   const [formData, setFormData] = useState<editEmployeeData>({
     id: 0,
@@ -99,7 +98,6 @@ const EditEmployeePage: React.FC = () => {
   const [emptyWarning, setEmptyWarning] = useState<boolean>(false);
   const [phoneWarning, setPhoneWarning] = useState<boolean>(false);
   const [successPopup, setSucessPopup] = useState<boolean>(false);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -172,11 +170,10 @@ const EditEmployeePage: React.FC = () => {
       }
     }
     const data = { ...formData, aktivan: true }
-    const res = await makeApiRequest('/radnik', 'PUT', data)
+    const res = await makeApiRequest(UserRoutes.worker, 'PUT', data)
     if (res) {
       setSucessPopup(true)
     }
-
   }
 
   return (

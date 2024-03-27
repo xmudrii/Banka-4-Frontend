@@ -127,4 +127,5 @@ function Navbar() {
         </StyledAppBar>
     );
 }
+
 export default Navbar;

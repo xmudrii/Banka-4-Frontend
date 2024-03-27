@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextField, Button, Alert, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import styled from 'styled-components';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
+import { UserRoutes } from 'utils/types';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -156,12 +157,12 @@ const EditUserPage: React.FC = () => {
           brojTelefona: formData.brojTelefona,
           pol: formData.pol
         }
-        const res = await makeApiRequest('/korisnik', 'PUT', { ...formDataNoPW, id: uid, povezaniRacuni, aktivan: true })
+        const res = await makeApiRequest(UserRoutes.user, 'PUT', { ...formDataNoPW, id: uid, povezaniRacuni, aktivan: true })
         if (res) {
           setSucessPopup(true)
         }
       } else {
-        const res = await makeApiRequest('/korisnik', 'PUT', { ...formData, id: uid, povezaniRacuni, aktivan: true })
+        const res = await makeApiRequest(UserRoutes.user, 'PUT', { ...formData, id: uid, povezaniRacuni, aktivan: true })
         if (res) {
           setSucessPopup(true)
         }

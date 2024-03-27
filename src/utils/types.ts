@@ -180,3 +180,36 @@ export type Transakcija = {
   svrhaPlacanja: string;
   vremeIzvrsavanja: string;
 }
+
+export enum UserRoutes {
+  favorite_users = "/omiljeni-korisnik",
+  validate_otp = "/validate-otp",
+  generate_otp = "/generate-otp",
+  user_generate_reset = "/korisnik/generate-reset",
+  user_reset_password = "/korisnik/reset-password",
+  user_login = "/korisnik/login",
+  user_generate_login = "/korisnik/generate-login",
+  user_register = "/korisnik/verifikacija",
+  user_add = "/korisnik/add",
+  user = "/korisnik",
+  worker = "/radnik",
+}
+
+export enum BankRoutes {
+  transaction_new_payment = "/transaction/nova-uplata",
+  transaction_new_transfer = "/transaction/nova-uplata",
+  cards = "/cards",
+  cards_create = "/cards/create",
+  credit_approve = "/credit/approve",
+  credit_deny = "/credit/deny",
+  credit_apply = "/credit/apply",
+  account_add_tekuci = "/racuni/dodajTekuci",
+  account_add_devizni = "/racuni/dodajDevizni",
+  account_find_by_number = "/racuni/deleteRacunPoBroju",
+  account_find_user_account = "/racuni/nadjiRacuneKorisnika",
+  company_create = "/racuni/kreirajFirmu",
+}
+
+export enum StockRoutes {
+
+}

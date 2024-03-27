@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { makeApiRequest } from 'utils/apiRequest';
 import styled from 'styled-components';
 import { Button, TextField } from '@mui/material';
+import { UserRoutes } from 'utils/types';
 
 
 const PageWrapper = styled.div`
@@ -26,8 +27,6 @@ const FormWrapper = styled.div`
     gap: 28px;
     padding-bottom: 60px;
 `
-
-
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex =
   /^(?=.*\d.*\d)(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@#$!%^&*()_+|~=`{ }[\]: ";'<>?,./\\-]{8,32}$/;
@@ -55,7 +54,7 @@ const ResetPasswordPage = () => {
 
   const sendRequest = async () => {
     try {
-      await makeApiRequest("/korisnik/generate-reset-korisnici", "POST", { email })
+      await makeApiRequest(UserRoutes.user_generate_reset, "POST", { email })
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -63,7 +62,7 @@ const ResetPasswordPage = () => {
 
   const resetPassword = async () => {
     try {
-      await makeApiRequest("/korisnik/reset-password", "POST", {
+      await makeApiRequest(UserRoutes.user_reset_password, "POST", {
         email,
         sifra: newPassword,
         kod: activationCode,

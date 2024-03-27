@@ -105,7 +105,7 @@ const UserHomePage: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
-          <CurrencyConverter />
+        <CurrencyConverter />
       </FormWrapper >
     </PageWrapper >
   );

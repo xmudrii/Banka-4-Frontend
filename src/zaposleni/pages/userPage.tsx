@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, TableHead, Button, Alert } from '@mui/material';
-import { Account } from '../../utils/types';
+import { Account, BankRoutes, UserRoutes } from '../../utils/types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
@@ -108,7 +108,7 @@ const UserInfoTable: React.FC = () => {
     }
   }
   const handleDeactivateUser = async () => {
-    const res = await makeApiRequest('/korisnik', 'PUT', { ...user, aktivan: false })
+    const res = await makeApiRequest(UserRoutes.user, 'PUT', { ...user, aktivan: false })
     if (res) {
       setSucessPopup(true)
     }
@@ -120,9 +120,9 @@ const UserInfoTable: React.FC = () => {
   }
 
   const handleDeactivateAccount = async (brojRacuna: string) => {
-    const res = await makeApiRequest(`/racuni/deleteRacunPoBroju/${brojRacuna}`, 'PUT')
+    const res = await makeApiRequest(`${BankRoutes.account_find_by_number}/${brojRacuna}`, 'PUT')
     if (res) {
-      const accs = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${uid}`);
+      const accs = await makeGetRequest(`${BankRoutes.account_find_user_account}/${uid}`);
       setAccounts(accs);
 
       setSucessPopup(true)

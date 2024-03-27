@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Typography } from '@mui/material';
 import Swal from 'sweetalert2'; import { useSearchParams } from 'react-router-dom';
-import { Kartica, TransakcijaKarticePrikaz } from '../../utils/types';
+import { BankRoutes, Kartica, TransakcijaKarticePrikaz } from '../../utils/types';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 import ListaTransakcija from './ListaTransakcija';
 import { getMe } from '../../utils/getMe';
 
 const updateKarticaStatus = async (id: number, status: string): Promise<boolean> => {
-  const result = await makeApiRequest("/kartica/promeni-status", "POST", { id, status });
+  const result = await makeApiRequest(`${BankRoutes.cards}/${status}/${id}`, "GET");
   return result ? true : false
 };
 
@@ -24,6 +24,7 @@ export default function DetaljiKartice() {
   useEffect(() => {
     if (id) {
       console.log(id);
+      //ne moze preko req
       makeGetRequest("/kartica/" + id)
         .then((result) => {
           if (!result)
@@ -35,7 +36,8 @@ export default function DetaljiKartice() {
           alert("Greška pri preuzimanju kartica");
         });
 
-      makeGetRequest("/kartica/transakcije/" + id)
+      //ne postoje jos uvek
+      makeGetRequest("/cards/transactions/" + id)
         .then((result) => {
           if (!result)
             return alert("Greška pri preuzimanju transakcija");

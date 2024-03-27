@@ -3,13 +3,11 @@ import { DropdownMenu } from '../components/DropdownMenu';
 import { FormaZaPlacanje } from '../components/FormaZaPlacanje';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { NovaUplata, NoviPrenosSredstava } from '../types/Types';
 import VerifikacijaPlacanja from '../components/VerifikacijaPlacanja';
 import { FormaZaPrenos } from '../components/FormaZaPrenos';
 import { PrimaociPlacanja } from '../components/PrimaociPlacanja';
 import PregledPlacanja from '../components/PregledPlacanja';
 import { isNovaUplata, isNoviPrenosSredstava } from 'korisnici/utils/korisniciUtils';
-
 
 const Placanje: React.FC = () => {
     // Dodati pravu navigaciju
@@ -38,7 +36,7 @@ const Placanje: React.FC = () => {
             {(selectedOption === 'verifikacija') ? <VerifikacijaPlacanja /> : <DropdownMenu onSelect={setSelectedOption} />}
             {selectedOption === 'novoPlacanje' && <FormaZaPlacanje navigate={navigate} onSave={data => console.log(data)} />}
             {(selectedOption === 'prenos') && <FormaZaPrenos navigate={navigate} onSave={data => console.log(data)} />}
-            {/*(selectedOption === 'primaociPlacanja') && <PrimaociPlacanja></PrimaociPlacanja>*/}
+            {(selectedOption === 'primaociPlacanja') && <PrimaociPlacanja></PrimaociPlacanja>}
             {(selectedOption === 'pregledPlacanja') && <PregledPlacanja></PregledPlacanja>}
         </Container>
     );

@@ -3,6 +3,7 @@ import { Button, TextField, Link, Typography, Container, CssBaseline } from '@mu
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { makeApiRequest } from 'utils/apiRequest';
+import { UserRoutes } from 'utils/types';
 
 const url = "http://api.stamenic.work:8080/api";
 
@@ -40,7 +41,7 @@ const LoginPage = () => {
         let isAuthenticated = true; // Placeholder for actual authentication logic
         let isEmployee = true; // Placeholder to determine if user is an employee
         try {
-            const data = await makeApiRequest('/korisnik/login', "POST", { username: email, password: password }, true, true )
+            const data = await makeApiRequest(UserRoutes.user_login, "POST", { username: email, password: password }, true, true)
             const token = await data.text()
             localStorage.setItem('si_jwt', token);
             const decodedToken = jwtDecode(token) as DecodedToken;

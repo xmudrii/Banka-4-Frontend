@@ -34,8 +34,6 @@ const PojedinacniKreditStranica = () => {
     }
   }, []);
 
-
-  
   return (
     <div>
       {kredit && <KreditiTabela kredit={kredit} />}

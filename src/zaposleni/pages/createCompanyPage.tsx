@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Alert } from '@mui/material';
 import styled from 'styled-components';
 import { makeApiRequest } from '../../utils/apiRequest';
+import { BankRoutes } from 'utils/types';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -37,7 +38,6 @@ const StyledTextField = styled(TextField)`
   background-color: white;
 `
 
-
 interface createCompanyData {
   nazivPreduzeca: string;
   brojTelefona: string;
@@ -46,7 +46,6 @@ interface createCompanyData {
   maticniBroj: number | null;
   sifraDelatnosti: number | null;
   registarskiBroj: number | null;
-
 }
 
 const CreateCompanyPage: React.FC = () => {
@@ -72,7 +71,7 @@ const CreateCompanyPage: React.FC = () => {
         return;
       }
     }
-    const res = await makeApiRequest('/racuni/kreirajFirmu', 'POST', formData)
+    const res = await makeApiRequest(BankRoutes.company_create, 'POST', formData)
     if (res) {
       setSucessPopup(true)
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -10,13 +10,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import Swal from 'sweetalert2';
 import { makeApiRequest } from 'utils/apiRequest';
+import { UserRoutes } from 'utils/types';
 
 const MOCK_PRIMAOCI = [
     { id: 1, naziv: 'John Doe', brojRacuna: '265-0000001234569-78', pozivNaBroj: '12345', sifraPlacanja: '001', svrhaPlacanja: 'Donation' },
     { id: 2, naziv: 'Jane Doe', brojRacuna: '265-0000001234568-79', pozivNaBroj: '67890', sifraPlacanja: '002', svrhaPlacanja: 'Support' },
 ];
-
-const url = "http://api.stamenic.work:8080/api";
 
 export const PrimaociPlacanja = () => {
     const [primaoci, setPrimaoci] = useState(MOCK_PRIMAOCI);
@@ -25,7 +24,7 @@ export const PrimaociPlacanja = () => {
         const func = async () => {
             //Izvlacenje iz kolaca xd
             try {
-                await makeApiRequest("/omiljeni-korisnici", "POST")
+                //await makeApiRequest(UserRoutes.favorite_users/id, "POST")
                 // const result = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
                 // setPrimaoci();
             } catch (e) {
@@ -69,7 +68,7 @@ export const PrimaociPlacanja = () => {
                     //Dodavanje primaoca
 
 
-                    const apiResult = await makeApiRequest("/omiljeni-korisnici", "POST")
+                    const apiResult = await makeApiRequest(UserRoutes.favorite_users, "POST")
                     setPrimaoci(old => [...old, { id: Math.floor(Math.random() * 10000), ...result.value }]);
                 } catch (e) {
 
@@ -77,8 +76,6 @@ export const PrimaociPlacanja = () => {
             }
         });
     };
-
-
 
     // @ts-ignore
     const handleEdit = (id) => {
@@ -129,7 +126,7 @@ export const PrimaociPlacanja = () => {
                 try {
                     //Editovanje  primaoca
                     // const apiResult = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
-                    const apiResult = await makeApiRequest("/omiljeni-korisnici", "POST")
+                    const apiResult = await makeApiRequest(UserRoutes.favorite_users, "POST")
                     setPrimaoci(old => old.map(prim => (prim.id === id) ? { ...prim, ...result.value } : prim));
                 } catch (e) {
 
@@ -143,7 +140,7 @@ export const PrimaociPlacanja = () => {
     const handleDelete = async (id) => {
         try {
             //Brisanje
-            const apiResult = await makeApiRequest("/omiljeni-korisnici", "POST")
+            const apiResult = await makeApiRequest(UserRoutes.favorite_users, "POST")
             // const apiResult = await fetch(`${url}/omiljeni-korisnici/`, { method: "POST", headers: { "Authorization": "", "Content-Type": "application/json" } });
             setPrimaoci(primaoci.filter(prim => prim.id !== id));
         } catch (e) {

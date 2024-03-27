@@ -4,7 +4,6 @@ import { User, UserListProps } from '../../utils/types';
 import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
 import { useNavigate } from 'react-router-dom';
 
-
 const UserList: React.FC<UserListProps> = ({ users }) => {
     const navigate = useNavigate();
 
