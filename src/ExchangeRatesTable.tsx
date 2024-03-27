@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { ExchangeRate } from "./Model";
-import "./Table.css";
 import { makeGetRequest } from "./utils/apiRequest";
+import { ExchangeRate } from "utils/types";
 
 const ExchangeRatesTable = () => {
   const [exchages, setExhanges] = useState<ExchangeRate[]>([]);

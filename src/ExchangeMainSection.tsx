@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
 import { getMe } from "./utils/getMe";
 import { makeGetRequest } from "./utils/apiRequest";
-import { Account, ExchangeRate } from "./Model";
+import { Account, ExchangeRate } from "utils/types";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
