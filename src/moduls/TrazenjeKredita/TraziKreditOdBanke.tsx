@@ -66,6 +66,52 @@ const TraziKreditStranica: React.FC = () => {
       </FormControl>
       <br />
       {/* Ostatak forme */}
+      <TextField
+        label="Iznos kredita"
+        type="number"
+        name="iznosKredita"
+        value={formData.iznosKredita}
+      />
+      <br />
+      <TextField
+        label="Svrha kredita"
+        name="svrhaKredita"
+        value={formData.svrhaKredita}
+      />
+      <br />
+      <TextField
+        label="Iznos mesečne plate"
+        type="number"
+        name="iznosMesecnePlate"
+        value={formData.iznosMesecnePlate}
+      />
+      <br />
+      <FormControlLabel
+        control={<Checkbox
+          checked={formData.zaposlenZaStalno}
+          onChange={(e) => setFormData((prevData) => ({ ...prevData, zaposlenZaStalno: e.target.checked }))}
+        />}
+        label="Zaposlen za stalno"
+      />
+      <br />
+      <TextField
+        label="Period zaposlenja"
+        name="periodZaposlenja"
+        value={formData.periodZaposlenja}
+      />
+      <br />
+      <TextField
+        label="Rocnost"
+        name="rocnost"
+        value={formData.rocnost}
+      />
+      <br />
+      <TextField
+        label="Ekspozitura"
+        name="ekspozitura"
+        value={formData.ekspozitura}
+      />
+      <br />
       <Button variant="contained" onClick={handlePosalji} disabled={loading}>Pošalji</Button>
     </div>
   );

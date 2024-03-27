@@ -141,16 +141,16 @@ export type TransakcijaKarticePrikaz = {
 
 export type Kredit = {
   id: number;
-  VrstaKredita: string;
-  IznosKredita: string;
-  SvrhaKredita: string;
-  IznosMesecnePlate: number;
-  ZaposlenZaStalno: number;
-  PeriodZaposlenja: number;
-  Rocnost: string;
-  Ekspozitura: string;
-  BrojMobilnogTelefona: string;
-  Status: "approved" | "not_approved";
+  type: string;
+  amount: string;
+  salary: number;
+  currentEmploymentPeriod: number;
+  loanTerm: number;
+  branchOffice: string;
+  bankAccountNumber: number;
+  loanPurpose: string;
+  permanentEmployee: boolean;
+  status: string;
 }
 
 export type KreditPojedinacni = {

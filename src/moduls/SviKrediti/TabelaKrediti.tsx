@@ -22,23 +22,20 @@ const Tabela: React.FC<TabelaProps> = ({ krediti, onClickRed }) => {
                         <StyledHeadTableCell>Period zaposlenja kod trenutnog poslodavca</StyledHeadTableCell>
                         <StyledHeadTableCell>Ročnost</StyledHeadTableCell>
                         <StyledHeadTableCell>Ekspozitura</StyledHeadTableCell>
-                        <StyledHeadTableCell>Broj mobilnog telefona</StyledHeadTableCell>
                         <StyledHeadTableCell>Status</StyledHeadTableCell>
                     </StyledTableRow>
                 </StyledTableHead>
                 <TableBody>
                     {krediti.map((kredit, index) => (
                         <StyledTableRow key={index} onClick={() => onClickRed(kredit)}>
-                            <StyledTableCell>{kredit.VrstaKredita}</StyledTableCell>
-                            <StyledTableCell>{kredit.IznosKredita}</StyledTableCell>
-                            <StyledTableCell>{kredit.SvrhaKredita}</StyledTableCell>
-                            <StyledTableCell>{kredit.IznosMesecnePlate}</StyledTableCell>
-                            <StyledTableCell>{kredit.ZaposlenZaStalno}</StyledTableCell>
-                            <StyledTableCell>{kredit.PeriodZaposlenja}</StyledTableCell>
-                            <StyledTableCell>{kredit.Rocnost}</StyledTableCell>
-                            <StyledTableCell>{kredit.Ekspozitura}</StyledTableCell>
-                            <StyledTableCell>{kredit.BrojMobilnogTelefona}</StyledTableCell>
-                            <StyledTableCell>{kredit.Status}</StyledTableCell>
+                            <StyledTableCell>{kredit.type}</StyledTableCell>
+                            <StyledTableCell>{kredit.amount}</StyledTableCell>
+                            <StyledTableCell>{kredit.loanPurpose}</StyledTableCell>
+                            <StyledTableCell>{kredit.salary}</StyledTableCell>
+                            <StyledTableCell>{kredit.permanentEmployee}</StyledTableCell>
+                            <StyledTableCell>{kredit.currentEmploymentPeriod}</StyledTableCell>
+                            <StyledTableCell>{kredit.branchOffice}</StyledTableCell>
+                            <StyledTableCell>{kredit.status}</StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
