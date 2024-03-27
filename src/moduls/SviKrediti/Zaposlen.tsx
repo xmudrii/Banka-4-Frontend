@@ -31,7 +31,7 @@ function Zaposlen() {
     const odobri = async (index: number) => {
         const kredit = krediti[index];
         const data = await makeApiRequest(BankRoutes.credit_approve, "POST", { id: kredit.id })
-        console.log(`Odobren kredit za: ${kredit.VrstaKredita}`);
+        console.log(`Odobren kredit za: ${kredit.type}`);
         console.log(data);
 
     };
@@ -39,7 +39,7 @@ function Zaposlen() {
     const odbij = async (index: number) => {
         const kredit = krediti[index];
         const data = await makeApiRequest(BankRoutes.credit_deny, "POST", { id: kredit.id })
-        console.log(`Odbijen kredit za: ${kredit.VrstaKredita}`);
+        console.log(`Odbijen kredit za: ${kredit.type}`);
         console.log(data);
     };
 

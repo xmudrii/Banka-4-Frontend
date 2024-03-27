@@ -24,8 +24,14 @@ function ListaKredita() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await makeGetRequest(`${BankRoutes.credit_all}/approved`)
+            const approvedData = await makeGetRequest(`${BankRoutes.credit_all}/approved`) as Kredit[];
+            const notApprovedData = await makeGetRequest(`${BankRoutes.credit_all}/not_approved`) as Kredit[];
+
+            let data = [] as Kredit[];
+            data = data.concat(notApprovedData);
+            data = data.concat(approvedData);
             setKrediti(data)
+            console.log(data);
         }
         fetchData()
     }, []);
