@@ -6,11 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import Grid from '@mui/material/Grid';
-import { NovaUplata, NoviPrenosSredstava } from '../types/Types';
 import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 import { getMe } from 'utils/getMe';
 import { getJWT, makeGetRequest } from 'utils/apiRequest';
@@ -42,9 +37,6 @@ function svrhaPlacanjaIliTekstSifrePlacanja(svrhaPlacanja: string, sifraPlacanja
     }
     return "";
 }
-
-const url = "http://api.stamenic.work:8080/api";
-
 
 export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }) => {
     const [racuni, setRacuni] = useState<RacunType[]>(RACUNI_PLACEHOLDER);

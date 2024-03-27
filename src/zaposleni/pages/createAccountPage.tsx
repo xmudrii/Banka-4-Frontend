@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { makeApiRequest, makeGetRequest } from '../../utils/apiRequest';
 import { getMe } from '../../utils/getMe';
+import { BankRoutes } from 'utils/types';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -117,7 +118,6 @@ const CreateAccountPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const handleSumbit = async () => {
     for (const [key, value] of Object.entries(formData)) {
       if (value === '') {
@@ -144,7 +144,7 @@ const CreateAccountPage: React.FC = () => {
         zaposleni: zaposleniId,
         vrstaRacuna: formData.vrstaRacuna
       }
-      const res = await makeApiRequest(`/racuni/dodajTekuci`, 'POST', data);
+      const res = await makeApiRequest(BankRoutes.account_add_tekuci, 'POST', data);
       if (res) {
         setSucessPopup(true)
       }
@@ -167,12 +167,11 @@ const CreateAccountPage: React.FC = () => {
         defaultCurrency: formData.defaultCurrency,
         brojDozvoljenihValuta: 7
       }
-      const res = await makeApiRequest(`/racuni/dodajDevizni`, 'POST', data);
+      const res = await makeApiRequest(BankRoutes.account_add_devizni, 'POST', data);
       if (res) {
         setSucessPopup(true)
       }
     }
-
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {

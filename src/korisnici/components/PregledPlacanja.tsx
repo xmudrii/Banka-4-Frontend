@@ -4,8 +4,6 @@ import { getJWT, makeGetRequest } from 'utils/apiRequest';
 import { getMe } from 'utils/getMe';
 import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 
-const url = "http://api.stamenic.work:8080/api";
-
 type UplataDTO = {
     racunPosiljaoca: string;
     nazivPrimaoca: string;

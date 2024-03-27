@@ -12,7 +12,7 @@ export default function PregledKartica() {
         const me = getMe();
         if (me?.permission)
             setJeZaposleni(true)
-        makeGetRequest("/kartica/povuci-sve")
+        makeGetRequest("/cards")
             .then((result) => {
                 setKartice(result);
             })

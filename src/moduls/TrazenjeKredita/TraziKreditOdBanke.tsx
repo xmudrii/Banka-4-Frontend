@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Checkbox, FormControlLabel } from '@mui/material';
 import { makeApiRequest } from 'utils/apiRequest';
+import { BankRoutes } from 'utils/types';
 
 interface FormData {
   vrstaKredita: string;
@@ -39,7 +40,7 @@ const TraziKreditStranica: React.FC = () => {
   const handlePosalji = async () => {
     setLoading(true);
     // Simulacija slanja zahteva na server
-    const data = await makeApiRequest('/kredit/TraziKredit', "POST", formData)
+    const data = await makeApiRequest(BankRoutes.credit_apply, "POST", formData)
     setLoading(false);
     setPoruka(data.message); // Prikazivanje poruke na stranici
   };

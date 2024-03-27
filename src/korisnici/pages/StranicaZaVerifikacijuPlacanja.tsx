@@ -5,6 +5,7 @@ import { getMe } from 'utils/getMe';
 import styled from 'styled-components';
 import { Button, IconButton, TextField } from '@mui/material';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
+import { UserRoutes } from 'utils/types';
 
 
 const PageWrapper = styled.div`
@@ -46,7 +47,7 @@ const Verifikacija: React.FC = () => {
     if (user && user.sub) {
       setEmailVlasnika(user.sub)
     }
-    const res = await makeApiRequest(`/generate-otp?email=${emailVlasnika}`, "POST")
+    const res = await makeApiRequest(`${UserRoutes.generate_otp}?email=${emailVlasnika}`, "POST")
     if (res) {
       setVerificationSuccess(true);
       setGeneratedCode(res);

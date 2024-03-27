@@ -3,6 +3,7 @@ import { TextField, Button, FormControl, InputLabel, Alert, Select, MenuItem } f
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { makeApiRequest } from '../../utils/apiRequest';
+import { UserRoutes } from 'utils/types';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -153,7 +154,7 @@ const CreateUserPage: React.FC = () => {
       setEmailWarning(false)
     }
     const data = { ...formData, datumRodjenja: new Date(formData.datumRodjenja).getTime(), aktivan: true }
-    const res = await makeApiRequest('/korisnik/add', 'POST', data)
+    const res = await makeApiRequest(UserRoutes.user_add, 'POST', data)
     if (res) {
       setSucessPopup(true)
     }
