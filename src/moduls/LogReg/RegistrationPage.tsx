@@ -39,7 +39,7 @@ const RegistrationPage = () => {
 
     const handleGenerateCode = async () => {
         try {
-            const result = await makeApiRequest('/korisnik/generate-login', "POST", { email: userData.email })
+            const result = await makeApiRequest('/korisnik/generate-login', "POST", { email: userData.email }, true, true)
             console.log(await result.text());
         }
         catch (e) {
@@ -111,7 +111,7 @@ const RegistrationPage = () => {
         // This would be a good place to validate all fields across all steps
         if (validateFieldsStepOne() && validateFieldsStepTwo() && validateFieldsStepThree()) {
             try {
-                await makeApiRequest('/korisnik/verifikacija', "POST", { email: userData.email, brojTelefona: userData.telefon, brojRacuna: userData.brojRacuna, password: userData.lozinka, code: userData.aktivacioniKod })
+                await makeApiRequest('/korisnik/verifikacija', "POST", { email: userData.email, brojTelefona: userData.telefon, brojRacuna: userData.brojRacuna, password: userData.lozinka, code: userData.aktivacioniKod }, true)
                 alert("Uspeh");
                 navigate('/login')
             } catch (e) {

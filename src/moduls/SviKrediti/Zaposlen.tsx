@@ -20,11 +20,12 @@ if (auth) {
 function Zaposlen() {
     const [krediti, setKrediti] = useState<Kredit[]>([]);
 
-    useEffect(async() => {
-       
-        
-        const data = await makeGetRequest(`/kredit/neOdobrenKredit?email=${encodeURIComponent(emailKorisnikov)}`)
+    useEffect(() => {
+        const fetchData = async () => { 
+            const data = await makeGetRequest(`/kredit/neOdobrenKredit?email=${encodeURIComponent(emailKorisnikov)}`)
             setKrediti(data)
+        }
+        fetchData()
     }, []);
 
     

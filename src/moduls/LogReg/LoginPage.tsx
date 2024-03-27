@@ -40,7 +40,8 @@ const LoginPage = () => {
         let isAuthenticated = true; // Placeholder for actual authentication logic
         let isEmployee = true; // Placeholder to determine if user is an employee
         try {
-            const token = await makeApiRequest('/korisnik/login', "POST", { username: email, password: password })
+            const data = await makeApiRequest('/korisnik/login', "POST", { username: email, password: password }, true, true )
+            const token = await data.text()
             localStorage.setItem('si_jwt', token);
             const decodedToken = jwtDecode(token) as DecodedToken;
             if (decodedToken.permission === 0) {

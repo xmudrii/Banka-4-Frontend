@@ -24,9 +24,12 @@ function ListaKredita() {
     const [krediti, setKrediti] = useState<Kredit[]>([]);
     const navigate = useNavigate(); // Dodato za useNavigate
 
-    useEffect(async () => {
-        const data = await makeGetRequest(`/kredit/odobreniKrediti?email=${encodeURIComponent(emailKorisnikov)}`)
-        setKrediti(data)
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await makeGetRequest(`/kredit/odobreniKrediti?email=${encodeURIComponent(emailKorisnikov)}`)
+            setKrediti(data)
+        }
+        fetchData()
     }, []);
 
     

@@ -37,7 +37,7 @@ const VerifikacijaPlacanja = () => {
         const email = me.sub;
 
         try {
-            const resultOtp = await makeApiRequest(`/validate-otp?email=${email}&password=${verifikacioniKod}`, "POST")
+            const resultOtp = await makeApiRequest(`/validate-otp?email=${email}&password=${verifikacioniKod}`, "POST", {}, false, true)
             if ("Valid OTP" != await resultOtp.text())
                 return alert("LOS OTP"); // FRONTEND PROVERAVA
         }
@@ -46,12 +46,14 @@ const VerifikacijaPlacanja = () => {
         }
 
         if (isNovaUplata(podaci)) {
-            const rac = await makeApiRequest(`/transaction/nova-uplata`, "POST", podaci)
+            const data = await makeApiRequest(`/transaction/nova-uplata`, "POST", podaci, false, true)
+            const rac = await data.text()
             console.log(rac);
             localStorage.removeItem("uplataPodaci")
         }
         else if (isNoviPrenosSredstava(podaci)) {
-            const rac = await makeApiRequest(`/transaction/novi-prenos`, "POST", podaci)
+            const data = await makeApiRequest(`/transaction/novi-prenos`, "POST", podaci, false, true)
+            const rac = await data.text()
             console.log(rac);
             localStorage.removeItem("prenosPodaci")
         }
