@@ -3,7 +3,7 @@ import Zaposlen from './Zaposlen';
 import NeZaposlen from './NeZaposlen';
 import { getMe } from '../../utils/getMe';
 import Tabela from './TabelaKrediti';
-import { Kredit } from './../../utils/types';
+import { BankRoutes, Kredit } from './../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { makeGetRequest } from 'utils/apiRequest';
 
@@ -24,7 +24,7 @@ function ListaKredita() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await makeGetRequest(`/kredit/odobreniKrediti?email=${encodeURIComponent(emailKorisnikov)}`)
+            const data = await makeGetRequest(`${BankRoutes.credit_all}/approved`)
             setKrediti(data)
         }
         fetchData()

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import KreditiTabela from './KreditiTabela';
 import TransakcijeTabela from './TransakcijeTabela';
-import { KreditPojedinacni, Transakcija } from '../../utils/types';
+import { BankRoutes, KreditPojedinacni, Transakcija } from '../../utils/types';
 import { makeGetRequest } from 'utils/apiRequest';
 
 const PojedinacniKreditStranica = () => {
@@ -21,7 +21,7 @@ const PojedinacniKreditStranica = () => {
 
     const fetchData = async () => {
       try {
-        const data = await makeGetRequest(`/kredit/neOdobreniKrediti?id=${encodeURIComponent(parsedKredit.id)}`)
+        const data = await makeGetRequest(`${BankRoutes.credit_all}/not_approved`)
         setKredit(data?.kredit);
         setTransakcije(data?.transakcije);
       } catch (error) {

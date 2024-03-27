@@ -54,7 +54,7 @@ const ResetPasswordPage = () => {
 
   const sendRequest = async () => {
     try {
-      await makeApiRequest(UserRoutes.user_generate_reset, "POST", { email })
+      await makeApiRequest(UserRoutes.user_generate_reset, "POST", { email }, true, true)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -62,11 +62,7 @@ const ResetPasswordPage = () => {
 
   const resetPassword = async () => {
     try {
-      await makeApiRequest(UserRoutes.user_reset_password, "POST", {
-        email,
-        sifra: newPassword,
-        kod: activationCode,
-      })
+      await makeApiRequest(UserRoutes.user_reset_password, "POST", { email, sifra: newPassword, kod: activationCode, }, true, true)
     } catch (error) {
       console.error("Error fetching data:", error);
     }

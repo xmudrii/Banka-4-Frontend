@@ -150,7 +150,7 @@ export type Kredit = {
   Rocnost: string;
   Ekspozitura: string;
   BrojMobilnogTelefona: string;
-  Status: string;
+  Status: "approved" | "not_approved";
 }
 
 export type KreditPojedinacni = {
@@ -203,6 +203,8 @@ export enum BankRoutes {
   credit_approve = "/credit/approve",
   credit_deny = "/credit/deny",
   credit_apply = "/credit/apply",
+  credit_all = "/credit/all",
+  credit_detailed = "/detailed-credit/creditRequestId",
   account_add_tekuci = "/racuni/dodajTekuci",
   account_add_devizni = "/racuni/dodajDevizni",
   account_find_by_number = "/racuni/deleteRacunPoBroju",

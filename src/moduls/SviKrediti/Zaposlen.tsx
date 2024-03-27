@@ -20,7 +20,7 @@ function Zaposlen() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await makeGetRequest(`/kredit/neOdobrenKredit?email=${encodeURIComponent(emailKorisnikov)}`)
+            const data = await makeGetRequest(`${BankRoutes.credit_all}/not_approved`)
             setKrediti(data)
         }
         fetchData()

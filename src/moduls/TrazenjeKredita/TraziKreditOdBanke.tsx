@@ -40,7 +40,7 @@ const TraziKreditStranica: React.FC = () => {
   const handlePosalji = async () => {
     setLoading(true);
     // Simulacija slanja zahteva na server
-    const data = await makeApiRequest(BankRoutes.credit_apply, "POST", formData)
+    const data = await makeApiRequest(BankRoutes.credit_apply, "POST", formData, false, true)
     setLoading(false);
     setPoruka(data.message); // Prikazivanje poruke na stranici
   };
