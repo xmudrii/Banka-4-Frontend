@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { makeGetRequest } from "./utils/apiRequest";
+import { makeGetRequest } from "../utils/apiRequest";
 import { ExchangeRate } from "utils/types";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 

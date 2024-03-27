@@ -3,9 +3,9 @@ import ".//ExchangePage.css";
 import ExchangeRatesTable from "./ExchangeRatesTable";
 import TransferDetails from "./TransferDetails";
 import ExchangeMainSection from "./ExchangeMainSection";
-import { makeGetRequest } from "./utils/apiRequest";
-import { getMe } from "./utils/getMe";
-import { Account, User } from "./utils/types";
+import { makeGetRequest } from "../utils/apiRequest";
+import { getMe } from "../utils/getMe";
+import { Account, User } from "../utils/types";
 import { Container } from "@mui/material";
 
 const ExchangePage = () => {

@@ -1,6 +1,6 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
 import ".//ExchangePage.css";
-import { Account, User } from "./utils/types";
+import { Account, User } from "../utils/types";
 
 const provizija = 0.005;
 const kurs = 117.6926;

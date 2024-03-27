@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
-import { getMe } from "./utils/getMe";
-import { makeGetRequest } from "./utils/apiRequest";
+import { getMe } from "../utils/getMe";
+import { makeGetRequest } from "../utils/apiRequest";
 import { Account, ExchangeRate } from "utils/types";
 import { Button, Container, FormControl, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 
