@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
-import { getMe } from "./utils/getMe";
-import { makeGetRequest } from "./utils/apiRequest";
+import { getMe } from "../utils/getMe";
+import { makeGetRequest } from "../utils/apiRequest";
 import { Account, ExchangeRate } from "utils/types";
+import { Button, Container, FormControl, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
@@ -76,17 +77,17 @@ const ExchangeMainSection = ({
   };
 
   return (
-    <article>
-      <form
+    <Container>
+      <FormControl
         className="main-section-div"
         onSubmit={(e) => {
           e.preventDefault();
           setDetaljiTransfera(true);
         }}
       >
-        <section className="iznos-div">
-          <label>Iznos:</label>
-          <textarea
+        <Paper className="iznos-div">
+          <Typography>Iznos:</Typography>
+          <TextField
             rows={1}
             name={"iznos"}
             className="textarea"
@@ -97,14 +98,14 @@ const ExchangeMainSection = ({
               setIznosError(false);
             }}
           />
-          {iznosError && <p className="error-text">Iznos je obavezan.</p>}
-        </section>
-        <section className="sa-racuna-div">
-          <label>Sa racuna: </label>
-          <select className="custom-select" defaultValue={"Broj racuna..."}>
-            <option defaultValue={"Broj racuna..."}>Broj racuna...</option>
+          {iznosError && <Typography className="error-text">Iznos je obavezan.</Typography>}
+        </Paper>
+        <Paper className="sa-racuna-div">
+          <Typography>Sa racuna: </Typography>
+          <Select className="custom-select" defaultValue={"Broj racuna..."}>
+            <MenuItem defaultValue={"Broj racuna..."}>Broj racuna...</MenuItem>
             {accounts.map((account) => (
-              <option
+              <MenuItem
                 value={account.brojRacuna}
                 onChange={() => {
                   setSaRacuna(account);
@@ -112,16 +113,16 @@ const ExchangeMainSection = ({
                 }}
               >
                 {account.brojRacuna}, {account.currency}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-        </section>
-        <section className="na-racun-div">
-          <label>Na racun: </label>
-          <select className="custom-select">
-            <option defaultValue={"Broj racuna..."}>Broj racuna...</option>
+          </Select>
+        </Paper>
+        <Paper className="na-racun-div">
+          <Typography>Na racun: </Typography>
+          <Select className="custom-select">
+            <MenuItem defaultValue={"Broj racuna..."}>Broj racuna...</MenuItem>
             {accounts.map((account) => (
-              <option
+              <MenuItem
                 value={account.brojRacuna}
                 onChange={() => {
                   setNaRacun(account);
@@ -129,24 +130,24 @@ const ExchangeMainSection = ({
                 }}
               >
                 {account.brojRacuna}, {account.currency}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-        </section>
-        <section className="kurs-div">
-          <label>
+          </Select>
+        </Paper>
+        <Paper className="kurs-div">
+          <Typography>
             Trenutni kurs izmedju: {saRacuna2?.currency} i {naRacun2?.currency}:{" "}
             {findExchangeRate(saRacuna2?.currency, naRacun2?.currency)}
-          </label>
-        </section>
-        <section className="buttons">
-          <button className="button">Odustani</button>
-          <button type="submit" className="button">
+          </Typography>
+        </Paper>
+        <Paper className="buttons">
+          <Button className="button">Odustani</Button>
+          <Button type="submit" className="button">
             Nastavi
-          </button>
-        </section>
-      </form>
-    </article>
+          </Button>
+        </Paper>
+      </FormControl>
+    </Container>
   );
 };
 export default ExchangeMainSection;
