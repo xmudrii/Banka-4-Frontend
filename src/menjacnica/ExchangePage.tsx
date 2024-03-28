@@ -5,14 +5,16 @@ import TransferDetails from "./TransferDetails";
 import ExchangeMainSection from "./ExchangeMainSection";
 import { makeGetRequest } from "../utils/apiRequest";
 import { getMe } from "../utils/getMe";
-import { Account, User } from "../utils/types";
+import { User } from "../utils/types";
 import { Container } from "@mui/material";
 
 const ExchangePage = () => {
   const [iznos, setIznos] = useState<string>();
   const [detaljiTransfera, setDetaljiTransfera] = useState<boolean>(false);
-  const [saRacuna, setSaRacuna] = useState<Account>();
-  const [naRacun, setNaRacun] = useState<Account>();
+  const [saRacunaBrRacuna, setSaRacunaBrRacuna] = useState<string>();
+  const [naRacunBrRacuna, setNaRacunBrRacuna] = useState<string>();
+  const [saRacunaValuta, setSaRacunaValuta] = useState<string>();
+  const [naRacunValuta, setNaRacunValuta] = useState<string>();
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const ExchangePage = () => {
     try {
       const user = getMe();
       if (!user) return;
-      const data = await makeGetRequest(`/korisnik/email/${user.sub}`);
+      const data = await makeGetRequest(`/korisnik/id/${user.id}`);
       if (data) {
         setUser(data);
       }
@@ -40,17 +42,21 @@ const ExchangePage = () => {
             user={user}
             setDetaljiTransfera={setDetaljiTransfera}
             iznos={iznos}
-            saRacuna={saRacuna}
-            naRacun={naRacun}
+            saRacunaBrRacuna={saRacunaBrRacuna}
+            naRacunBrRacuna={naRacunBrRacuna}
+            saRacunaValuta={saRacunaValuta}
+            naRacunValuta={naRacunValuta}
           />
         </Container>
       ) : (
         <Container>
           <ExchangeMainSection
-            setNaRacun={setNaRacun}
-            setSaRacuna={setSaRacuna}
+            setNaRacunBrRacuna={setNaRacunBrRacuna}
+            setSaRacunaBrRacuna={setSaRacunaBrRacuna}
             setDetaljiTransfera={setDetaljiTransfera}
             setIznos={setIznos}
+            setSaRacunaValuta={setSaRacunaValuta}
+            setNaRacunValuta={setNaRacunValuta}
           />
         </Container>
       )}

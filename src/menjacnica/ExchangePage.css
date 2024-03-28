@@ -56,6 +56,11 @@ p {
   gap: 1rem;
 }
 
+.selektuj_racun {
+  color: red;
+  font-style: italic;
+}
+
 .custom-select {
   padding: 0.5rem;
   font-size: 1rem;
@@ -69,9 +74,14 @@ p {
 
 .kurs-div {
   width: 222px;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
 }
 
-.iznos-div, .sa-racuna-div, .na-racun-div, .kurs-div {
+.iznos-div,
+.sa-racuna-div,
+.na-racun-div {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

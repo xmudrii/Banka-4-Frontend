@@ -1,6 +1,7 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
 import ".//ExchangePage.css";
-import { Account, User } from "../utils/types";
+import { BankRoutes, User } from "../utils/types";
+import { NoviPrenosSredstava } from "korisnici/types/Types";
+import { makeApiRequest } from "utils/apiRequest";
 
 const provizija = 0.005;
 const kurs = 117.6926;
@@ -8,61 +9,94 @@ const kurs = 117.6926;
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
   iznos: string | undefined;
-  saRacuna: Account | undefined;
-  naRacun: Account | undefined;
+  saRacunaBrRacuna: string | undefined;
+  naRacunBrRacuna: string | undefined;
   user: User | undefined;
+  saRacunaValuta: string | undefined;
+  naRacunValuta:  string | undefined;
 };
 
 const TransferDetails = ({
   setDetaljiTransfera,
   iznos,
-  saRacuna,
-  naRacun,
+  saRacunaBrRacuna,
+  naRacunBrRacuna,
   user,
+  saRacunaValuta,
+  naRacunValuta
 }: Props) => {
+  console.log("saRacunaBrRacuna:", saRacunaBrRacuna)
+    console.log("naRacunBrRacuna:", naRacunBrRacuna)
+    console.log("saRacunaValuta:", saRacunaValuta)
+    console.log("naRacunValuta:", naRacunValuta)
+    console.log("iznos:", iznos)
+
+
+  const handleSubmit = async () => {
+
+    if(iznos && saRacunaBrRacuna && naRacunBrRacuna) {
+
+      const noviPrenos: NoviPrenosSredstava = {
+        racunPosiljaoca: saRacunaBrRacuna,
+        racunPrimaoca: naRacunBrRacuna,
+        iznos: parseInt(iznos, 10)
+      }
+
+      try{
+        const data = await makeApiRequest(BankRoutes.transaction_new_transfer, "POST", noviPrenos, false, true)
+            const rac = await data.text()
+            console.log(rac);
+            localStorage.removeItem("prenosPodaci")
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+  }
+
   return (
-    <Container className="main-section-details-div">
-      <Grid className="details-section">
-        <Typography>Platilac:</Typography>
-        <Typography className="platilac">
+    <div className="main-section-details-div">
+      <div className="details-section">
+        <p>Platilac:</p>
+        <p className="platilac">
           {user?.ime} {user?.prezime}, {user?.adresa}
-        </Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Sa racuna:</Typography>
-        <Typography>{saRacuna?.brojRacuna}</Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Iznos:</Typography>
-        <Typography>
-          {iznos} {saRacuna?.currency}
-        </Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Na racun:</Typography>
-        <Typography>{naRacun?.brojRacuna}</Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Iznos:</Typography>
-        <Typography>
-          {iznos && parseInt(iznos, 10) * kurs} {naRacun?.currency}
-        </Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Kurs:</Typography>
-        <Typography>{kurs}</Typography>
-      </Grid>
-      <Grid className="details-section">
-        <Typography>Provizija:</Typography>
-        <Typography>{provizija}</Typography>
-      </Grid>
-      <Grid className="buttons">
-        <Button className="button" onClick={() => setDetaljiTransfera(false)}>
+        </p>
+      </div>
+      <div className="details-section">
+        <p>Sa racuna:</p>
+        <p>{saRacunaBrRacuna}</p>
+      </div>
+      <div className="details-section">
+        <p>Iznos:</p>
+        <p>
+          {iznos} {saRacunaValuta}
+        </p>
+      </div>
+      <div className="details-section">
+        <p>Na racun:</p>
+        <p>{naRacunBrRacuna}</p>
+      </div>
+      <div className="details-section">
+        <p>Iznos:</p>
+        <p>
+          {iznos && parseInt(iznos, 10) / kurs * provizija} {naRacunValuta}
+        </p>
+      </div>
+      <div className="details-section">
+        <p>Kurs:</p>
+        <p>{kurs}</p>
+      </div>
+      <div className="details-section">
+        <p>Provizija:</p>
+        <p>{provizija}</p>
+      </div>
+      <div className="buttons">
+        <button className="button" onClick={() => setDetaljiTransfera(false)}>
           Ponisti
-        </Button>
-        <Button className="button">Potvrdi</Button>
-      </Grid>
-    </Container>
+        </button>
+        <button className="button" onClick={handleSubmit}>Potvrdi</button>
+      </div>
+    </div>
   );
 };
 export default TransferDetails;
