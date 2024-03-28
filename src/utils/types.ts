@@ -155,19 +155,19 @@ export type Kredit = {
 }
 
 export type KreditPojedinacni = {
-  naziv: string;
-  broj: string;
-  iznos: number;
-  period: number;
-  nominalnaKamatnaStopa: number;
-  efektivnaKamatnaStopa: number;
-  datumUgovaranja: number;
-  datumDospeca: number;
-  iznosRate: number;
-  datumSledeceRate: number;
-  preostaloDugovanje: number;
-  iznosPretplate: number;
-  valuta: string;
+  amount: number;
+  bankAccountNumber: string;
+  contractDate: number;
+  currency: string;
+  effectiveInterestRate: number;
+  installmentAmount: number;
+  loanMaturityDate: number;
+  loanTerm: number;
+  nextInstallmentDate: number;
+  nominalInterestRate: number;
+  prepayment: number;
+  remainingDebt: number;
+  type: string;
 };
 
 export type Transakcija = {
@@ -206,7 +206,7 @@ export enum BankRoutes {
   credit_deny = "/credit/deny",
   credit_apply = "/credit/apply",
   credit_all = "/credit/all",
-  credit_detailed = "/detailed-credit/creditRequestId",
+  credit_detailed = "/credit/detailed-credit/creditRequestId",
   account_add_tekuci = "/racuni/dodajTekuci",
   account_add_devizni = "/racuni/dodajDevizni",
   account_find_by_number = "/racuni/deleteRacunPoBroju",
