@@ -14,7 +14,7 @@ export default function DodajKarticu() {
     const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
-        makeGetRequest("/cards/allNames").then(result => {
+        makeGetRequest(BankRoutes.cards_names).then(result => {
             if (!result)
                 return;
 
