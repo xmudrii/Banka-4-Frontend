@@ -29,6 +29,7 @@ function ListaKredita() {
             const approvedData = await makeGetRequest(`${BankRoutes.credit_all}/approved`) as Kredit[];
             const notApprovedData = await makeGetRequest(`${BankRoutes.credit_all}/not_approved`) as Kredit[];
 
+            console.log(approvedData);
             let data = [] as Kredit[];
             data = data.concat(notApprovedData.map(kredit => ({ ...kredit, status: 'ne odobren' })));
             data = data.concat(approvedData.map(kredit => ({ ...kredit, status: 'odobren' })));
@@ -58,7 +59,9 @@ function ListaKredita() {
     return (
         <div>
             {zaposlen ? <div><Zaposlen />
-            <Tabela krediti={krediti2} onClickRed={handleRedClick} /> </div>: <Tabela krediti={krediti} onClickRed={handleRedClick} />}
+            <Tabela krediti={krediti2} onClickRed={handleRedClick} /> </div>: <div>  <NeZaposlen /> <Tabela krediti={krediti} onClickRed={handleRedClick} /> </div>}
+            
+
             
             <button onClick={() => posalji()}>Posalji</button>
         </div>

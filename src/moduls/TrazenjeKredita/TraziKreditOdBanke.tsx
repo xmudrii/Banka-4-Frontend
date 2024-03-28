@@ -23,17 +23,26 @@ const TraziKreditStranica: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string | undefined; value: unknown; checked?: boolean | undefined; }>) => {
     const { name, value, checked } = e.target;
-    let parsedValue = value;
-    
-    if (name === 'currentEmploymentPeriod' || name === 'bankAccountNumber' || name === 'salary' || name === 'amount') {
-      parsedValue = parseInt(value as string, 10);
+    let parsedValue: string | number | boolean | '';
+  
+    if (name === 'cccurrentEmploymentPeriod') {
+      const trimmedValue = (value as string).trim();
+      if (trimmedValue === '' || isNaN(parseInt(trimmedValue, 10))) {
+        parsedValue = '';
+      } else {
+        parsedValue = parseInt(trimmedValue, 10);
+      }
+    } else {
+      parsedValue = name === 'zaposlenZaStalno' && checked !== undefined ? checked : (value as string);
     }
   
     setFormData((prevData) => ({
       ...prevData,
-      [name as string]: name === 'zaposlenZaStalno' ? checked : parsedValue,
+      [name as string]: name === 'zaposlenZaStalno' && checked !== undefined ? checked : parsedValue,
     }));
   };
+  
+
   
   
   const handleChange2 = (e: SelectChangeEvent<string>) => {
@@ -87,7 +96,7 @@ const TraziKreditStranica: React.FC = () => {
      
       <TextField
         label="Iznos kredita"
-        type="number"
+
         name="amount" // Ispravljeno ime polja
         value={formData.amount}
         onChange={handleChange}
@@ -111,7 +120,7 @@ const TraziKreditStranica: React.FC = () => {
       <FormControlLabel
         control={<Checkbox
           checked={formData.permanentEmployee}
-          onChange={handleChange}
+          onChange={(e) => setFormData((prevData) => ({ ...prevData, permanentEmployee: e.target.checked }))}
           name="permanentEmployee" // Ispravljeno ime polja
         />}
         label="Zaposlen za stalno"
@@ -120,12 +129,22 @@ const TraziKreditStranica: React.FC = () => {
       <TextField
         label="Period zaposlenja"
         name="currentEmploymentPeriod" // Ispravljeno ime polja
+        type="text"
         value={formData.currentEmploymentPeriod}
         onChange={handleChange}
       />
       <br />
       <TextField
+        label="Rok otplate (u mesecima)"
+        type="text"
+        name="loanTerm" // Ispravljeno ime polja
+        value={formData.loanTerm}
+        onChange={handleChange}
+      />
+      <br />
+      <TextField
         label="Broj Bankovnog racuna"
+        type="text"
         name="bankAccountNumber" // Ispravljeno ime polja
         value={formData.bankAccountNumber}
         onChange={handleChange}

@@ -22,7 +22,6 @@ const Tabela: React.FC<TabelaProps> = ({ krediti, onClickRed, children }) => {
                             <StyledHeadTableCell>Iznos mesečne plate</StyledHeadTableCell>
                             <StyledHeadTableCell>Zaposlen za stalno</StyledHeadTableCell>
                             <StyledHeadTableCell>Period zaposlenja kod trenutnog poslodavca</StyledHeadTableCell>
-                            <StyledHeadTableCell>Ročnost</StyledHeadTableCell>
                             <StyledHeadTableCell>Ekspozitura</StyledHeadTableCell>
                             
                         </StyledTableRow>
