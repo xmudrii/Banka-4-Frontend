@@ -115,15 +115,16 @@ export type CompanyListProps = {
 
 export type Kartica = {
   id: number;
-  naziv: string;
-  broj: string;
-  vrsta: 'kreditna' | 'debitna';
-  datum_kreiranja: number;
-  datum_isteka: number;
-  broj_racuna: string;
+  name: string;
+  number: string;
+  type: 'kreditna' | 'debitna';
+  creationDate: number;
+  expirationDate: number;
+  bankAccountNumber: string;
   cvv: string;
-  limit: number;
+  cardLimit: number;
   status: 'aktivna' | 'deaktivirana' | 'blokirana';
+  blocked: boolean;
 }
 
 export type TransakcijaKarticePrikaz = {
@@ -198,6 +199,7 @@ export enum UserRoutes {
 export enum BankRoutes {
   transaction_new_payment = "/transaction/nova-uplata",
   transaction_new_transfer = "/transaction/nova-uplata",
+  cards_names = "/cards/names",
   cards = "/cards",
   cards_create = "/cards/create",
   credit_approve = "/credit/approve",
@@ -210,6 +212,7 @@ export enum BankRoutes {
   account_find_by_number = "/racuni/deleteRacunPoBroju",
   account_find_user_account = "/racuni/nadjiRacuneKorisnika",
   company_create = "/racuni/kreirajFirmu",
+  exchange = "/exchange"
 }
 
 export enum StockRoutes {
