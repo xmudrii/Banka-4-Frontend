@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import ".//ExchangePage.css";
 import { getMe } from "../utils/getMe";
 import { makeGetRequest } from "../utils/apiRequest";
-import { Account, ExchangeRate } from "utils/types";
-import { Button, Container, FormControl, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Account, BankRoutes, ExchangeRate } from "utils/types";
 
 type Props = {
   setDetaljiTransfera: (detaljiTransfera: boolean) => void;
   setIznos: (iznos: string) => void;
-  setSaRacuna: (saRacuna: Account) => void;
-  setNaRacun: (naRacun: Account) => void;
+  setSaRacunaBrRacuna: (saRacunaBrRacuna: string) => void;
+  setNaRacunBrRacuna: (naRacunBrRacuna: string) => void;
+  setSaRacunaValuta: (saRacunaValuta: string) => void;
+  setNaRacunValuta: (naRacunValuta: string) => void;
 };
 
 const ExchangeMainSection = ({
   setDetaljiTransfera,
   setIznos,
-  setSaRacuna,
-  setNaRacun,
+  setSaRacunaBrRacuna,
+  setNaRacunBrRacuna,
+  setSaRacunaValuta,
+  setNaRacunValuta
 }: Props) => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [iznosError, setIznosError] = useState<boolean>(false);
@@ -31,7 +34,7 @@ const ExchangeMainSection = ({
 
   const fetchExchange = async () => {
     try {
-      const data = await makeGetRequest(`/api/exchange`);
+      const data = await makeGetRequest(`/exchange`);
       if (data) {
         setExhanges(data);
       }
@@ -45,7 +48,7 @@ const ExchangeMainSection = ({
       const user = getMe();
       if (!user) return;
       const data = await makeGetRequest(
-        `/racuni/nadjiRacuneKorisnika/${user.id}`
+        `${BankRoutes.account_find_user_account}/${user.id}`
       );
       if (data) {
         setAccounts(data);
@@ -59,7 +62,10 @@ const ExchangeMainSection = ({
     currency1: string | undefined,
     currency2: string | undefined
   ) => {
+    
     if (!currency1 || !currency2) return null;
+    if(currency1 === "Srpski dinar") currency1 = "RSD"
+    if(currency2 === "Srpski dinar") currency1 = "RSD"
 
     const rate1 = exchages.find(
       (exchage) => exchage.currencyCode === currency1
@@ -77,17 +83,17 @@ const ExchangeMainSection = ({
   };
 
   return (
-    <Container>
-      <FormControl
+    <div>
+      <form
         className="main-section-div"
         onSubmit={(e) => {
           e.preventDefault();
           setDetaljiTransfera(true);
         }}
       >
-        <Paper className="iznos-div">
-          <Typography>Iznos:</Typography>
-          <TextField
+        <div className="iznos-div">
+          <p>Iznos:</p>
+          <textarea
             rows={1}
             name={"iznos"}
             className="textarea"
@@ -98,56 +104,66 @@ const ExchangeMainSection = ({
               setIznosError(false);
             }}
           />
-          {iznosError && <Typography className="error-text">Iznos je obavezan.</Typography>}
-        </Paper>
-        <Paper className="sa-racuna-div">
-          <Typography>Sa racuna: </Typography>
-          <Select className="custom-select" defaultValue={"Broj racuna..."}>
-            <MenuItem defaultValue={"Broj racuna..."}>Broj racuna...</MenuItem>
+          {iznosError && <p className="error-text">Iznos je obavezan.</p>}
+        </div>
+        <div className="sa-racuna-div">
+          <p>Sa racuna: </p>
+          <select className="custom-select" defaultValue={"Broj racuna..."} onChange={(e) => {
+            const selectedAccount = accounts.find(account => account.brojRacuna === e.target.value);
+            if (selectedAccount) {
+              setSaRacunaBrRacuna(selectedAccount.brojRacuna);
+              setSaRacunaValuta(selectedAccount.currency);
+              setSaRacuna2(selectedAccount);
+            }
+          }}
+          >
+            <option disabled value={"Broj racuna..."}  key="default">Broj racuna...</option>
             {accounts.map((account) => (
-              <MenuItem
+              <option
+                key={account.brojRacuna}
                 value={account.brojRacuna}
-                onChange={() => {
-                  setSaRacuna(account);
-                  setSaRacuna2(account);
-                }}
               >
                 {account.brojRacuna}, {account.currency}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </Paper>
-        <Paper className="na-racun-div">
-          <Typography>Na racun: </Typography>
-          <Select className="custom-select">
-            <MenuItem defaultValue={"Broj racuna..."}>Broj racuna...</MenuItem>
+          </select>
+        </div>
+        <div className="na-racun-div">
+          <p>Na racun: </p>
+          <select className="custom-select" defaultValue={"Broj racuna..."} onChange={(e) => {
+            const selectedAccount = accounts.find(account => account.brojRacuna === e.target.value);
+            if (selectedAccount) {
+              setNaRacunBrRacuna(selectedAccount.brojRacuna);
+              setNaRacunValuta(selectedAccount.currency);
+              setNaRacun2(selectedAccount);
+            }
+          }}> 
+            <option disabled value={"Broj racuna..."} key="default">Broj racuna...</option>
             {accounts.map((account) => (
-              <MenuItem
+              <option
+                key={account.brojRacuna}
                 value={account.brojRacuna}
-                onChange={() => {
-                  setNaRacun(account);
-                  setNaRacun2(account);
-                }}
               >
                 {account.brojRacuna}, {account.currency}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </Paper>
-        <Paper className="kurs-div">
-          <Typography>
-            Trenutni kurs izmedju: {saRacuna2?.currency} i {naRacun2?.currency}:{" "}
+          </select>
+        </div>
+        <div className="kurs-div">
+            Trenutni kurs izmedju 
+            {saRacuna2 ?  <b className="selektovan_racun">{saRacuna2.currency}</b> : <p className="selektuj_racun">Izaberite racun</p>} 
+            i 
+            {naRacun2? <b className="selektovan_racun">{naRacun2.currency}</b> : <p className="selektuj_racun">Izaberite racun</p>}:{" "}
             {findExchangeRate(saRacuna2?.currency, naRacun2?.currency)}
-          </Typography>
-        </Paper>
-        <Paper className="buttons">
-          <Button className="button">Odustani</Button>
-          <Button type="submit" className="button">
+        </div>
+        <div className="buttons">
+          <button className="button">Odustani</button>
+          <button type="submit" className="button">
             Nastavi
-          </Button>
-        </Paper>
-      </FormControl>
-    </Container>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 export default ExchangeMainSection;

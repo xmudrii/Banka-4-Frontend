@@ -32,6 +32,7 @@ import UserOpcijePage from 'berza/pages/UserOptionsPage';
 import Transaction from 'zaposleni/pages/TransactionPage';
 import AkcijePage from 'berza/pages/AkcijePage';
 import DetaljiAkcije from 'berza/pages/DetaljiAkcijePage';
+import ExchangePage from 'menjacnica/ExchangePage';
 const auth = getMe()
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
         <Route path="/transakcija" element={auth?.id ? <Transaction /> : <LoginPage />} />
         <Route path="/akcije" element={auth?.id ? <AkcijePage /> : <LoginPage />} />
         <Route path="/detaljiAkcije" element={auth?.id ? <DetaljiAkcije /> : <LoginPage />} />
+        <Route path="/menjacnica" element={auth?.id ? <ExchangePage /> : <LoginPage />} />
 
       </Routes>
     </BrowserRouter>
