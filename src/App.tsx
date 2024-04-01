@@ -33,44 +33,63 @@ import Transaction from 'zaposleni/pages/TransactionPage';
 import AkcijePage from 'berza/pages/AkcijePage';
 import DetaljiAkcije from 'berza/pages/DetaljiAkcijePage';
 import ExchangePage from 'menjacnica/ExchangePage';
+import styled from 'styled-components';
+
+const VideoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const auth = getMe()
 function App() {
   return (
-    <BrowserRouter>
-      {auth?.id && <Navbar></Navbar>}
-      <Routes>
-        <Route path="/" element={auth?.id ? <UserHomePage /> : <LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/listaKorisnika" element={auth?.id ? <UserAndAccountList /> : <LoginPage />} />
-        <Route path="/korisnik" element={auth?.id ? <UserInfoTable /> : <LoginPage />} />
-        <Route path="/kreirajKorisnika" element={auth?.id ? <CreateUserPage /> : <LoginPage />} />
-        <Route path="/izmeniKorisnika" element={auth?.id ? <EditUserPage /> : <LoginPage />} />
-        <Route path="/racun" element={auth?.id ? <AccountInfoPage /> : <LoginPage />} />
-        <Route path="/kreirajRacun" element={auth?.id ? <CreateAccountPage /> : <LoginPage />} />
-        <Route path="/kreirajZaposlenog" element={auth?.id ? <CreateEmployeePage /> : <LoginPage />} />
-        <Route path="/izmeniZaposlenog" element={auth?.id ? <EditEmployeePage /> : <LoginPage />} />
-        <Route path="/kreirajFirmu" element={auth?.id ? <CreateCompanyPage /> : <LoginPage />} />
-        <Route path="/izmeniFirmu" element={auth?.id ? <EditCompanyPage /> : <LoginPage />} />
-        <Route path="/resetPassword" element={<ResetPasswordPage />} />
-        <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
-        <Route path="/listaKredita" element={auth?.id ? <ListaKredita /> : <LoginPage />} />
-        <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
-        <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <LoginPage />} />
-        <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <LoginPage />} />
-        <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <LoginPage />} />
-        <Route path="/trazenjeKredita" element={auth?.id ? <TraziKreditStranica /> : <LoginPage />} />
-        <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKreditStranica /> : <LoginPage />} />
-        <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
-        <Route path="/opcije" element={auth?.id ? <OpcijePage /> : <LoginPage />} />
-        <Route path="/userOpcije" element={auth?.id ? <UserOpcijePage /> : <LoginPage />} />
-        <Route path="/transakcija" element={auth?.id ? <Transaction /> : <LoginPage />} />
-        <Route path="/akcije" element={auth?.id ? <AkcijePage /> : <LoginPage />} />
-        <Route path="/detaljiAkcije" element={auth?.id ? <DetaljiAkcije /> : <LoginPage />} />
-        <Route path="/menjacnica" element={auth?.id ? <ExchangePage /> : <LoginPage />} />
+    <>
+      {/* {!auth?.id &&
+        <VideoWrapper>
+          <video autoPlay muted width="800" controls>
+            <source src={'https://cdn.discordapp.com/attachments/1161024401001680987/1224340251385004052/stop.mp4?ex=661d22b7&is=660aadb7&hm=b023e16a8c263142fbeeed37e364132d6cf6a447561502c19c405b201cfa6040&'} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </VideoWrapper>
+      } */}
 
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        {auth?.id && <Navbar></Navbar>}
+        <Routes>
+          <Route path="/" element={auth?.id ? <UserHomePage /> : <LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/listaKorisnika" element={auth?.id ? <UserAndAccountList /> : <LoginPage />} />
+          <Route path="/korisnik" element={auth?.id ? <UserInfoTable /> : <LoginPage />} />
+          <Route path="/kreirajKorisnika" element={auth?.id ? <CreateUserPage /> : <LoginPage />} />
+          <Route path="/izmeniKorisnika" element={auth?.id ? <EditUserPage /> : <LoginPage />} />
+          <Route path="/racun" element={auth?.id ? <AccountInfoPage /> : <LoginPage />} />
+          <Route path="/kreirajRacun" element={auth?.id ? <CreateAccountPage /> : <LoginPage />} />
+          <Route path="/kreirajZaposlenog" element={auth?.id ? <CreateEmployeePage /> : <LoginPage />} />
+          <Route path="/izmeniZaposlenog" element={auth?.id ? <EditEmployeePage /> : <LoginPage />} />
+          <Route path="/kreirajFirmu" element={auth?.id ? <CreateCompanyPage /> : <LoginPage />} />
+          <Route path="/izmeniFirmu" element={auth?.id ? <EditCompanyPage /> : <LoginPage />} />
+          <Route path="/resetPassword" element={<ResetPasswordPage />} />
+          <Route path="/verifikacija" element={auth?.id ? <Verifikacija /> : <LoginPage />} />
+          <Route path="/listaKredita" element={auth?.id ? <ListaKredita /> : <LoginPage />} />
+          <Route path="/placanja" element={auth?.id ? <Placanje /> : <LoginPage />} />
+          <Route path="/kartice" element={auth?.id ? <PregledKartica /> : <LoginPage />} />
+          <Route path="/dodaj-karticu" element={auth?.id ? <DodajKarticu /> : <LoginPage />} />
+          <Route path="/kartica" element={auth?.id ? <DetaljiKartice /> : <LoginPage />} />
+          <Route path="/trazenjeKredita" element={auth?.id ? <TraziKreditStranica /> : <LoginPage />} />
+          <Route path="/pojedinacniKredit" element={auth?.id ? <PojedinacniKreditStranica /> : <LoginPage />} />
+          <Route path="/stranica-za-pojedinacni-racun" element={auth?.id ? <StranicaZaPojedinacniRacunSaPocetneStraniceZaKorisnike /> : <LoginPage />} />
+          <Route path="/opcije" element={auth?.id ? <OpcijePage /> : <LoginPage />} />
+          <Route path="/userOpcije" element={auth?.id ? <UserOpcijePage /> : <LoginPage />} />
+          <Route path="/transakcija" element={auth?.id ? <Transaction /> : <LoginPage />} />
+          <Route path="/akcije" element={auth?.id ? <AkcijePage /> : <LoginPage />} />
+          <Route path="/detaljiAkcije" element={auth?.id ? <DetaljiAkcije /> : <LoginPage />} />
+          <Route path="/menjacnica" element={auth?.id ? <ExchangePage /> : <LoginPage />} />
+
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
