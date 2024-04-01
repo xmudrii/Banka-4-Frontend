@@ -3,7 +3,7 @@ import { getApiUrl } from "./apiUrl";
 
 type Decoded = {
     permission: number;
-    exp: 1711556594;
+    exp: number;
 }
 
 
