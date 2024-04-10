@@ -36,56 +36,49 @@
 
 /*DUGME CSS*/
 .learn-more-btn {
-  background-color: #3498db;
-  color: white;
-  padding: 0px 20px;
+  background-color: #3498db; 
+  color: white; 
+  padding: 0px 20px; 
   font-size: 16px;
-  border: none;
-  border-radius: 5px;
+  border: none; 
+  border-radius: 5px; 
   cursor: pointer;
-  font-weight: bold;
+  font-weight: bold; 
   text-align: center;
-  text-decoration: none;
+  text-decoration: none; 
   display: inline-block;
-  position: relative;
-  /*position relative to allow absolute positioning of pseudo elements */
-  transition: background-color 0.3s;
+  position: relative; /*position relative to allow absolute positioning of pseudo elements */
+  transition: background-color 0.3s; 
 }
 
 .learn-more-btn:hover {
-  background-color: #297cb7;
+  background-color: #297cb7; 
 }
 
 /* button pointy bit */
 .learn-more-btn::before {
   content: '';
   position: absolute;
-  top: -10px;
-  /* up/down */
+  top: -10px; /* up/down */
   left: 50%;
   transform: translateX(-50%);
-  border-left: 10px solid transparent;
-  /* width */
-  border-right: 10px solid transparent;
-  /* width */
-  border-bottom: 10px solid #3498db;
-  /* Color and size to match the button */
+  border-left: 10px solid transparent; /* width */
+  border-right: 10px solid transparent; /* width */
+  border-bottom: 10px solid #3498db; /* Color and size to match the button */
 }
 
 /*TABELA CSS*/
 .custom-table-bank {
-  border: none;
+  border: none; 
   width: 100%;
-  border-collapse: collapse;
-  /* Uklanja glavnu liniju */
+  border-collapse: collapse; /* Uklanja glavnu liniju */
 }
 
 
 
 .custom-table-bank th,
 .custom-table-bank td {
-  border: none;
-  /* Uklanja border linije */
+  border: none; /* Uklanja border linije */
   padding: 8px;
 }
 
@@ -95,7 +88,7 @@
 }
 
 .custom-table-bank tr:nth-child(even) {
-  background-color: rgba(26, 123, 153, 0.2);
+  background-color: rgba(26, 123, 153, 0.2); 
 }
 
 .custom-table-bank tr:hover {
@@ -104,31 +97,31 @@
 
 /* NAVBAR related*/
 .navbar {
-  background-color: #1A7B99;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
+  background-color: #1A7B99; 
+  color: #ffffff; 
+  padding: 0.5rem 1rem; 
+  display: flex; 
+  align-items: center; 
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar p {
-  color: #f0f0f0;
-  margin: 0;
-  font-size: 1rem;
+  color: #f0f0f0; 
+  margin: 0; 
+  font-size: 1rem; 
 }
 
 .navbar a {
-  color: #f0f0f0;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s;
+  color: #f0f0f0; 
+  text-decoration: none; 
+  padding: 0.5rem 1rem; 
+  transition: color 0.3s; 
 }
 
 .navbar a:hover,
 .navbar a:focus {
-  color: #cddc39;
+  color: #cddc39; 
 }
 
 .nav-item {
@@ -144,7 +137,7 @@
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 4px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   margin-bottom: 1rem;
   width: 100%;
   box-sizing: border-box;
@@ -153,7 +146,7 @@
 
 .bank-textbox:focus {
   border-color: #105e78;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(16, 94, 120, 0.5);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), 0 0 5px rgba(16, 94, 120, 0.5);
   outline: none;
 }
 
