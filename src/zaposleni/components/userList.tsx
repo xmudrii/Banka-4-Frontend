@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
 import { User, UserListProps } from '../../utils/types';
-import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
+import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow, ScrollContainer } from '../../utils/tableStyles';
 import { useNavigate } from 'react-router-dom';
+
+
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
     const navigate = useNavigate();
@@ -13,7 +15,7 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
     };
 
     return (
-        <TableContainer component={Paper}>
+        <ScrollContainer>
             <Table sx={{ minWidth: 650, marginTop: 0 }}>
                 <StyledTableHead>
                     <TableRow>
@@ -42,7 +44,7 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </ScrollContainer>
     );
 };
 

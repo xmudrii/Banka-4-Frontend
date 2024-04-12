@@ -4,6 +4,7 @@ import { Account } from '../../utils/types';
 import styled from 'styled-components';
 import { makeGetRequest } from '../../utils/apiRequest';
 import { useNavigate } from 'react-router-dom';
+import { ScrollContainer } from 'utils/tableStyles';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -192,7 +193,7 @@ const AccountInfoPage: React.FC = () => {
         <H2Text>
           Transakcije
         </H2Text>
-        <TableContainer component={Paper}>
+        <ScrollContainer>
           <Table aria-label="user account table">
             <TableHead>
               <TableRow>
@@ -241,7 +242,7 @@ const AccountInfoPage: React.FC = () => {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </ScrollContainer>
 
       </FormWrapper>
     </PageWrapper>

@@ -14,6 +14,7 @@ import { getJWT, makeGetRequest } from 'utils/apiRequest';
 interface PaymentFormProps {
     onSave: (data: any) => void;
     navigate: (screen: string) => void;
+    defaultProps: { [key: string]: any };
 }
 
 type SifraPlacanjaTip = {
@@ -38,15 +39,15 @@ function svrhaPlacanjaIliTekstSifrePlacanja(svrhaPlacanja: string, sifraPlacanja
     return "";
 }
 
-export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }) => {
-    const [racuni, setRacuni] = useState<RacunType[]>(RACUNI_PLACEHOLDER);
-    const [selectedRacun, setSelectedRacun] = useState(0);
-    const [racun, setRacun] = useState<RacunType>(racuni[0]);
-    const [nazivPrimaoca, setNazivPrimaoca] = useState('');
-    const [racunPrimaoca, setRacunPrimaoca] = useState('');
+export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate, defaultProps }) => {
+    const [racuni, setRacuni] = useState(RACUNI_PLACEHOLDER);
+    const [selectedRacun, setSelectedRacun] = useState(defaultProps.selectedRacun || 0);
+    const [racun, setRacun] = useState<RacunType>({ naziv: "Dragos", broj: '265-0000001234123-12', raspolozivo: 100.11 });
+    const [nazivPrimaoca, setNazivPrimaoca] = useState(defaultProps.nazivPrimaoca || '');
+    const [racunPrimaoca, setRacunPrimaoca] = useState(defaultProps.racunPrimaoca || '');
     const [iznos, setIznos] = useState('');
-    const [pozivNaBroj, setPozivNaBroj] = useState('');
-    const [sifraPlacanja, setSifraPlacanja] = useState<number>(289);
+    const [pozivNaBroj, setPozivNaBroj] = useState(defaultProps.pozivNaBroj || '');
+    const [sifraPlacanja, setSifraPlacanja] = useState<number>(defaultProps.sifraPlacanja || 289);
     const [svrhaPlacanja, setSvrhaPlacanja] = useState("");
 
     useEffect(() => {
@@ -55,16 +56,14 @@ export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }
             const me = getMe();
 
             if (!me) return;
-            console.log("IDKOR " + me.id);
-            const rac = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`)
-            // @ts-ignore
-            setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
+            const rac: { brojRacuna: string, raspolozivoStanje: number }[] = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`)
+            setRacuni(rac?.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
         }
         gett();
     }, [])
 
     useEffect(() => {
-        if (racuni.length > 0) {
+        if (racuni?.length > 0) {
             setSelectedRacun(0);
         }
     }, [racuni]);
@@ -101,7 +100,7 @@ export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }
                     label="Izaberi račun"
                     onChange={(e) => setSelectedRacun(Number(e.target.value))}
                 >
-                    {racuni.map((racun, index) => (
+                    {racuni?.map((racun, index) => (
                         <MenuItem key={index} value={index}>{`${racun.naziv} - ${racun.broj} (${racun.raspolozivo} RSD)`}</MenuItem>
                     ))}
                 </Select>
@@ -160,8 +159,8 @@ export const FormaZaPlacanje: React.FC<PaymentFormProps> = ({ onSave, navigate }
                     label="Šifra Plaćanja"
                     onChange={(event: SelectChangeEvent) => setSifraPlacanja(Number(event.target.value))}
                 >
-                    {Object.values(sifraPlacanja).map((sifra) => (
-                        <MenuItem key={sifra.id} value={sifra.id}>{sifra.naziv}</MenuItem>
+                    {Object.values(sifrePlacanja)?.map((sifra) => (
+                        <MenuItem key={sifra.id} value={sifra.id}>{sifra.id} -{sifra.naziv}</MenuItem>
                     ))}
                 </Select>
             </FormControl>

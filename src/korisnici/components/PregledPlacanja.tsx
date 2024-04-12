@@ -4,6 +4,8 @@ import { getJWT, makeGetRequest } from 'utils/apiRequest';
 import { getMe } from 'utils/getMe';
 import { RACUNI_PLACEHOLDER, RacunType } from 'korisnici/data/Racuni';
 
+import { ScrollContainer } from 'utils/tableStyles';
+
 type UplataDTO = {
     racunPosiljaoca: string;
     nazivPrimaoca: string;
@@ -60,9 +62,8 @@ const PregledPlacanja = () => {
             const me = getMe();
 
             if (!me) return;
-            const rac = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`);
-            // @ts-ignore
-            setRacuni(rac.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
+            const rac: { brojRacuna: string, raspolozivoStanje: number }[] = await makeGetRequest(`/racuni/nadjiRacuneKorisnika/${me.id}`)
+            setRacuni(rac?.map(e => ({ naziv: "Racun", broj: e.brojRacuna, raspolozivo: e.raspolozivoStanje })))
         }
         gett();
     }, [])
@@ -100,12 +101,12 @@ const PregledPlacanja = () => {
                     label="Izaberi račun"
                     onChange={(e) => setSelectedRacun(Number(e.target.value))}
                 >
-                    {racuni.map((racun, index) => (
+                    {racuni?.map((racun, index) => (
                         <MenuItem key={index} value={index}>{`${racun.naziv} - ${racun.broj} (${racun.raspolozivo} RSD)`}</MenuItem>
                     ))}
                 </Select>
             </FormControl>}
-            <TableContainer component={Paper}>
+            <ScrollContainer>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -120,7 +121,7 @@ const PregledPlacanja = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {placanja.map((trans) => (
+                        {placanja?.map((trans) => (
                             <TableRow key={trans.racunPosiljaoca} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     {trans.racunPosiljaoca}
@@ -136,7 +137,7 @@ const PregledPlacanja = () => {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </ScrollContainer>
         </>
     );
 };

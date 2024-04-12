@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Account, BankRoutes } from "utils/types";
 import CurrencyConverter from "korisnici/components/CurrencyConverter";
 
+import { ScrollContainer } from "utils/tableStyles";
+
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -56,6 +58,7 @@ const UserHomePage: React.FC = () => {
       const data = await makeGetRequest(`${BankRoutes.account_find_user_account}/${me.id}`)
       if (data) {
         console.log(data);
+
         setAccounts(data);
       }
     } catch (error) {
@@ -79,7 +82,7 @@ const UserHomePage: React.FC = () => {
         Lista Racuna
       </HeadingText>
       <FormWrapper>
-        <TableContainer component={Paper}>
+        <ScrollContainer >
           <Table aria-label="user account table">
             <TableHead>
               <TableRow>
@@ -105,7 +108,7 @@ const UserHomePage: React.FC = () => {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </ScrollContainer>
         <CurrencyConverter />
       </FormWrapper >
     </PageWrapper >

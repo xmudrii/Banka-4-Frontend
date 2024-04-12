@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { TableContainer, Table, TableBody, TableRow, Paper } from '@mui/material';
 import { Company, CompanyListProps } from '../../utils/types';
-import { StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
+import { ScrollContainer, StyledHeadTableCell, StyledTableCell, StyledTableHead, StyledTableRow } from '../../utils/tableStyles';
+
 
 const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
     const handleSelect = (event: any) => {
@@ -10,7 +11,7 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
     };
 
     return (
-        <TableContainer component={Paper}>
+        <ScrollContainer>
             <Table sx={{ minWidth: 650, marginTop: 0 }}>
                 <StyledTableHead>
                     <TableRow>
@@ -37,7 +38,7 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </ScrollContainer>
     );
 };
 
