@@ -15,11 +15,11 @@ export const getApiUrl = (route: string) => {
     ]
     const isKoisnikRoute = koisnikRoutes.some(prefix => route.startsWith(prefix));
     if (isKoisnikRoute) {
-        return 'http://user-service:8080/api'
+        return 'user-service:8080/api'
     }
     const isBankaRoute = bankaRoutes.some(prefix => route.startsWith(prefix));
     if (isBankaRoute) {
-        return 'http://banka-service:8082/api'
+        return 'banka-service:8082/api'
     }
-    return 'http://berza-service:8081/api'
+    return 'berza-service:8081/api'
 }
