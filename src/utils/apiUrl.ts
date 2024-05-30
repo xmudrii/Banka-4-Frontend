@@ -21,5 +21,5 @@ export const getApiUrl = (route: string) => {
     if (isBankaRoute) {
         return process.env.REACT_APP_BANKA_URL
     }
-    return 'https://banka-4-dev.si.raf.edu.rs/berza-service/api'
+    return process.env.REACT_APP_BERZA_URL
 }
