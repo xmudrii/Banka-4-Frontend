@@ -23,6 +23,7 @@ postsubmits:
     # Harbor instancu.
     labels:
       preset-harbor-robot-push: "true"
+      preset-k8s-banka-4: "true"
     spec:
       containers:
         # "image" koji se koristi ovde je specijalan tip image-a, tzv. "build image"
@@ -66,6 +67,12 @@ postsubmits:
               # Pushuje oba image na našu Harbor instancu.
               docker push harbor.k8s.elab.rs/${TEAM_NAME}/frontend:latest
               docker push harbor.k8s.elab.rs/${TEAM_NAME}/frontend:${commit_hash}
+
+              helm upgrade --namespace="$TEAM_NAME-dev" --create-namespace --timeout=20m --atomic --install --set imageTag="${commit_hash}" "$TEAM_NAME-frontend" "oci://harbor.k8s.elab.rs/$TEAM_NAME/$TEAM_NAME-frontend/$TEAM_NAME-frontend"
+              if [ "$PULL_BASE_REF" == "main" ]; then
+                helm upgrade --namespace="$TEAM_NAME-prod" --create-namespace --timeout=20m --atomic --install --set imageTag="${commit_hash}",host="$TEAM_NAME.si.raf.edu.rs" "$TEAM_NAME-frontend" "oci://harbor.k8s.elab.rs/$TEAM_NAME/$TEAM_NAME-frontend/$TEAM_NAME-frontend"
+              fi
+              
           securityContext:
             privileged: true
           imagePullPolicy: Always
